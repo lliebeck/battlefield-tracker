@@ -1,6 +1,8 @@
 "use client";
 
 import { useBf1serversBf1ServersGet } from "@/api/battlefield-1/battlefield-1";
+import { FrostbiteSearch } from "@/api/model/frostbiteSearch";
+import { FrostbiteServerList } from "@/api/model/frostbiteServerList";
 import { getDictionary } from "@/get-dictionary";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -11,9 +13,10 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { AxiosResponse } from "axios";
 
 type Props = {
-  servers: any;
+  servers?: AxiosResponse<FrostbiteSearch, any>;
   dictionary: Awaited<ReturnType<typeof getDictionary>>["server"];
 };
 
@@ -21,8 +24,8 @@ export const Client = ({ servers, dictionary }: Props) => {
   const { data: server, isLoading } = useBf1serversBf1ServersGet(
     {
       name: "bob",
-    }
-    // { query: { initialData: servers } }
+    },
+    { query: { initialData: servers } }
   );
 
   if (isLoading)

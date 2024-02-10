@@ -6,7 +6,7 @@ module.exports = {
       baseUrl: "https://api.gametools.network/",
       schemas: "../api/model",
       client: "react-query",
-      mock: true,
+      mock: false,
     },
     input: {
       target: "./openapi.json",
