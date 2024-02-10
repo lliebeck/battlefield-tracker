@@ -1,7 +1,7 @@
 import Typography from "@mui/material/Typography";
 import { Locale } from "../../config/i18n-config";
 import { getDictionary } from "../../get-dictionary";
-import Counter from "./components/Counter";
+import Counter from "./components/counter";
 
 export default async function IndexPage({
   params: { lang },
@@ -14,7 +14,7 @@ export default async function IndexPage({
     <div>
       <Typography>Current locale: {lang}</Typography>
       <Typography>
-        This text is rendered on the server:{" "}
+        This text is rendered on the server:
         {dictionary["server-component"].welcome}
       </Typography>
       <Counter dictionary={dictionary.counter} />

@@ -25,7 +25,7 @@ export const CustomAppBar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Template
+            Battlefield
           </Typography>
           <LocaleSwitcher />
           <DarkModeSwitcher />

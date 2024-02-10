@@ -5,5 +5,12 @@
   "counter": {
     "increment": "Increment",
     "decrement": "Decrement"
+  },
+  "server": {
+    "name": "Name",
+    "map": "Map",
+    "mode": "Mode",
+    "player": "Player",
+    "inQue": "Queue"
   }
 }
