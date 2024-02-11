@@ -1,5 +1,6 @@
 import { FrostbiteServerList } from "@/api/model/frostbiteServerList";
 import { getDictionary } from "@/get-dictionary";
+import { Container, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -33,16 +34,16 @@ export const ServerList = ({ servers, dictionary }: Props) => {
   });
 
   return (
-    <Box marginLeft={3}>
+    <Box marginX={3}>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>{dictionary.name}</TableCell>
-              <TableCell align="right">{dictionary.map}</TableCell>
-              <TableCell align="right">{dictionary.mode}</TableCell>
-              <TableCell align="right">{dictionary.player}</TableCell>
-              <TableCell align="right">{dictionary.inQue}</TableCell>
+              <TableCell align="left">{dictionary.map}</TableCell>
+              <TableCell align="left">{dictionary.mode}</TableCell>
+              <TableCell align="left">{dictionary.player}</TableCell>
+              <TableCell align="left">{dictionary.inQue}</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -57,10 +58,22 @@ export const ServerList = ({ servers, dictionary }: Props) => {
                   <TableCell component="th" scope="row">
                     {server.prefix}
                   </TableCell>
-                  <TableCell align="right">{server.currentMap}</TableCell>
-                  <TableCell align="right">{server.mode}</TableCell>
-                  <TableCell align="right">{server.serverInfo}</TableCell>
-                  <TableCell align="right">{server.inQue}</TableCell>
+                  <TableCell align="left">
+                    <Box display="flex">
+                      <Box
+                        component="img"
+                        height={50}
+                        alt="Picture of the map"
+                        src={server.url}
+                      />
+                      <Box alignSelf="center" marginLeft={1}>
+                        {server.currentMap}
+                      </Box>
+                    </Box>
+                  </TableCell>
+                  <TableCell align="left">{server.mode}</TableCell>
+                  <TableCell align="left">{server.serverInfo}</TableCell>
+                  <TableCell align="left">{server.inQue}</TableCell>
                 </TableRow>
               );
             })}

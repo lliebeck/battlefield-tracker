@@ -9,7 +9,6 @@ import { useState } from "react";
 import { SearchBar } from "./components/SearchBar";
 import { ServerList } from "./components/ServerList";
 import Container from "@mui/material/Container";
-import { useBf4serversBf4ServersGet } from "@/api/battlefield-4/battlefield-4";
 
 type Props = {
   servers?: FrostbiteSearch;
@@ -17,19 +16,15 @@ type Props = {
 };
 
 export const Client = ({ servers: initialServers, dictionary }: Props) => {
-  const [search, setSearch] = useState("bob");
+  const [search, setSearch] = useState("");
+  const [emptyServer, setEmptyServer] = useState(false);
+  const [map, setMap] = useState("");
   const { data: servers, isLoading } = useBf1serversBf1ServersGet(
     {
       name: search,
-      limit: 20,
-    }
-    // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
-  );
-
-  const { data: servers1, isLoading: isLoading1 } = useBf4serversBf4ServersGet(
-    {
-      name: search,
-      limit: 20,
+      limit: 50,
+      player_filters: emptyServer ? "" : "oneToFive,sixToTen,tenPlus,none",
+      map_filters: map,
     }
     // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
   );
@@ -37,7 +32,14 @@ export const Client = ({ servers: initialServers, dictionary }: Props) => {
   return (
     <>
       <Container maxWidth={false}>
-        <SearchBar search={search} setSearch={setSearch} />
+        <SearchBar
+          search={search}
+          setSearch={setSearch}
+          emptyServer
+          setEmptyServer={setEmptyServer}
+          map={map}
+          setMap={setMap}
+        />
         {isLoading ? (
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <CircularProgress />

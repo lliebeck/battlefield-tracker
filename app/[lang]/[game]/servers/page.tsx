@@ -13,7 +13,7 @@ export default async function Page({
 
   try {
     servers = await axios.get<FrostbiteSearch>(
-      "https://api.gametools.network//bf1/servers?name=bob&limit=20"
+      "https://api.gametools.network//bf1/servers?name=bob&limit=50"
     );
   } catch (ex) {
     //
