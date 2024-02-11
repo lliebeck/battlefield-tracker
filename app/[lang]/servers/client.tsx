@@ -17,9 +17,10 @@ import { AxiosResponse } from "axios";
 import { useCallback, useState } from "react";
 import { SearchBar } from "./components/SearchBar";
 import { ServerList } from "./components/ServerList";
+import { createEmptyAxiosResponse } from "@/utils/axiosResponse";
 
 type Props = {
-  servers?: AxiosResponse<FrostbiteSearch, any>;
+  servers?: FrostbiteSearch;
   dictionary: Awaited<ReturnType<typeof getDictionary>>["server"];
 };
 
@@ -28,8 +29,9 @@ export const Client = ({ servers: initialServers, dictionary }: Props) => {
   const { data: servers, isLoading } = useBf1serversBf1ServersGet(
     {
       name: search,
+      limit: 20,
     },
-    { query: { initialData: initialServers } }
+    { query: { initialData: createEmptyAxiosResponse(initialServers) } }
   );
 
   return (

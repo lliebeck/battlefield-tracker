@@ -9,6 +9,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { useRouter } from "next/navigation";
 
 type Props = {
   servers: FrostbiteServerList[] | undefined;
@@ -16,6 +17,8 @@ type Props = {
 };
 
 export const ServerList = ({ servers, dictionary }: Props) => {
+  const router = useRouter();
+
   servers?.sort((a, b) => {
     const nameA = a.serverInfo.toUpperCase(); // ignore upper and lowercase
     const nameB = b.serverInfo.toUpperCase(); // ignore upper and lowercase
@@ -48,6 +51,8 @@ export const ServerList = ({ servers, dictionary }: Props) => {
               return (
                 <TableRow
                   key={server.gameId}
+                  hover
+                  onClick={() => router.push(`/servers/${server.gameId}`)}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
