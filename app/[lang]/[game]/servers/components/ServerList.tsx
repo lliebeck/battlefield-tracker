@@ -1,7 +1,6 @@
 import { FrostbiteServerList } from "@/api/model/frostbiteServerList";
 import { getDictionary } from "@/get-dictionary";
 import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -34,7 +33,7 @@ export const ServerList = ({ servers, dictionary }: Props) => {
   });
 
   return (
-    <Box margin={3}>
+    <Box marginLeft={3}>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -52,7 +51,7 @@ export const ServerList = ({ servers, dictionary }: Props) => {
                 <TableRow
                   key={server.gameId}
                   hover
-                  onClick={() => router.push(`/servers/${server.gameId}`)}
+                  onClick={() => router.push(`servers/${server.gameId}`)}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">

@@ -13,13 +13,16 @@ export default async function Page({
 
   try {
     servers = await axios.get<FrostbiteSearch>(
-      "https://api.gametools.network//bf1/servers?name=bob"
+      "https://api.gametools.network//bf1/servers?name=bob&limit=20"
     );
   } catch (ex) {
     //
   }
-
   const dictionary = await getDictionary(lang);
 
-  return <Client servers={servers?.data} dictionary={dictionary.server} />;
+  return (
+    <>
+      <Client dictionary={dictionary.server} />{" "}
+    </>
+  );
 }

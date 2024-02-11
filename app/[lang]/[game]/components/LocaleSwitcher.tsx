@@ -1,11 +1,10 @@
 "use client";
 
 import Autocomplete from "@mui/material/Autocomplete";
-import TextField from "@mui/material/TextField";
-import Typography from "@mui/material/Typography";
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { i18n, type Locale } from "../../../config/i18n-config";
 import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import { i18n, type Locale } from "../../../../config/i18n-config";
 
 export default function LocaleSwitcher() {
   const pathName = usePathname();
