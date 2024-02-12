@@ -12,5 +12,12 @@
     "mode": "Modus",
     "player": "Spieler",
     "inQue": "Warteschlange"
+  },
+  "player": {
+    "userName": "Username",
+    "killsPerMinute": "Kills pro Minute",
+    "killDeath": "K/D",
+    "accuracy": "Genauigkeit",
+    "headShots": "Kopfschüsse"
   }
 }

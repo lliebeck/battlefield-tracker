@@ -20,17 +20,10 @@ export const ServerList = ({ servers, dictionary }: Props) => {
   const router = useRouter();
 
   servers?.sort((a, b) => {
-    const nameA = a.serverInfo.toUpperCase(); // ignore upper and lowercase
-    const nameB = b.serverInfo.toUpperCase(); // ignore upper and lowercase
-    if (nameA < nameB) {
-      return 1;
-    }
-    if (nameA > nameB) {
-      return -1;
-    }
+    const num1 = a.serverInfo.split("/");
+    const num2 = b.serverInfo.split("/");
 
-    // names must be equal
-    return 0;
+    return Number(num2[0]) - Number(num1[0]);
   });
 
   return (
