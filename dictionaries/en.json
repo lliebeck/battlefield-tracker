@@ -11,7 +11,8 @@
     "map": "Map",
     "mode": "Mode",
     "player": "Player",
-    "inQue": "Queue"
+    "inQue": "Queue",
+    "showEmptyServer": "Empty server"
   },
   "player": {
     "userName": "Username",
@@ -19,5 +20,36 @@
     "killDeath": "K/D",
     "accuracy": "Accuracy",
     "headShots": "Headshots"
+  },
+  "maps": {
+    "suez": "Suez",
+    "sinai desert": "Sinai Desert",
+    "monte grappa": "Monte Grappa",
+    "st quentin scar": "St Quentin Scar",
+    "giant's shadow": "Giant's Shadow",
+    "empire's edge": "Empire's Edge",
+    "fao fortress": "Fao Fortress",
+    "ballroom blitz": "Ballroom Blitz",
+    "amiens": "Amiens",
+    "argonne forest": "Argonne Forest",
+    "rupture": "Rupture",
+    "nivelle nights": "Nivelle Nights",
+    "prise de tahure": "Prise de Tahure",
+    "verdun heights": "Verdun Heights",
+    "fort de vaux": "Fort De Vaux",
+    "soissons": "Soissons",
+    "tsaritsyn": "Tsaritsyn",
+    "volga river": "Volga River",
+    "łupków pass": "Łupków Pass",
+    "albion": "Albion",
+    "galicia": "Galicia",
+    "brusilov keep": "Brusilov Keep",
+    "cape helles": "Cape Helles",
+    "achi baba": "Achi Baba",
+    "heligoland bight": "Heligoland Bight",
+    "zeebrugge": "Zeebrugge",
+    "passchendaele": "Passchendaele",
+    "caporetto": "Caporetto",
+    "river somme": "River Somme"
   }
 }

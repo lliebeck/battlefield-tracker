@@ -6,7 +6,6 @@ import {
 } from "@/api/battlefield-1/battlefield-1";
 import { Bf1DetailedServerInfo } from "@/api/model/bf1DetailedServerInfo";
 import { getDictionary } from "@/get-dictionary";
-import { createEmptyAxiosResponse } from "@/utils/axiosResponse";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -16,7 +15,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useParams } from "next/navigation";
-import { Player } from "./components/player";
+import { Player } from "./components/Player";
 
 type Props = {
   servers?: Bf1DetailedServerInfo;
@@ -46,7 +45,7 @@ export const Client = ({ servers: initialServers, dictionary }: Props) => {
   return (
     <Box marginX={3}>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>{dictionary.userName}</TableCell>

@@ -11,7 +11,8 @@
     "map": "Karte",
     "mode": "Modus",
     "player": "Spieler",
-    "inQue": "Warteschlange"
+    "inQue": "Warteschlange",
+    "showEmptyServer": "Leere Server"
   },
   "player": {
     "userName": "Username",
@@ -19,5 +20,36 @@
     "killDeath": "K/D",
     "accuracy": "Genauigkeit",
     "headShots": "Kopfschüsse"
+  },
+  "maps": {
+    "suez": "Suez",
+    "sinai desert": "Wüste Sinai",
+    "monte grappa": "Monte Grappa",
+    "st quentin scar": "Narbe von St. Quentin",
+    "giant's shadow": "Schatten des Giganten",
+    "empire's edge": "Am Rande des Reichs",
+    "fao fortress": "Festung von Faw",
+    "ballroom blitz": "Krieg im Ballsaal",
+    "amiens": "Amiens",
+    "argonne forest": "Wald der Argonnen",
+    "rupture": "Bruch",
+    "nivelle nights": "Nivelle Nächte",
+    "prise de tahure": "Prise de Tahure",
+    "verdun heights": "Verdun Höhen",
+    "fort de vaux": "Fort De Vaux",
+    "soissons": "Soissons",
+    "tsaritsyn": "Zarizyn",
+    "volga river": "Wolga",
+    "łupków pass": "Łupków Pass",
+    "albion": "Albion",
+    "galicia": "Galizien",
+    "brusilov keep": "Brussilov Bergfried",
+    "cape helles": "Kap Helles",
+    "achi baba": "Achi Baba",
+    "heligoland bight": "Helgoländer Bucht",
+    "zeebrugge": "Zeebrugge",
+    "passchendaele": "Passendale",
+    "caporetto": "Caporetto",
+    "river somme": "Somme"
   }
 }

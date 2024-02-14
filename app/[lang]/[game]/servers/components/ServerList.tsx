@@ -29,7 +29,7 @@ export const ServerList = ({ servers, dictionary }: Props) => {
   return (
     <Box marginX={3}>
       <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>{dictionary.name}</TableCell>
@@ -49,9 +49,6 @@ export const ServerList = ({ servers, dictionary }: Props) => {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {server.prefix}
-                  </TableCell>
-                  <TableCell align="left">
                     <Box display="flex">
                       <Box
                         component="img"
@@ -60,10 +57,11 @@ export const ServerList = ({ servers, dictionary }: Props) => {
                         src={server.url}
                       />
                       <Box alignSelf="center" marginLeft={1}>
-                        {server.currentMap}
+                        {server.prefix}
                       </Box>
                     </Box>
                   </TableCell>
+                  <TableCell align="left">{server.currentMap}</TableCell>
                   <TableCell align="left">{server.mode}</TableCell>
                   <TableCell align="left">{server.serverInfo}</TableCell>
                   <TableCell align="left">{server.inQue}</TableCell>
