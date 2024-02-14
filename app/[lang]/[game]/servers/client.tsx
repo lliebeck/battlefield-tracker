@@ -5,22 +5,16 @@ import { FrostbiteSearch } from "@/api/model/frostbiteSearch";
 import { getDictionary } from "@/get-dictionary";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useMemo, useState } from "react";
-import { SearchBar } from "./components/SearchBar";
-import { ServerList } from "./components/ServerList";
 import Container from "@mui/material/Container";
 import { useParams, useSearchParams } from "next/navigation";
+import { SearchBar } from "./components/SearchBar";
+import { ServerList } from "./components/ServerList";
+import { useServerSearchParams } from "./hooks/useServerSearchParams";
 
 type Props = {
   servers?: FrostbiteSearch;
   dictionaryServer: Awaited<ReturnType<typeof getDictionary>>["server"];
   dictionaryMaps: Awaited<ReturnType<typeof getDictionary>>["maps"];
-};
-
-type FilterOptions = {
-  search?: string;
-  map?: string;
-  isEmptyServer?: boolean;
 };
 
 export const Client = ({
@@ -31,32 +25,7 @@ export const Client = ({
   const searchParams = useSearchParams();
   const { lang } = useParams();
 
-  let currentSearch = useMemo(() => searchParams.get("search"), [searchParams]);
-  let currentMap = useMemo(() => searchParams.get("map"), [searchParams]);
-  let currentIsEmptyServer = useMemo(
-    () => searchParams.get("isEmptyServer"),
-    [searchParams]
-  );
-
-  const filterOptions: FilterOptions | undefined = useMemo(() => {
-    let options: FilterOptions = {};
-
-    if (!currentSearch && !currentMap && !currentIsEmptyServer) return;
-
-    if (currentSearch) {
-      options.search = currentSearch;
-    }
-
-    if (currentMap) {
-      options.map = currentMap;
-    }
-
-    if (currentIsEmptyServer) {
-      options.isEmptyServer = currentIsEmptyServer === "true" ? true : false;
-    }
-
-    return options;
-  }, [currentIsEmptyServer, currentMap, currentSearch]);
+  const { filterOptions } = useServerSearchParams();
 
   const { data: servers, isLoading } = useBf1serversBf1ServersGet(
     {
@@ -65,7 +34,7 @@ export const Client = ({
       player_filters: filterOptions?.isEmptyServer
         ? ""
         : "oneToFive,sixToTen,tenPlus,none",
-      map_filters: filterOptions?.map,
+      map_filters: filterOptions?.map ?? undefined,
       lang: lang === "de" ? "de-de" : "en-us",
     }
     // { query: { initialData: createEmptyAxiosResponse(initialServers) } }

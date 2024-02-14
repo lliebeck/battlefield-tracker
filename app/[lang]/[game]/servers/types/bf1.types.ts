@@ -1,40 +1,4 @@
-export const bf1MapOptions = [
-  "Suez",
-  "Sinai Desert",
-  "Monte Grappa",
-  "St Quentin Scar",
-  "Giant's Shadow",
-  "Empire's Edge",
-  "Fao Fortress",
-  "Ballroom Blitz",
-  "Amiens",
-  "Argonne Forest",
-  "Rupture",
-  "Nivelle Nights",
-  "Prise de Tahure",
-  //They Shell Not Pass
-  "Verdun Heights",
-  "Fort De Vaux",
-  "Soissons",
-  //In The Name Of The Tsar
-  "Tsaritsyn",
-  "Volga River",
-  "Łupków Pass",
-  "Albion",
-  "Galicia",
-  "Brusilov Keep",
-  //Turning Tides
-  "Cape Helles",
-  "Achi Baba",
-  "Heligoland Bight",
-  "Zeebrugge",
-  //Apocalypse
-  "Passchendaele",
-  "Caporetto",
-  "River Somme",
-];
-
-export const bf1MapOptionsKeys = {
+export const bf1MapOptionKeys = {
   suez: {},
   "sinai desert": {},
   "monte grappa": {},
@@ -70,4 +34,4 @@ export const bf1MapOptionsKeys = {
   "river somme": {},
 } as const;
 
-export type Ibf1MapOptionsKeys = keyof typeof bf1MapOptionsKeys;
+export type Ibf1MapOptionsKeys = keyof typeof bf1MapOptionKeys;

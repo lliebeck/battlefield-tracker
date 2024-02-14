@@ -7,88 +7,16 @@ import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import debounce from "@mui/material/utils/debounce";
-import { Dictionary, identity, pickBy } from "lodash";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo } from "react";
-import {
-  Ibf1MapOptionsKeys,
-  bf1MapOptionsKeys as bf1MapOptionKeys,
-} from "../types/bf1.types";
+import { useServerSearchParams } from "../hooks/useServerSearchParams";
+import { Ibf1MapOptionsKeys, bf1MapOptionKeys } from "../types/bf1.types";
 
 type Props = {
   dictionaryMap: Awaited<ReturnType<typeof getDictionary>>["maps"];
   dictionaryServer: Awaited<ReturnType<typeof getDictionary>>["server"];
 };
 
-type FilterOptions = {
-  search?: string | undefined | null;
-  map?: string | undefined | null;
-  isEmptyServer?: boolean | undefined | null;
-};
-
 export const SearchBar = ({ dictionaryMap, dictionaryServer }: Props) => {
-  const searchParams = useSearchParams();
-  const router = useRouter();
-
-  let currentSearch = useMemo(() => searchParams.get("search"), [searchParams]);
-  let currentMap = useMemo(() => searchParams.get("map"), [searchParams]);
-  let currentIsEmptyServer = useMemo(
-    () => searchParams.get("isEmptyServer"),
-    [searchParams]
-  );
-
-  const filterOptions: FilterOptions = useMemo(() => {
-    let options: FilterOptions = {};
-
-    if (!currentSearch && !currentMap && !currentIsEmptyServer) return {};
-
-    if (currentSearch) {
-      options.search = currentSearch;
-    }
-
-    if (
-      currentMap &&
-      Object.keys(bf1MapOptionKeys).some((x) => x === currentMap)
-    ) {
-      options.map = currentMap;
-    }
-
-    if (currentIsEmptyServer) {
-      options.isEmptyServer = currentIsEmptyServer === "true" ? true : false;
-    }
-
-    return options;
-  }, [currentIsEmptyServer, currentMap, currentSearch]);
-
-  const setFilterOptions = useCallback(
-    (key: keyof FilterOptions, value: string | null | undefined) => {
-      let newFilterOptions: FilterOptions = filterOptions;
-
-      switch (key) {
-        case "map": {
-          newFilterOptions.map = value;
-          break;
-        }
-        case "search": {
-          console.log(value);
-          newFilterOptions.search = value;
-          break;
-        }
-        case "isEmptyServer": {
-          newFilterOptions.isEmptyServer = value === "true" ? true : false;
-          break;
-        }
-      }
-
-      const cleanedFilterOptions = pickBy(
-        newFilterOptions,
-        identity
-      ) as Dictionary<string>;
-
-      router.replace(`servers?${new URLSearchParams(cleanedFilterOptions)}`);
-    },
-    [filterOptions, router]
-  );
+  const { filterOptions, setFilterOptions } = useServerSearchParams();
 
   return (
     <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>

@@ -24,7 +24,6 @@ type Props = {
 
 export const Client = ({ servers: initialServers, dictionary }: Props) => {
   const { gameid } = useParams();
-  console.log(gameid);
   const { data: servers, isLoading } =
     useBf1detailedserversBf1DetailedserverGet(
       {

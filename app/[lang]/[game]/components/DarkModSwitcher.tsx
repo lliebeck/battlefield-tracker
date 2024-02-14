@@ -12,7 +12,6 @@ export default function DarkModeSwitcher() {
     <IconButton
       sx={{ ml: 1 }}
       onClick={() => {
-        console.log("Hallo");
         setMode(mode === "dark" ? "light" : "dark");
       }}
       color="inherit"
