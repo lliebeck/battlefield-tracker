@@ -15,7 +15,10 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { useParams } from "next/navigation";
-import { Player } from "./components/Player";
+import { PlayerRow } from "./components/PlayerRow";
+import Grid from "@mui/material/Grid";
+import { PlayerList } from "./components/PlayerList";
+import { ServerDashboard } from "./components/ServerDashboard";
 
 type Props = {
   servers?: Bf1DetailedServerInfo;
@@ -32,7 +35,7 @@ export const Client = ({ servers: initialServers, dictionary }: Props) => {
       // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
     );
 
-  const { data: players, isLoading: isPlayersLoading } =
+  const { data: bf1ServerPlayers, isLoading: isPlayersLoading } =
     useBf1playersBf1PlayersGet(
       {
         gameid: gameid as string,
@@ -40,29 +43,12 @@ export const Client = ({ servers: initialServers, dictionary }: Props) => {
       // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
     );
 
-  // return <pre>{JSON.stringify(players, undefined, 2)}</pre>;
   return (
     <Box marginX={3}>
-      <TableContainer component={Paper}>
-        <Table size="small" sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead>
-            <TableRow>
-              <TableCell>{dictionary.userName}</TableCell>
-              <TableCell align="left">{dictionary.killsPerMinute}</TableCell>
-              <TableCell align="left">{dictionary.killDeath}</TableCell>
-              <TableCell align="left">{dictionary.accuracy}</TableCell>
-              <TableCell align="left">{dictionary.headShots}</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {players?.data?.teams?.map((team) =>
-              team.players.map((player) => (
-                <Player key={player.player_id} player={player} />
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <ServerDashboard
+        bf1ServerPlayers={bf1ServerPlayers?.data}
+        dictionary={dictionary}
+      />
     </Box>
   );
 };

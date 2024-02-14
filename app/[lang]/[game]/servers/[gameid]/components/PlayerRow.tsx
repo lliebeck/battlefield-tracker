@@ -12,7 +12,7 @@ type Props = {
   player: FrostbiteServerPlayer;
 };
 
-export const Player = ({ player }: Props) => {
+export const PlayerRow = ({ player }: Props) => {
   const {
     data: allPlayerData,
     isLoading,
@@ -31,16 +31,16 @@ export const Player = ({ player }: Props) => {
           <Skeleton variant="circular" width={40} height={40} />
         </TableCell>
         <TableCell>
-          <Skeleton variant="text" width={210} height={60} />
+          <Skeleton variant="text" width={150} height={40} />
         </TableCell>
         <TableCell>
-          <Skeleton variant="text" width={210} height={60} />
+          <Skeleton variant="text" width={150} height={40} />
         </TableCell>
         <TableCell>
-          <Skeleton variant="text" width={210} height={60} />
+          <Skeleton variant="text" width={150} height={40} />
         </TableCell>
         <TableCell>
-          <Skeleton variant="text" width={210} height={60} />
+          <Skeleton variant="text" width={150} height={40} />
         </TableCell>
       </TableRow>
     );
