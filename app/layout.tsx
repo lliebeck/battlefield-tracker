@@ -1,9 +1,9 @@
 import { AppThemeProvider } from "@/config/AppThemeProvider";
 import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import type { Metadata } from "next";
-import { i18n, type Locale } from "../../config/i18n-config";
-import ClientLayout from "./[game]/components/ClientLayout";
-import ReactQueryProviders from "./[game]/components/ReactQueryProviders";
+import { i18n, type Locale } from "../config/i18n-config";
+import ClientLayout from "./[lang]/[game]/components/ClientLayout";
+import ReactQueryProviders from "./[lang]/[game]/components/ReactQueryProviders";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));

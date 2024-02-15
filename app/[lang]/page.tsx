@@ -4,12 +4,6 @@ import { getDictionary } from "../../get-dictionary";
 import Counter from "./[game]/components/counter";
 import { redirect } from "next/navigation";
 
-export default async function IndexPage({
-  params: { lang },
-}: {
-  params: { lang: Locale };
-}) {
-  const dictionary = await getDictionary(lang);
-
+export default async function IndexPage({}: {}) {
   redirect("battlefield1/servers");
 }
