@@ -11,5 +11,5 @@ export default async function IndexPage({
 }) {
   const dictionary = await getDictionary(lang);
 
-  redirect("/battlefield1/servers");
+  redirect("battlefield1/servers");
 }
