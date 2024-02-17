@@ -1,13 +1,12 @@
 "use client";
 
+import { Bf1ServerPlayers } from "@/api/model";
+import { getDictionary } from "@/get-dictionary";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import { PlayerList } from "./PlayerList";
-import { getDictionary } from "@/get-dictionary";
-import { Bf1ServerPlayers } from "@/api/model";
 import Typography from "@mui/material/Typography";
-import { useBf1multipleBf1MultiplePost } from "@/api/battlefield-1/battlefield-1";
 import { useMemo } from "react";
+import { PlayerList } from "./PlayerList";
 
 type Props = {
   bf1ServerPlayers?: Bf1ServerPlayers;

@@ -17,6 +17,7 @@
   "player": {
     "userName": "Username",
     "killsPerMinute": "Kills per minute",
+    "killsPerMinuteShort": "KPM",
     "killDeath": "K/D",
     "accuracy": "Accuracy",
     "headShots": "Headshots"

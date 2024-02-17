@@ -46,7 +46,10 @@ export const ServerList = ({ servers, dictionary }: Props) => {
                   key={server.gameId}
                   hover
                   onClick={() => router.push(`servers/${server.gameId}`)}
-                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                    cursor: "pointer",
+                  }}
                 >
                   <TableCell component="th" scope="row">
                     <Box display="flex">
