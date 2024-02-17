@@ -8,13 +8,13 @@ import { SideNav } from "./SideNav";
 export default function ClientLayout({
   children,
 }: {} & React.PropsWithChildren) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <>
       <Box>
         <CustomAppBar setOpen={setOpen} />
-        <SideNav open={open} />
+        <SideNav open={open} setOpen={setOpen} />
         <Box
           component="main"
           sx={{

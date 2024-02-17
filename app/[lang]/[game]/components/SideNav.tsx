@@ -9,15 +9,17 @@ import Toolbar from "@mui/material/Toolbar";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { games } from "../../types/games.types";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 type Props = {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>["server"];
   open: boolean;
+  setOpen: (value: any) => void;
 };
 
 const drawerWidth = 220;
 
-export const SideNav = ({ dictionary, open = true }: Props) => {
+export const SideNav = ({ dictionary, open = true, setOpen }: Props) => {
   const router = useRouter();
   const { game: selectedGame, lang } = useParams();
 
@@ -42,23 +44,32 @@ export const SideNav = ({ dictionary, open = true }: Props) => {
   }, [lang, router, selectedGame]);
 
   return (
-    <Drawer
-      variant="temporary"
-      open={open}
-      sx={{
-        width: drawerWidth,
-        flexShrink: 0,
-        "& .MuiDrawer-paper": {
-          width: drawerWidth,
-          boxSizing: "border-box",
-          px: 2,
-          py: 1,
-        },
-      }}
-    >
-      <Toolbar />
-      <Divider />
-      <List component="nav">{mainListItems}</List>
-    </Drawer>
+    <>
+      <ClickAwayListener
+        mouseEvent="onMouseDown"
+        touchEvent="onTouchStart"
+        onClickAway={() => open && setOpen(false)}
+      >
+        <Drawer
+          variant="temporary"
+          open={open}
+          onClose={(_, reason) => reason === "backdropClick" && setOpen(false)}
+          sx={{
+            width: drawerWidth,
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: drawerWidth,
+              boxSizing: "border-box",
+              px: 2,
+              py: 1,
+            },
+          }}
+        >
+          <Toolbar />
+          <Divider />
+          <List component="nav">{mainListItems}</List>
+        </Drawer>
+      </ClickAwayListener>
+    </>
   );
 };

@@ -1,5 +1,6 @@
 "use client";
 
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import {
   useBf1detailedserversBf1DetailedserverGet,
   useBf1playersBf1PlayersGet,
@@ -7,8 +8,9 @@ import {
 import { Bf1DetailedServerInfo } from "@/api/model/bf1DetailedServerInfo";
 import { getDictionary } from "@/get-dictionary";
 import Box from "@mui/material/Box";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { ServerDashboard } from "./components/ServerDashboard";
+import { IconButton, Toolbar } from "@mui/material";
 
 type Props = {
   servers?: Bf1DetailedServerInfo;
@@ -17,6 +19,7 @@ type Props = {
 
 export const Client = ({ servers: initialServers, dictionary }: Props) => {
   const { gameid } = useParams();
+  const router = useRouter();
   const { data: servers, isLoading } =
     useBf1detailedserversBf1DetailedserverGet(
       {
@@ -35,6 +38,11 @@ export const Client = ({ servers: initialServers, dictionary }: Props) => {
 
   return (
     <Box marginX={3}>
+      <Toolbar>
+        <IconButton onClick={() => router.back()}>
+          <ArrowBackIcon />
+        </IconButton>
+      </Toolbar>
       <ServerDashboard
         bf1ServerPlayers={bf1ServerPlayers?.data}
         dictionary={dictionary}
