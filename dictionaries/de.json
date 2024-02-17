@@ -20,7 +20,10 @@
     "killsPerMinuteShort": "KPM",
     "killDeath": "K/D",
     "accuracy": "Genauigkeit",
-    "headShots": "Kopfschüsse"
+    "headShots": "Kopfschüsse",
+    "suspicious": "Suspicious",
+    "suspiciousShort": "Sus",
+    "tracker": "Tracker"
   },
   "maps": {
     "suez": "Suez",

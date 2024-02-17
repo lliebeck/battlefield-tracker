@@ -10,7 +10,9 @@ import { getDictionary } from "@/get-dictionary";
 import Box from "@mui/material/Box";
 import { useParams, useRouter } from "next/navigation";
 import { ServerDashboard } from "./components/ServerDashboard";
-import { IconButton, Toolbar } from "@mui/material";
+import Toolbar from "@mui/material/Toolbar";
+import IconButton from "@mui/material/IconButton";
+import Typography from "@mui/material/Typography";
 
 type Props = {
   servers?: Bf1DetailedServerInfo;
@@ -20,13 +22,12 @@ type Props = {
 export const Client = ({ servers: initialServers, dictionary }: Props) => {
   const { gameid } = useParams();
   const router = useRouter();
-  const { data: servers, isLoading } =
-    useBf1detailedserversBf1DetailedserverGet(
-      {
-        gameid: gameid as string,
-      }
-      // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
-    );
+  const { data: server, isLoading } = useBf1detailedserversBf1DetailedserverGet(
+    {
+      gameid: gameid as string,
+    }
+    // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
+  );
 
   const { data: bf1ServerPlayers, isLoading: isPlayersLoading } =
     useBf1playersBf1PlayersGet(
@@ -42,6 +43,9 @@ export const Client = ({ servers: initialServers, dictionary }: Props) => {
         <IconButton onClick={() => router.back()}>
           <ArrowBackIcon />
         </IconButton>
+        <Typography marginLeft={1} variant={"h5"}>
+          {server?.data?.prefix}
+        </Typography>
       </Toolbar>
       <ServerDashboard
         bf1ServerPlayers={bf1ServerPlayers?.data}

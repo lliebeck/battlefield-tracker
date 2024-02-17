@@ -27,7 +27,7 @@ export const ServerDashboard = ({ dictionary, bf1ServerPlayers }: Props) => {
   return (
     <Box marginX={3}>
       <Grid container spacing={0.5}>
-        <Grid item sm={12} md={6}>
+        <Grid item sm={12} lg={6}>
           <Grid item marginY={1}>
             <Box display={"flex"}>
               <Box
@@ -48,7 +48,7 @@ export const ServerDashboard = ({ dictionary, bf1ServerPlayers }: Props) => {
             />
           </Grid>
         </Grid>
-        <Grid item sm={12} md={6}>
+        <Grid item sm={12} lg={6}>
           <Grid item marginY={1}>
             <Box display={"flex"}>
               <Box

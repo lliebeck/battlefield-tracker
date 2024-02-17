@@ -6,25 +6,19 @@ import Grid from "@mui/material/Grid";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
-import { useEffect } from "react";
 
 type Props = {
   show: boolean;
   player: Bf1Combined | undefined;
 };
 
-export const PlayerAvancedRow = ({ show, player }: Props) => {
-  const theme = useTheme();
-  const isMatch = useMediaQuery(theme.breakpoints.down("sm"));
-
+export const PlayerAdvancedRow = ({ show, player }: Props) => {
   return (
     <TableRow>
       <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={8}>
         <Collapse in={show} timeout="auto" unmountOnExit>
           <Box sx={{ margin: 1 }}>
-            <Typography variant="h6">ALLTIME OVERVIEW</Typography>
+            <Typography variant="h6">ADVANCED OVERVIEW</Typography>
             <Divider sx={{ marginBottom: 1 }} />
             <Grid container spacing={2}>
               <Grid item xs={3} sm={2}>
@@ -38,6 +32,9 @@ export const PlayerAvancedRow = ({ show, player }: Props) => {
               </Grid>
               <Grid item xs={3} sm={2}>
                 <Item label="Kill assists" value={player?.killAssists} />
+              </Grid>
+              <Grid item xs={3} sm={2}>
+                <Item label="Kill per Minute" value={player?.killsPerMinute} />
               </Grid>
               <Grid item xs={3} sm={2}>
                 <Item label="Skill" value={player?.skill} />

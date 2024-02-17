@@ -47,36 +47,28 @@ export const PlayerList = ({ players, dictionary }: Props) => {
       label: dictionary.killDeath,
     },
     {
-      id: "killsPerMinute",
-      numeric: false,
-      disablePadding: false,
-      label: isUpLg
-        ? dictionary.killsPerMinute
-        : dictionary.killsPerMinuteShort,
-    },
-    {
       id: "accuracy",
       numeric: false,
       disablePadding: false,
       label: dictionary.accuracy,
     },
     {
-      id: "headShots",
+      id: "headshots",
       numeric: false,
       disablePadding: false,
       label: dictionary.headShots,
     },
     {
       id: "sus",
-      numeric: true,
+      numeric: false,
       disablePadding: false,
-      label: "Suspicious",
+      label: isUpLg ? dictionary.suspicious : dictionary.suspiciousShort,
     },
     {
       id: "redirectIcon",
       numeric: false,
       disablePadding: false,
-      label: "",
+      label: dictionary.tracker,
     },
   ];
 

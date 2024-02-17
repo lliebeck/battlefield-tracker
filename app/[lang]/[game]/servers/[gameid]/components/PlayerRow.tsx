@@ -12,10 +12,10 @@ import Skeleton from "@mui/material/Skeleton";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useCallback, useMemo, useState } from "react";
-import { PlayerAvancedRow } from "./PlayerAvancedRow";
 import { Bf1CombinedAvatar } from "@/api/model/bf1CombinedAvatar";
 import { Bf1CombinedUserName } from "@/api/model/bf1CombinedUserName";
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
+import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
 
 type Props = {
   player: FrostbiteServerPlayer;
@@ -80,9 +80,6 @@ export const PlayerRow = ({ player }: Props) => {
           <Skeleton variant="text" width="100%" height={40} />
         </TableCell>
         <TableCell>
-          <Skeleton variant="text" width="100%" height={40} />
-        </TableCell>
-        <TableCell>
           <Skeleton variant="circular" width={25} height={25} />
         </TableCell>
         <TableCell>
@@ -118,9 +115,6 @@ export const PlayerRow = ({ player }: Props) => {
             rankImg={allPlayerData?.data?.rankImg}
           />
         </TableCell>
-        <TableCell align="left">
-          {allPlayerData?.data?.killsPerMinute}
-        </TableCell>
         <TableCell align="left">{allPlayerData?.data?.killDeath}</TableCell>
         <TableCell align="left">{allPlayerData?.data?.accuracy}</TableCell>
         <TableCell align="left">{allPlayerData?.data?.headshots}</TableCell>
@@ -141,7 +135,7 @@ export const PlayerRow = ({ player }: Props) => {
           )}
         </TableCell>
       </TableRow>
-      {!error && <PlayerAvancedRow show={open} player={allPlayerData?.data} />}
+      {!error && <PlayerAdvancedRow show={open} player={allPlayerData?.data} />}
     </>
   );
 };
