@@ -42,7 +42,7 @@ export const Client = ({
 
   return (
     <>
-      <Container maxWidth={false}>
+      <Box>
         <SearchBar
           dictionaryMap={dictionaryMaps}
           dictionaryServer={dictionaryServer}
@@ -57,7 +57,7 @@ export const Client = ({
             dictionary={dictionaryServer}
           />
         )}
-      </Container>
+      </Box>
     </>
   );
 };

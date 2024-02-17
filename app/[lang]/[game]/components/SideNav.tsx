@@ -7,18 +7,19 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import { useParams, useRouter } from "next/navigation";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { games } from "../../types/games.types";
 
 type Props = {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>["server"];
+  open: boolean;
 };
 
-const drawerWidth = 250;
+const drawerWidth = 220;
 
-export const SideNav = ({ dictionary }: Props) => {
+export const SideNav = ({ dictionary, open = true }: Props) => {
   const router = useRouter();
-  const { game: selectedGame } = useParams();
+  const { game: selectedGame, lang } = useParams();
 
   const mainListItems = useMemo(() => {
     return games.map((game) => {
@@ -26,19 +27,24 @@ export const SideNav = ({ dictionary }: Props) => {
         <ListItemButton
           key={game.key}
           selected={game.key === selectedGame}
+          disabled={!game.available}
           onClick={() => {
-            router.push(`/${game.key}/servers`);
+            router.push(`/${lang ?? "en"}/${game.key}/servers`);
           }}
         >
-          <ListItemText primary={game.name} />
+          <ListItemText
+            primary={game.name}
+            secondary={!game.available ? "(coming soon)" : null}
+          />
         </ListItemButton>
       );
     });
-  }, [router, selectedGame]);
+  }, [lang, router, selectedGame]);
 
   return (
     <Drawer
-      variant="permanent"
+      variant="temporary"
+      open={open}
       sx={{
         width: drawerWidth,
         flexShrink: 0,

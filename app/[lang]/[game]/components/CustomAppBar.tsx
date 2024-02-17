@@ -7,8 +7,15 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import DarkModeSwitcher from "./DarkModSwitcher";
 import LocaleSwitcher from "./LocaleSwitcher";
+import { useParams } from "next/navigation";
+import { games } from "../../types/games.types";
 
-export const CustomAppBar = () => {
+type Props = {
+  setOpen: (value: any) => void;
+};
+
+export const CustomAppBar = ({ setOpen }: Props) => {
+  const { game } = useParams();
   return (
     <AppBar
       position="fixed"
@@ -21,11 +28,16 @@ export const CustomAppBar = () => {
           color="inherit"
           aria-label="menu"
           sx={{ mr: 2 }}
+          onClick={() =>
+            setOpen((prev: any) => {
+              return !prev;
+            })
+          }
         >
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          Battlefield
+          {games.find((x) => x.key === game)?.name ?? "Battlefield"}
         </Typography>
         <LocaleSwitcher />
         <DarkModeSwitcher />

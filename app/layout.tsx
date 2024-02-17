@@ -10,8 +10,8 @@ export async function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: "Next App Template",
-  description: "Next template with MUI and i18n",
+  title: "Battlefield",
+  description: "Find your battlefield lobby",
 };
 
 export default function RootLayout({
