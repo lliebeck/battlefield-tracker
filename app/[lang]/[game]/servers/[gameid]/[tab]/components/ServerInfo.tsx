@@ -80,7 +80,7 @@ export const ServerInfo = () => {
           sm={6}
           md={2}
           label="Owner"
-          value={serverInfo?.owner.name}
+          value={serverInfo?.owner?.name}
         />
       </Grid>
       <Grid container spacing={2}>
