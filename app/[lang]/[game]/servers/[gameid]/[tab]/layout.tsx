@@ -25,7 +25,7 @@ const LinkTab = (props: LinkTabProps) => {
   );
 };
 
-export const ServerLayout = ({ children }: React.PropsWithChildren) => {
+export default function ServerLayout({ children }: React.PropsWithChildren) {
   const router = useRouter();
   const { gameid, tab } = useParams();
 
@@ -65,6 +65,4 @@ export const ServerLayout = ({ children }: React.PropsWithChildren) => {
       </Box>
     </Box>
   );
-};
-
-export default ServerLayout;
+}
