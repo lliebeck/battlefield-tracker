@@ -12,7 +12,7 @@ import { PlayerRow } from "./PlayerRow";
 import { TableRow, useMediaQuery, useTheme } from "@mui/material";
 
 type Props = {
-  players: FrostbiteServerPlayer[];
+  players: FrostbiteServerPlayer[] | undefined;
   dictionary: Awaited<ReturnType<typeof getDictionary>>["player"];
 };
 

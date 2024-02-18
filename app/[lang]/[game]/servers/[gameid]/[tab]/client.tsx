@@ -21,7 +21,7 @@ type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>["player"];
 };
 
-export const Client = ({ servers: initialServers, dictionary }: Props) => {
+export const Client = ({ dictionary }: Props) => {
   const { tab } = useParams();
   const router = useRouter();
 

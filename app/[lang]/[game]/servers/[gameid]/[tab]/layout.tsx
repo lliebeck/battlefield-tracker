@@ -27,7 +27,7 @@ const LinkTab = (props: LinkTabProps) => {
 
 export default function ServerLayout({ children }: React.PropsWithChildren) {
   const router = useRouter();
-  const { gameid, tab } = useParams();
+  const { gameid, lang, tab } = useParams();
 
   const value = useMemo(() => {
     const currentTab = tab as ServerRoutes;
@@ -49,7 +49,9 @@ export default function ServerLayout({ children }: React.PropsWithChildren) {
   return (
     <Box>
       <Toolbar>
-        <IconButton onClick={() => router.back()}>
+        <IconButton
+          onClick={() => router.push(`/${lang}/battlefield1/servers`)}
+        >
           <ArrowBackIcon />
         </IconButton>
         <Typography marginLeft={1} variant={"h5"} noWrap>

@@ -17,9 +17,18 @@ type Props = {
 
 export const ServerDashboard = ({ dictionary }: Props) => {
   const { gameid } = useParams();
-  const { data: bf1ServerPlayers, isLoading } = useBf1playersBf1PlayersGet(
+  const {
+    data: bf1ServerPlayers,
+    isLoading,
+    error,
+  } = useBf1playersBf1PlayersGet(
     {
       gameid: gameid as string,
+    },
+    {
+      query: {
+        retry: 2,
+      },
     }
     // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
   );
@@ -36,6 +45,14 @@ export const ServerDashboard = ({ dictionary }: Props) => {
 
   if (isLoading) {
     return <LinearProgress />;
+  }
+
+  if (error?.status && error?.status >= 500 && error?.status < 600) {
+    return <Typography variant="h6">Services not available!</Typography>;
+  }
+
+  if (error) {
+    return <Typography variant="h6">Something went wrong!</Typography>;
   }
 
   return (
