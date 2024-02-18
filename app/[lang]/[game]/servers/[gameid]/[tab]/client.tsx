@@ -14,7 +14,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { ServerInfo } from "./components/ServerInfo";
-import { ServerRoutes } from "./layout";
+import { ServerRoutes } from "./tabs.types";
 
 type Props = {
   servers?: Bf1DetailedServerInfo;

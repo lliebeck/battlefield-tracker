@@ -6,6 +6,7 @@ import { Box, IconButton, Tab, Tabs, Toolbar, Typography } from "@mui/material";
 import type { Metadata } from "next";
 import { useParams, useRouter } from "next/navigation";
 import { ReactText, useMemo, useState } from "react";
+import { ServerRoutes } from "./tabs.types";
 
 type LinkTabProps = {
   label?: string;
@@ -23,11 +24,6 @@ const LinkTab = (props: LinkTabProps) => {
     />
   );
 };
-
-export const enum ServerRoutes {
-  PLAYERS = "players",
-  INFO = "info",
-}
 
 export const ServerLayout = ({ children }: React.PropsWithChildren) => {
   const router = useRouter();
