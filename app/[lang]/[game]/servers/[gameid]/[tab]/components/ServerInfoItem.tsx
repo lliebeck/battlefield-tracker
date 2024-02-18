@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 type ItemProps = {
   label: string;
   value: string | number | undefined;
+  alignValue?: "center" | "left" | "right" | "inherit" | "justify";
   xs?: boolean | GridSize | undefined;
   sm?: boolean | GridSize | undefined;
   md?: boolean | GridSize | undefined;
@@ -24,7 +25,9 @@ export const ServerInfoGridItem = (props: ItemProps) => {
     >
       <Grid item>
         <Typography variant={"body1"}>{props.label}</Typography>
-        <Typography variant="h5">{props.value?.toString()}</Typography>
+        <Typography align={props.alignValue} variant="h5">
+          {props.value?.toString()}
+        </Typography>
       </Grid>
     </Grid>
   );
