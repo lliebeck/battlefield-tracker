@@ -6,6 +6,7 @@ import Grid from "@mui/material/Grid";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
+import { PlayerAdvancedRowItem } from "./PlayerAdvancedRowItem";
 
 type Props = {
   show: boolean;
@@ -22,58 +23,63 @@ export const PlayerAdvancedRow = ({ show, player }: Props) => {
             <Divider sx={{ marginBottom: 1 }} />
             <Grid container spacing={2}>
               <Grid item xs={3} sm={2}>
-                <Item label={"Kills"} value={player?.kills} />
+                <PlayerAdvancedRowItem label={"Kills"} value={player?.kills} />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Deaths" value={player?.deaths} />
+                <PlayerAdvancedRowItem label="Deaths" value={player?.deaths} />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Headshots" value={player?.headShots} />
+                <PlayerAdvancedRowItem
+                  label="Headshots"
+                  value={player?.headShots}
+                />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Kill assists" value={player?.killAssists} />
+                <PlayerAdvancedRowItem
+                  label="Kill assists"
+                  value={player?.killAssists}
+                />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Kill per Minute" value={player?.killsPerMinute} />
+                <PlayerAdvancedRowItem
+                  label="Kill per Minute"
+                  value={player?.killsPerMinute}
+                />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Skill" value={player?.skill} />
+                <PlayerAdvancedRowItem label="Skill" value={player?.skill} />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Wins" value={player?.wins} />
+                <PlayerAdvancedRowItem label="Wins" value={player?.wins} />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Loses" value={player?.loses} />
+                <PlayerAdvancedRowItem label="Loses" value={player?.loses} />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Win percentage" value={player?.winPercent} />
+                <PlayerAdvancedRowItem
+                  label="Win percentage"
+                  value={player?.winPercent}
+                />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Revives" value={player?.revives} />
+                <PlayerAdvancedRowItem
+                  label="Revives"
+                  value={player?.revives}
+                />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Heals" value={player?.heals} />
+                <PlayerAdvancedRowItem label="Heals" value={player?.heals} />
               </Grid>
               <Grid item xs={3} sm={2}>
-                <Item label="Dogtags taken" value={player?.dogtagsTaken} />
+                <PlayerAdvancedRowItem
+                  label="Dogtags taken"
+                  value={player?.dogtagsTaken}
+                />
               </Grid>
             </Grid>
           </Box>
         </Collapse>
       </TableCell>
     </TableRow>
-  );
-};
-
-type ItemProps = {
-  label: string;
-  value: string | number | undefined;
-};
-const Item = ({ label, value }: ItemProps) => {
-  return (
-    <>
-      <Typography variant={"body2"}>{label}</Typography>
-      <Typography variant="h6">{value?.toString()}</Typography>
-    </>
   );
 };

@@ -16,6 +16,7 @@ import { Bf1CombinedAvatar } from "@/api/model/bf1CombinedAvatar";
 import { Bf1CombinedUserName } from "@/api/model/bf1CombinedUserName";
 import { Typography, useMediaQuery, useTheme } from "@mui/material";
 import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
+import { DisplayUserName } from "./DisplayUserName";
 
 type Props = {
   player: FrostbiteServerPlayer;
@@ -136,33 +137,6 @@ export const PlayerRow = ({ player }: Props) => {
         </TableCell>
       </TableRow>
       {!error && <PlayerAdvancedRow show={open} player={allPlayerData?.data} />}
-    </>
-  );
-};
-
-type ItemProps = {
-  userName: Bf1CombinedUserName | undefined;
-  avatar: Bf1CombinedAvatar | undefined;
-  rankImg: string | undefined;
-  rank: number | undefined;
-};
-const DisplayUserName = ({ userName, avatar, rank, rankImg }: ItemProps) => {
-  return (
-    <>
-      <Box display="flex">
-        <Avatar src={avatar ?? ""} />
-        <Box marginLeft={1} display={"flex"} flexDirection={"column"}>
-          <Box display={"flex"} flexDirection={"row"}>
-            <Box component="img" height={19} alt="" src={rankImg ?? ""} />
-            <Box alignSelf={"center"} marginLeft={0.25}>
-              <Typography variant="caption">{rank}</Typography>
-            </Box>
-          </Box>
-          <Typography variant="subtitle2">
-            {userName ? userName : "Unknown"}
-          </Typography>
-        </Box>
-      </Box>
     </>
   );
 };
