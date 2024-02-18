@@ -130,6 +130,8 @@ export const PlayerRow = ({ player }: Props) => {
           {!error && (
             <IconButton
               href={`https://battlefieldtracker.com/bf1/profile/origin/${player.name}/overview`}
+              rel="noopener noreferrer"
+              target="_blank"
             >
               <LaunchIcon />
             </IconButton>
