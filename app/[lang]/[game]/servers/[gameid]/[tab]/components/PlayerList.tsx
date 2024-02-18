@@ -76,14 +76,13 @@ export const PlayerList = ({ players, dictionary }: Props) => {
     <TableContainer component={Paper}>
       <Table size="small" sx={{ minWidth: 200 }} aria-label="simple table">
         <colgroup>
-          <col style={{ width: "2%" }} />
-          <col style={{ width: "30%" }} />
+          <col style={{ width: "5%" }} />
+          <col style={{ width: "40%" }} />
           <col style={{ width: "15%" }} />
           <col style={{ width: "15%" }} />
           <col style={{ width: "15%" }} />
-          <col style={{ width: "15%" }} />
-          <col style={{ width: "4%" }} />
-          <col style={{ width: "4%" }} />
+          <col style={{ width: "5%" }} />
+          <col style={{ width: "5%" }} />
         </colgroup>
         <TableHead>
           <TableRow>
