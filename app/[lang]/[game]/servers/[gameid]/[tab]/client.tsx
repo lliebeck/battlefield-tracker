@@ -18,15 +18,17 @@ import { ServerRoutes } from "./tabs.types";
 
 type Props = {
   servers?: Bf1DetailedServerInfo;
-  dictionary: Awaited<ReturnType<typeof getDictionary>>["player"];
+  dictionaryPlayer: Awaited<ReturnType<typeof getDictionary>>["player"];
+  dictionaryServer: Awaited<ReturnType<typeof getDictionary>>["server"];
 };
 
-export const Client = ({ dictionary }: Props) => {
+export const Client = ({ dictionaryPlayer, dictionaryServer }: Props) => {
   const { tab } = useParams();
   const router = useRouter();
 
   if (tab === ServerRoutes.PLAYERS)
-    return <ServerDashboard dictionary={dictionary} />;
+    return <ServerDashboard dictionary={dictionaryPlayer} />;
 
-  if (tab === ServerRoutes.INFO) return <ServerInfo />;
+  if (tab === ServerRoutes.INFO)
+    return <ServerInfo dictionary={dictionaryServer} />;
 };

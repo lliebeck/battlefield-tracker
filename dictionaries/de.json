@@ -12,7 +12,16 @@
     "mode": "Modus",
     "player": "Spieler",
     "inQue": "Warteschlange",
-    "showEmptyServer": "Leere Server"
+    "showEmptyServer": "Leere Server",
+    "region": "Region",
+    "owner": "Besitzer",
+    "settings": {
+      "extended": "Erweitert",
+      "vehicles": "Fahrzeuge",
+      "scales": "Skalierungen",
+      "kits": "Klassen",
+      "weapons": "Waffen"
+    }
   },
   "player": {
     "userName": "Username",

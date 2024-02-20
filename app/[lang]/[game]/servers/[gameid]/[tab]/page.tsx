@@ -26,5 +26,11 @@ export default async function Page({
   }
   const dictionary = await getDictionary(lang);
 
-  return <Client servers={servers?.data} dictionary={dictionary.player} />;
+  return (
+    <Client
+      servers={servers?.data}
+      dictionaryPlayer={dictionary.player}
+      dictionaryServer={dictionary.server}
+    />
+  );
 }

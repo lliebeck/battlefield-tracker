@@ -12,7 +12,16 @@
     "mode": "Mode",
     "player": "Player",
     "inQue": "Queue",
-    "showEmptyServer": "Empty server"
+    "showEmptyServer": "Empty server",
+    "region": "Region",
+    "owner": "Owner",
+    "settings": {
+      "extended": "Extended",
+      "vehicles": "Vehicles",
+      "scales": "Scales",
+      "kits": "Kits",
+      "weapons": "Weapons"
+    }
   },
   "player": {
     "userName": "Username",

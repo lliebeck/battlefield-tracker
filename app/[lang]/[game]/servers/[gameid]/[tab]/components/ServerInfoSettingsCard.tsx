@@ -21,7 +21,7 @@ type Props = {
 
 export const ServerInfoSettingsCard = ({ value, label }: Props) => {
   return (
-    <Card variant={"outlined"} sx={{ padding: 1 }}>
+    <Card variant={"elevation"} sx={{ padding: 1 }}>
       <Typography variant="h6">{label}</Typography>
       {Object.entries(value).map((x) => (
         <Box key={x[0]} display={"flex"}>
