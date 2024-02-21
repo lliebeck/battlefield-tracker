@@ -10,6 +10,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import { PlayerRow } from "./PlayerRow";
 import { TableRow, useMediaQuery, useTheme } from "@mui/material";
+import { useEffect, useMemo, useRef } from "react";
 
 type Props = {
   players: FrostbiteServerPlayer[] | undefined;
@@ -73,8 +74,13 @@ export const PlayerList = ({ players, dictionary }: Props) => {
   ];
 
   return (
-    <TableContainer component={Paper}>
-      <Table size="small" sx={{ minWidth: 200 }} aria-label="simple table">
+    <TableContainer
+      component={Paper}
+      sx={{
+        maxHeight: "100%",
+      }}
+    >
+      <Table stickyHeader size="small">
         <colgroup>
           <col style={{ width: "5%" }} />
           <col style={{ width: "40%" }} />

@@ -47,7 +47,8 @@ export default function ServerLayout({ children }: React.PropsWithChildren) {
   );
 
   return (
-    <Box>
+    // Subtract height from CustomAppBar, header and tabs plus some margin
+    <Box height={`calc(100% - 176px - 4px)`}>
       <Toolbar>
         <IconButton
           onClick={() => router.push(`/${lang}/battlefield1/servers`)}
@@ -58,7 +59,7 @@ export default function ServerLayout({ children }: React.PropsWithChildren) {
           {server?.data?.prefix}
         </Typography>
       </Toolbar>
-      <Box marginX={3}>
+      <Box marginX={3} height={"100%"}>
         <Tabs value={value} role="navigation">
           <LinkTab label="Players" href={ServerRoutes.PLAYERS} />
           <LinkTab label="Server Info" href={ServerRoutes.INFO} />

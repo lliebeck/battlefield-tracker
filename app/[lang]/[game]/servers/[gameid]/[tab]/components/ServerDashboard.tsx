@@ -10,6 +10,7 @@ import { PlayerList } from "./PlayerList";
 import { useBf1playersBf1PlayersGet } from "@/api/battlefield-1/battlefield-1";
 import { useParams } from "next/navigation";
 import LinearProgress from "@mui/material/LinearProgress";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>["player"];
@@ -32,6 +33,9 @@ export const ServerDashboard = ({ dictionary }: Props) => {
     }
     // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
   );
+
+  const theme = useTheme();
+  const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
 
   const teamOne = useMemo(
     () => bf1ServerPlayers?.data.teams[0],
@@ -56,43 +60,65 @@ export const ServerDashboard = ({ dictionary }: Props) => {
   }
 
   return (
-    <Grid container spacing={0.5}>
-      <Grid item sm={12} lg={6}>
+    <Grid container spacing={0.5} height={"100%"}>
+      <Grid
+        item
+        sm={12}
+        lg={6}
+        height={`calc(${isLgUp ? "100%" : "50%"} - ${
+          isLgUp ? "60px" : "45px"
+        })`}
+      >
         <Grid item marginY={1}>
           <Box display={"flex"}>
             <Box
               component="img"
-              height={50}
-              alt="Picture of the map"
+              height={isLgUp ? 50 : 30}
+              alt="Image of the Team"
               src={teamOne?.image}
             />
-            <Typography variant="h4" alignSelf={"center"} marginLeft={1}>
+            <Typography
+              variant={`${isLgUp ? "h4" : "h6"}`}
+              alignSelf={"center"}
+              marginLeft={1}
+            >
               {teamOne?.name}
             </Typography>
           </Box>
         </Grid>
-        <Grid item>
+        <Grid item height={"100%"}>
           <PlayerList
             players={teamOne?.players ?? []}
             dictionary={dictionary}
           />
         </Grid>
       </Grid>
-      <Grid item sm={12} lg={6}>
+      <Grid
+        item
+        sm={12}
+        lg={6}
+        height={`calc(${isLgUp ? "100%" : "50%"} - ${
+          isLgUp ? "60px" : "45px"
+        })`}
+      >
         <Grid item marginY={1}>
           <Box display={"flex"}>
             <Box
               component="img"
-              height={50}
-              alt="Picture of the map"
+              height={isLgUp ? 50 : 30}
+              alt="Image of the Team"
               src={teamTwo?.image}
             />
-            <Typography variant="h4" alignSelf={"center"} marginLeft={1}>
+            <Typography
+              variant={`${isLgUp ? "h4" : "h6"}`}
+              alignSelf={"center"}
+              marginLeft={1}
+            >
               {teamTwo?.name}
             </Typography>
           </Box>
         </Grid>
-        <Grid item>
+        <Grid item height={"100%"}>
           <PlayerList
             players={teamTwo?.players ?? []}
             dictionary={dictionary}
