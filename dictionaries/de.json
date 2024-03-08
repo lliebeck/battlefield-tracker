@@ -16,6 +16,7 @@
     "region": "Region",
     "owner": "Besitzer",
     "settings": {
+      "title": "Einstellungen",
       "extended": "Erweitert",
       "vehicles": "Fahrzeuge",
       "scales": "Skalierungen",

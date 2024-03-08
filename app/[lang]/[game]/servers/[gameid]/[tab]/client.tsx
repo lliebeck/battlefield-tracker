@@ -9,12 +9,12 @@ import { Bf1DetailedServerInfo } from "@/api/model/bf1DetailedServerInfo";
 import { getDictionary } from "@/get-dictionary";
 import Box from "@mui/material/Box";
 import { useParams, useRouter } from "next/navigation";
-import { ServerDashboard } from "./components/ServerDashboard";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { ServerInfo } from "./components/ServerInfo";
 import { ServerRoutes } from "./tabs.types";
+import { ServerInfo } from "./(serverinfo)/client";
+import { ServerDashboard } from "./(dashboard)/client";
 
 type Props = {
   servers?: Bf1DetailedServerInfo;

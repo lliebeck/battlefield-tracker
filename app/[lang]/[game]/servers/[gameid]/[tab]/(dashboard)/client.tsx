@@ -6,11 +6,11 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { useMemo } from "react";
-import { PlayerList } from "./PlayerList";
 import { useBf1playersBf1PlayersGet } from "@/api/battlefield-1/battlefield-1";
 import { useParams } from "next/navigation";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useMediaQuery, useTheme } from "@mui/material";
+import { PlayerList } from "./components/PlayerList";
 
 type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>["player"];

@@ -21,16 +21,16 @@ type Props = {
 
 export const ServerInfoSettingsCard = ({ value, label }: Props) => {
   return (
-    <Card variant={"elevation"} sx={{ padding: 1 }}>
+    <Box>
       <Typography variant="h6">{label}</Typography>
-      {Object.entries(value).map((x) => (
-        <Box key={x[0]} display={"flex"}>
-          <Typography variant="subtitle2">{x[0]}:</Typography>
+      {Object.entries(value).map(([key, value]) => (
+        <Box key={key} display={"flex"}>
+          <Typography variant="subtitle2">{key}:</Typography>
           <Typography marginLeft={1} variant="subtitle2">
-            {x[1]}
+            {value}
           </Typography>
         </Box>
       ))}
-    </Card>
+    </Box>
   );
 };
