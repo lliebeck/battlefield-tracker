@@ -1,15 +1,14 @@
 "use client";
 
-import { Bf1ServerPlayers } from "@/api/model";
+import { useBf1playersBf1PlayersGet } from "@/api/battlefield-1/battlefield-1";
 import { getDictionary } from "@/get-dictionary";
+import { useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import { useMemo } from "react";
-import { useBf1playersBf1PlayersGet } from "@/api/battlefield-1/battlefield-1";
-import { useParams } from "next/navigation";
 import LinearProgress from "@mui/material/LinearProgress";
-import { useMediaQuery, useTheme } from "@mui/material";
+import Typography from "@mui/material/Typography";
+import { useParams } from "next/navigation";
+import { useMemo } from "react";
 import { PlayerList } from "./components/PlayerList";
 
 type Props = {
