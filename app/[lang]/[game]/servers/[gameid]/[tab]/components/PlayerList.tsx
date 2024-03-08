@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { FrostbiteServerPlayer } from "@/api/model/frostbiteServerPlayer";
 import { getDictionary } from "@/get-dictionary";
 import Paper from "@mui/material/Paper";
@@ -9,8 +10,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import { PlayerRow } from "./PlayerRow";
-import { TableRow, useMediaQuery, useTheme } from "@mui/material";
-import { useEffect, useMemo, useRef } from "react";
+import { Icon, TableRow, useMediaQuery, useTheme } from "@mui/material";
+// import AccIcon from "./accuracy.svg";
 
 type Props = {
   players: FrostbiteServerPlayer[] | undefined;
@@ -20,7 +21,7 @@ type Props = {
 type HeadCell = {
   disablePadding: boolean;
   id: string;
-  label: string;
+  label: string | JSX.Element;
   numeric: boolean;
 };
 
@@ -52,6 +53,15 @@ export const PlayerList = ({ players, dictionary }: Props) => {
       numeric: false,
       disablePadding: false,
       label: dictionary.accuracy,
+      // label: isUpLg ? (
+      //   dictionary.accuracy
+      // ) : (
+      //   // <Image src="/accuracy.png" alt={"acc"} width="64" height="64" />
+      //   // <SvgIcon component={AccIcon} viewBox="0 0 600 476.6" />
+      //   // <Icon >
+      //     // <Image src="/accuracy.png" alt={"acc"} width="24" height="24" />
+      //   // </Icon>
+      // ),
     },
     {
       id: "headshots",
@@ -78,6 +88,7 @@ export const PlayerList = ({ players, dictionary }: Props) => {
       component={Paper}
       sx={{
         maxHeight: "100%",
+        // maxWidth: "250px",
       }}
     >
       <Table stickyHeader size="small">
@@ -98,6 +109,12 @@ export const PlayerList = ({ players, dictionary }: Props) => {
                 align={headCell.numeric ? "right" : "left"}
                 padding={headCell.disablePadding ? "none" : "normal"}
                 // sortDirection={orderBy === headCell.id ? order : false}
+                sx={{
+                  whiteSpace: "nowrap",
+                  textOverflow: "ellipsis",
+                  maxWidth: "50px",
+                  overflow: "hidden",
+                }}
               >
                 {headCell.label}
               </TableCell>

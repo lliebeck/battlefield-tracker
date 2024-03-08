@@ -36,6 +36,7 @@ export const ServerDashboard = ({ dictionary }: Props) => {
 
   const theme = useTheme();
   const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
+  const isSmDown = useMediaQuery(theme.breakpoints.down("md"));
 
   const teamOne = useMemo(
     () => bf1ServerPlayers?.data.teams[0],
@@ -46,6 +47,18 @@ export const ServerDashboard = ({ dictionary }: Props) => {
     () => bf1ServerPlayers?.data.teams[1],
     [bf1ServerPlayers?.data.teams]
   );
+
+  const tableHeight = useMemo(
+    () => `calc(${isLgUp ? "100%" : "50%"} - ${isLgUp ? "60px" : "45px"})`,
+    [isLgUp]
+  );
+
+  const headerVariant: "h4" | "h6" = useMemo(
+    () => (isLgUp ? "h4" : "h6"),
+    [isLgUp]
+  );
+
+  const headerPicSize = useMemo(() => (isLgUp ? 50 : 30), [isLgUp]);
 
   if (isLoading) {
     return <LinearProgress />;
@@ -65,20 +78,19 @@ export const ServerDashboard = ({ dictionary }: Props) => {
         item
         sm={12}
         lg={6}
-        height={`calc(${isLgUp ? "100%" : "50%"} - ${
-          isLgUp ? "60px" : "45px"
-        })`}
+        height={tableHeight}
+        // maxWidth={isSmDown ? "250px" : "100%"}
       >
         <Grid item marginY={1}>
           <Box display={"flex"}>
             <Box
               component="img"
-              height={isLgUp ? 50 : 30}
+              height={headerPicSize}
               alt="Image of the Team"
               src={teamOne?.image}
             />
             <Typography
-              variant={`${isLgUp ? "h4" : "h6"}`}
+              variant={headerVariant}
               alignSelf={"center"}
               marginLeft={1}
             >
@@ -97,20 +109,19 @@ export const ServerDashboard = ({ dictionary }: Props) => {
         item
         sm={12}
         lg={6}
-        height={`calc(${isLgUp ? "100%" : "50%"} - ${
-          isLgUp ? "60px" : "45px"
-        })`}
+        height={tableHeight}
+        // maxWidth={isSmDown ? "250px" : "100%"}
       >
         <Grid item marginY={1}>
           <Box display={"flex"}>
             <Box
               component="img"
-              height={isLgUp ? 50 : 30}
+              height={headerPicSize}
               alt="Image of the Team"
               src={teamTwo?.image}
             />
             <Typography
-              variant={`${isLgUp ? "h4" : "h6"}`}
+              variant={headerVariant}
               alignSelf={"center"}
               marginLeft={1}
             >

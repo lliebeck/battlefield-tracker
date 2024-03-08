@@ -1,22 +1,17 @@
 "use client";
-import CircleIcon from "@mui/icons-material/Circle";
-import LaunchIcon from "@mui/icons-material/Launch";
 import { useBf1AllBf1AllGet } from "@/api/battlefield-1/battlefield-1";
 import { FrostbiteServerPlayer } from "@/api/model/frostbiteServerPlayer";
+import CircleIcon from "@mui/icons-material/Circle";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
+import LaunchIcon from "@mui/icons-material/Launch";
 import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useCallback, useMemo, useState } from "react";
-import { Bf1CombinedAvatar } from "@/api/model/bf1CombinedAvatar";
-import { Bf1CombinedUserName } from "@/api/model/bf1CombinedUserName";
-import { Typography, useMediaQuery, useTheme } from "@mui/material";
-import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
 import { DisplayUserName } from "./DisplayUserName";
+import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
 
 type Props = {
   player: FrostbiteServerPlayer;
@@ -30,8 +25,15 @@ export const PlayerRow = ({ player }: Props) => {
   } = useBf1AllBf1AllGet(
     {
       playerid: player.player_id,
-    }
+    },
     // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
+    {
+      query: {
+        // select(data) {
+        //   return data.data;
+        // },
+      },
+    }
   );
 
   const [open, setOpen] = useState(false);
@@ -97,7 +99,14 @@ export const PlayerRow = ({ player }: Props) => {
         hover
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
-        <TableCell>
+        <TableCell
+          sx={{
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            maxWidth: "50px",
+            overflow: "hidden",
+          }}
+        >
           {!error && (
             <IconButton
               aria-label="expand row"
@@ -108,7 +117,16 @@ export const PlayerRow = ({ player }: Props) => {
             </IconButton>
           )}
         </TableCell>
-        <TableCell component="th" scope="row">
+        <TableCell
+          component="th"
+          scope="row"
+          sx={{
+            whiteSpace: "nowrap",
+            textOverflow: "ellipsis",
+            maxWidth: "50px",
+            overflow: "hidden",
+          }}
+        >
           <DisplayUserName
             avatar={allPlayerData?.data?.avatar}
             userName={allPlayerData?.data?.userName}
@@ -123,6 +141,7 @@ export const PlayerRow = ({ player }: Props) => {
           {!error && (
             <CircleIcon
               color={suspiciousStats.length > 0 ? "error" : "success"}
+              fontSize="small"
             />
           )}
         </TableCell>
@@ -132,6 +151,7 @@ export const PlayerRow = ({ player }: Props) => {
               href={`https://battlefieldtracker.com/bf1/profile/origin/${player.name}/overview`}
               rel="noopener noreferrer"
               target="_blank"
+              size="small"
             >
               <LaunchIcon />
             </IconButton>
