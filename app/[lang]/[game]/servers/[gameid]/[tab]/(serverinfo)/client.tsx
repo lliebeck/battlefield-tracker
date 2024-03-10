@@ -1,20 +1,11 @@
 import { useBf1detailedserversBf1DetailedserverGet } from "@/api/battlefield-1/battlefield-1";
-import { Bf1DetailedServerInfo } from "@/api/model";
 import { getDictionary } from "@/get-dictionary";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  useTheme,
-} from "@mui/material";
+import { useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
-import Typography from "@mui/material/Typography";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useParams } from "next/navigation";
-import { ServerInfoSettingsCard } from "./components/ServerInfoSettingsCard";
 import { GeneralServerInfo } from "./components/GeneralServerInfol";
 import { ServerInfoSettings } from "./components/ServerInfoSettings";
 

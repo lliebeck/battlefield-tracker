@@ -2,6 +2,7 @@
 
 import { FrostbiteServerPlayer } from "@/api/model/frostbiteServerPlayer";
 import { getDictionary } from "@/get-dictionary";
+import { TableRow, useMediaQuery, useTheme } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -9,8 +10,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import { PlayerRow } from "./PlayerRow";
-import { TableRow, useMediaQuery, useTheme } from "@mui/material";
-import { useEffect, useMemo, useRef } from "react";
 
 type Props = {
   players: FrostbiteServerPlayer[] | undefined;

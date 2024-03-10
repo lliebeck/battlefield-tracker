@@ -1,11 +1,9 @@
 "use client";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useBf1detailedserversBf1DetailedserverGet } from "@/api/battlefield-1/battlefield-1";
-import { Locale } from "@/config/i18n-config";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, IconButton, Tab, Tabs, Toolbar, Typography } from "@mui/material";
-import type { Metadata } from "next";
 import { useParams, useRouter } from "next/navigation";
-import { ReactText, useMemo, useState } from "react";
+import { useMemo } from "react";
 import { ServerRoutes } from "./tabs.types";
 
 type LinkTabProps = {

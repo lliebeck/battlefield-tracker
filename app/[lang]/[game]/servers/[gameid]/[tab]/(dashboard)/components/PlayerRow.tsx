@@ -1,22 +1,17 @@
 "use client";
-import CircleIcon from "@mui/icons-material/Circle";
-import LaunchIcon from "@mui/icons-material/Launch";
 import { useBf1AllBf1AllGet } from "@/api/battlefield-1/battlefield-1";
 import { FrostbiteServerPlayer } from "@/api/model/frostbiteServerPlayer";
+import CircleIcon from "@mui/icons-material/Circle";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import Avatar from "@mui/material/Avatar";
-import Box from "@mui/material/Box";
+import LaunchIcon from "@mui/icons-material/Launch";
 import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useCallback, useMemo, useState } from "react";
-import { Bf1CombinedAvatar } from "@/api/model/bf1CombinedAvatar";
-import { Bf1CombinedUserName } from "@/api/model/bf1CombinedUserName";
-import { Typography, useMediaQuery, useTheme } from "@mui/material";
-import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
 import { DisplayUserName } from "./DisplayUserName";
+import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
 
 type Props = {
   player: FrostbiteServerPlayer;
