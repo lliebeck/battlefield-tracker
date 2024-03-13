@@ -12,24 +12,26 @@ import TableRow from "@mui/material/TableRow";
 import { useCallback, useMemo, useState } from "react";
 import { DisplayUserName } from "./DisplayUserName";
 import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
+import { AdvancedPlayer } from "../client";
 
 type Props = {
-  player: FrostbiteServerPlayer;
+  player: AdvancedPlayer;
 };
 
 export const PlayerRow = ({ player }: Props) => {
-  const {
-    data: allPlayerData,
-    isLoading,
-    error,
-  } = useBf1AllBf1AllGet(
-    {
-      playerid: player.player_id,
-    }
-    // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
-  );
+  // const {
+  //   data: allPlayerData,
+  //   isLoading,
+  //   error,
+  // } = useBf1AllBf1AllGet(
+  //   {
+  //     playerid: player.player_id,
+  //   }
+  //   // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
+  // );
 
   const [open, setOpen] = useState(false);
+  const error = useMemo(() => player.status === "error", [player.status]);
 
   const getNumberOfPercentage = useCallback((value: string | undefined) => {
     if (!value) return;
@@ -44,9 +46,11 @@ export const PlayerRow = ({ player }: Props) => {
 
   const suspiciousStats: string[] = useMemo(() => {
     const arr: string[] = [];
-    const acc = getNumberOfPercentage(allPlayerData?.data.accuracy.toString());
+    const acc = getNumberOfPercentage(
+      player?.advancedData?.accuracy.toString()
+    );
     const headshotPercentage = getNumberOfPercentage(
-      allPlayerData?.data.headshots.toString()
+      player?.advancedData?.headshots.toString()
     );
 
     if (acc && acc > 50) arr.push("accuracy");
@@ -54,12 +58,12 @@ export const PlayerRow = ({ player }: Props) => {
 
     return arr;
   }, [
-    allPlayerData?.data.accuracy,
-    allPlayerData?.data.headshots,
     getNumberOfPercentage,
+    player?.advancedData?.accuracy,
+    player?.advancedData?.headshots,
   ]);
 
-  if (isLoading) {
+  if (player.status === "loading") {
     return (
       <TableRow>
         <TableCell component="th" scope="row"></TableCell>
@@ -88,7 +92,7 @@ export const PlayerRow = ({ player }: Props) => {
   return (
     <>
       <TableRow
-        key={allPlayerData?.data?.id}
+        key={player.advancedData?.id}
         hover
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
@@ -105,15 +109,15 @@ export const PlayerRow = ({ player }: Props) => {
         </TableCell>
         <TableCell component="th" scope="row">
           <DisplayUserName
-            avatar={allPlayerData?.data?.avatar}
-            userName={allPlayerData?.data?.userName}
-            rank={allPlayerData?.data?.rank}
-            rankImg={allPlayerData?.data?.rankImg}
+            avatar={player.advancedData?.avatar}
+            userName={player.advancedData?.userName}
+            rank={player.advancedData?.rank}
+            rankImg={player.advancedData?.rankImg}
           />
         </TableCell>
-        <TableCell align="left">{allPlayerData?.data?.killDeath}</TableCell>
-        <TableCell align="left">{allPlayerData?.data?.accuracy}</TableCell>
-        <TableCell align="left">{allPlayerData?.data?.headshots}</TableCell>
+        <TableCell align="left">{player.advancedData?.killDeath}</TableCell>
+        <TableCell align="left">{player.advancedData?.accuracy}</TableCell>
+        <TableCell align="left">{player.advancedData?.headshots}</TableCell>
         <TableCell align="left">
           {!error && (
             <CircleIcon
@@ -124,7 +128,7 @@ export const PlayerRow = ({ player }: Props) => {
         <TableCell align="left">
           {!error && (
             <IconButton
-              href={`https://battlefieldtracker.com/bf1/profile/origin/${player.name}/overview`}
+              href={`https://battlefieldtracker.com/bf1/profile/origin/${player.advancedData?.userName}/overview`}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -133,7 +137,7 @@ export const PlayerRow = ({ player }: Props) => {
           )}
         </TableCell>
       </TableRow>
-      {!error && <PlayerAdvancedRow show={open} player={allPlayerData?.data} />}
+      {!error && <PlayerAdvancedRow show={open} player={player.advancedData} />}
     </>
   );
 };

@@ -8,11 +8,26 @@ import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
 import { useParams } from "next/navigation";
-import { useMemo } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { PlayerList } from "./components/PlayerList";
+import axios, { AxiosResponse } from "axios";
+import { Bf1Combined, FrostbiteServerPlayer } from "@/api/model";
 
 type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>["player"];
+};
+
+export type AdvancedPlayer = {
+  status: "ok" | "loading" | "error";
+  basicData: FrostbiteServerPlayer;
+  advancedData: Bf1Combined | undefined;
 };
 
 export const ServerDashboard = ({ dictionary }: Props) => {
@@ -45,6 +60,107 @@ export const ServerDashboard = ({ dictionary }: Props) => {
     () => bf1ServerPlayers?.data.teams[1],
     [bf1ServerPlayers?.data.teams]
   );
+
+  const inititalAdvancedTeamOnePlayers: AdvancedPlayer[] | undefined = useMemo(
+    () =>
+      teamOne?.players.map((player) => {
+        const AdvancedPlayer: AdvancedPlayer = {
+          status: "loading",
+          basicData: player,
+          advancedData: undefined,
+        };
+        return AdvancedPlayer;
+      }),
+    [teamOne?.players]
+  );
+
+  const inititalAdvancedTeamTwoPlayers: AdvancedPlayer[] | undefined = useMemo(
+    () =>
+      teamTwo?.players.map((player) => {
+        const AdvancedPlayer: AdvancedPlayer = {
+          status: "loading",
+          basicData: player,
+          advancedData: undefined,
+        };
+        return AdvancedPlayer;
+      }),
+    [teamTwo?.players]
+  );
+
+  const [teamOnePlayers, setTeamOnePlayers] = useState<
+    AdvancedPlayer[] | undefined
+  >(inititalAdvancedTeamOnePlayers);
+
+  const [teamTwoPlayers, setTeamTwoPlayers] = useState<
+    AdvancedPlayer[] | undefined
+  >(inititalAdvancedTeamTwoPlayers);
+
+  const fetchAdvancedPlayerStats = useCallback(
+    async (
+      players: FrostbiteServerPlayer[] | undefined,
+      inititalAdvancedPlayers: AdvancedPlayer[] | undefined,
+      setNewPlayers: Dispatch<SetStateAction<AdvancedPlayer[] | undefined>>
+    ) => {
+      if (!players) return;
+      for (const player of players) {
+        let res: AxiosResponse<Bf1Combined, any>;
+        try {
+          res = await axios.get<Bf1Combined>(
+            `https://api.gametools.network/bf1/all/?playerid=${player.player_id}`
+          );
+        } catch (ex) {
+        } finally {
+          setNewPlayers((prev) =>
+            prev
+              ? prev?.map((p) =>
+                  p.basicData.player_id === player.player_id
+                    ? {
+                        status: res ? "ok" : "error",
+                        basicData: p.basicData,
+                        advancedData: res?.data,
+                      }
+                    : p
+                )
+              : inititalAdvancedPlayers?.map((p) =>
+                  p.basicData.player_id === player.player_id
+                    ? {
+                        status: res ? "ok" : "error",
+                        basicData: p.basicData,
+                        advancedData: res?.data,
+                      }
+                    : p
+                )
+          );
+        }
+      }
+    },
+    []
+  );
+
+  useEffect(() => {
+    fetchAdvancedPlayerStats(
+      teamOne?.players,
+      inititalAdvancedTeamOnePlayers,
+      setTeamOnePlayers
+    );
+  }, [
+    fetchAdvancedPlayerStats,
+    inititalAdvancedTeamOnePlayers,
+    teamOne,
+    teamOne?.players,
+  ]);
+
+  useEffect(() => {
+    fetchAdvancedPlayerStats(
+      teamTwo?.players,
+      inititalAdvancedTeamTwoPlayers,
+      setTeamTwoPlayers
+    );
+  }, [
+    fetchAdvancedPlayerStats,
+    inititalAdvancedTeamTwoPlayers,
+    teamTwo?.players,
+  ]);
 
   if (isLoading) {
     return <LinearProgress />;
@@ -86,10 +202,7 @@ export const ServerDashboard = ({ dictionary }: Props) => {
           </Box>
         </Grid>
         <Grid item height={"100%"}>
-          <PlayerList
-            players={teamOne?.players ?? []}
-            dictionary={dictionary}
-          />
+          <PlayerList players={teamOnePlayers} dictionary={dictionary} />
         </Grid>
       </Grid>
       <Grid
@@ -118,10 +231,7 @@ export const ServerDashboard = ({ dictionary }: Props) => {
           </Box>
         </Grid>
         <Grid item height={"100%"}>
-          <PlayerList
-            players={teamTwo?.players ?? []}
-            dictionary={dictionary}
-          />
+          <PlayerList players={teamTwoPlayers} dictionary={dictionary} />
         </Grid>
       </Grid>
     </Grid>
