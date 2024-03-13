@@ -1,9 +1,9 @@
 {
-  "name": "next-template",
+  "name": "your-battlefield-lobby",
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "18.x"
+    "node": "18.17.1"
   },
   "scripts": {
     "dev": "next dev",
