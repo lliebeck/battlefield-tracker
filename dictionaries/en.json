@@ -22,7 +22,9 @@
       "scales": "Scales",
       "kits": "Kits",
       "weapons": "Weapons"
-    }
+    },
+    "noServersFound": "No servers found!",
+    "somethingWentWrong": "Something went wrong!"
   },
   "player": {
     "userName": "Username",

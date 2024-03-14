@@ -27,7 +27,11 @@ export const Client = ({
 
   const { filterOptions } = useServerSearchParams();
 
-  const { data: servers, isLoading } = useBf1serversBf1ServersGet(
+  const {
+    data: servers,
+    isLoading,
+    error,
+  } = useBf1serversBf1ServersGet(
     {
       name: filterOptions?.search ?? "",
       limit: 50,
@@ -41,23 +45,18 @@ export const Client = ({
   );
 
   return (
-    <>
-      <Box>
-        <SearchBar
-          dictionaryMap={dictionaryMaps}
-          dictionaryServer={dictionaryServer}
-        />
-        {isLoading ? (
-          <Box sx={{ display: "flex", justifyContent: "center" }}>
-            <CircularProgress />
-          </Box>
-        ) : (
-          <ServerList
-            servers={servers?.data?.servers}
-            dictionary={dictionaryServer}
-          />
-        )}
-      </Box>
-    </>
+    //Substract custom app bar height (64px)
+    <Box height={`calc(100% - 64px)`}>
+      <SearchBar
+        dictionaryMap={dictionaryMaps}
+        dictionaryServer={dictionaryServer}
+      />
+      <ServerList
+        servers={servers?.data?.servers}
+        dictionary={dictionaryServer}
+        isLoading={isLoading}
+        hasError={error !== null}
+      />
+    </Box>
   );
 };

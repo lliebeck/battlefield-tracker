@@ -22,7 +22,9 @@
       "scales": "Skalierungen",
       "kits": "Klassen",
       "weapons": "Waffen"
-    }
+    },
+    "noServersFound": "Keine Server gefunden!",
+    "somethingWentWrong": "Etwas ist schief gelaufen!"
   },
   "player": {
     "userName": "Username",
