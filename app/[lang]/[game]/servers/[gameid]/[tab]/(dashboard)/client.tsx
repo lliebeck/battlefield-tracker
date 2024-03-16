@@ -1,12 +1,18 @@
 "use client";
 
 import { useBf1playersBf1PlayersGet } from "@/api/battlefield-1/battlefield-1";
+import {
+  Bf1Combined,
+  FrostbiteMainStats,
+  FrostbiteServerPlayer,
+} from "@/api/model";
 import { getDictionary } from "@/get-dictionary";
 import { useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
+import axios, { AxiosResponse } from "axios";
 import { useParams } from "next/navigation";
 import {
   Dispatch,
@@ -17,8 +23,6 @@ import {
   useState,
 } from "react";
 import { PlayerList } from "./components/PlayerList";
-import axios, { AxiosResponse } from "axios";
-import { Bf1Combined, FrostbiteServerPlayer } from "@/api/model";
 
 type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>["player"];
@@ -27,7 +31,7 @@ type Props = {
 export type AdvancedPlayer = {
   status: "ok" | "loading" | "error";
   basicData: FrostbiteServerPlayer;
-  advancedData: Bf1Combined | undefined;
+  advancedData: FrostbiteMainStats | undefined;
 };
 
 export const ServerDashboard = ({ dictionary }: Props) => {
@@ -106,7 +110,7 @@ export const ServerDashboard = ({ dictionary }: Props) => {
         let res: AxiosResponse<Bf1Combined, any>;
         try {
           res = await axios.get<Bf1Combined>(
-            `https://api.gametools.network/bf1/all/?playerid=${player.player_id}`
+            `https://api.gametools.network/bf1/stats/?playerid=${player.player_id}`
           );
         } catch (ex) {
         } finally {
