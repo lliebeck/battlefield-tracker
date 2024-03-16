@@ -1,4 +1,4 @@
-import { Bf1Combined } from "@/api/model/bf1Combined";
+import { FrostbiteMainStats } from "@/api/model/frostbiteMainStats";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import Divider from "@mui/material/Divider";
@@ -10,7 +10,7 @@ import { PlayerAdvancedRowItem } from "./PlayerAdvancedRowItem";
 
 type Props = {
   show: boolean;
-  player: Bf1Combined | undefined;
+  player: FrostbiteMainStats | undefined;
 };
 
 export const PlayerAdvancedRow = ({ show, player }: Props) => {

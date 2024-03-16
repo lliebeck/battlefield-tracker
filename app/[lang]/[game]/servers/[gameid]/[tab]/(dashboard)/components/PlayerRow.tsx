@@ -1,6 +1,4 @@
 "use client";
-import { useBf1AllBf1AllGet } from "@/api/battlefield-1/battlefield-1";
-import { FrostbiteServerPlayer } from "@/api/model/frostbiteServerPlayer";
 import CircleIcon from "@mui/icons-material/Circle";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
@@ -10,26 +8,15 @@ import Skeleton from "@mui/material/Skeleton";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import { useCallback, useMemo, useState } from "react";
+import { AdvancedPlayer } from "../client";
 import { DisplayUserName } from "./DisplayUserName";
 import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
-import { AdvancedPlayer } from "../client";
 
 type Props = {
   player: AdvancedPlayer;
 };
 
 export const PlayerRow = ({ player }: Props) => {
-  // const {
-  //   data: allPlayerData,
-  //   isLoading,
-  //   error,
-  // } = useBf1AllBf1AllGet(
-  //   {
-  //     playerid: player.player_id,
-  //   }
-  //   // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
-  // );
-
   const [open, setOpen] = useState(false);
   const error = useMemo(() => player.status === "error", [player.status]);
 

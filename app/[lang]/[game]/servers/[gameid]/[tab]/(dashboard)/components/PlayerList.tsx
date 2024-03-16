@@ -1,6 +1,5 @@
 "use client";
 
-import { FrostbiteServerPlayer } from "@/api/model/frostbiteServerPlayer";
 import { getDictionary } from "@/get-dictionary";
 import {
   Box,
@@ -15,10 +14,10 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-import { PlayerRow } from "./PlayerRow";
-import { AdvancedPlayer } from "../client";
-import { useCallback, useMemo, useState } from "react";
 import { visuallyHidden } from "@mui/utils";
+import { useCallback, useMemo, useState } from "react";
+import { AdvancedPlayer } from "../client";
+import { PlayerRow } from "./PlayerRow";
 
 type Order = "asc" | "desc";
 
