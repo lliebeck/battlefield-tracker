@@ -4,9 +4,7 @@ import { useBf1serversBf1ServersGet } from "@/api/battlefield-1/battlefield-1";
 import { FrostbiteSearch } from "@/api/model/frostbiteSearch";
 import { getDictionary } from "@/get-dictionary";
 import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
-import Container from "@mui/material/Container";
-import { useParams, useSearchParams } from "next/navigation";
+import { useParams } from "next/navigation";
 import { SearchBar } from "./components/SearchBar";
 import { ServerList } from "./components/ServerList";
 import { useServerSearchParams } from "./hooks/useServerSearchParams";
@@ -22,7 +20,6 @@ export const Client = ({
   dictionaryServer,
   dictionaryMaps,
 }: Props) => {
-  const searchParams = useSearchParams();
   const { lang } = useParams();
 
   const { filterOptions } = useServerSearchParams();
@@ -39,7 +36,7 @@ export const Client = ({
         ? ""
         : "oneToFive,sixToTen,tenPlus,none",
       map_filters: filterOptions?.map ?? undefined,
-      lang: lang === "de" ? "de-de" : "en-us",
+      lang: lang.toString() ?? "en-us",
     }
     // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
   );

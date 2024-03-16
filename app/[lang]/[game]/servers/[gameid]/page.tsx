@@ -6,5 +6,5 @@ export default async function Page({
 }: {
   params: { lang: Locale; gameid: string };
 }) {
-  redirect(`/${lang}/battlefield1/servers/${gameid}/players`);
+  redirect(`/${lang}/bf1/servers/${gameid}/players`);
 }

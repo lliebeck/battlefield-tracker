@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default async function IndexPage({}: {}) {
-  redirect("/en/battlefield1/servers");
+  redirect("/en-us/bf1/servers");
 }

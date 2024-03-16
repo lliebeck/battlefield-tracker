@@ -5,10 +5,10 @@ import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import DarkModeSwitcher from "./DarkModSwitcher";
-import LocaleSwitcher from "./LocaleSwitcher";
 import { useParams } from "next/navigation";
 import { games } from "../../types/games.types";
+import DarkModeSwitcher from "./DarkModSwitcher";
+import LocaleSwitcher from "./LocaleSwitcher";
 
 type Props = {
   setOpen: (value: any) => void;
