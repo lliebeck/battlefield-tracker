@@ -1,14 +1,14 @@
 "use client";
 
-import { useBf1serversBf1ServersGet } from "@/api/battlefield-1/battlefield-1";
+import { useBfvserversBfvServersGet } from "@/api/battlefield-5/battlefield-5";
 import { FrostbiteSearch } from "@/api/model/frostbiteSearch";
 import { getDictionary } from "@/get-dictionary";
 import Box from "@mui/material/Box";
 import { useParams } from "next/navigation";
-import { ServerList } from "../../components/ServerList";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
-import { bf1MapOptionKeys } from "./types/bf1.types";
+import { ServerList } from "../../components/ServerList";
 import { useServerSearchParams } from "../../hooks/useServerSearchParams";
+import { bf5MapOptionKeys } from "./types/bf5.types";
 
 type Props = {
   servers?: FrostbiteSearch;
@@ -21,13 +21,13 @@ type Props = {
 export const Client = ({ servers: initialServers, dictionary }: Props) => {
   const { lang } = useParams();
 
-  const { filterOptions } = useServerSearchParams(bf1MapOptionKeys);
+  const { filterOptions } = useServerSearchParams(bf5MapOptionKeys);
 
   const {
     data: servers,
     isLoading,
     error,
-  } = useBf1serversBf1ServersGet(
+  } = useBfvserversBfvServersGet(
     {
       name: filterOptions?.search ?? "",
       limit: 50,
@@ -43,7 +43,7 @@ export const Client = ({ servers: initialServers, dictionary }: Props) => {
   return (
     //Substract custom app bar height (64px)
     <Box height={`calc(100% - 64px)`}>
-      <SearchBar dictionary={dictionary} mapOptionKeys={bf1MapOptionKeys} />
+      <SearchBar dictionary={dictionary} mapOptionKeys={bf5MapOptionKeys} />
       <ServerList
         servers={servers?.data?.servers}
         dictionary={dictionary.server}

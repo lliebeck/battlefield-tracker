@@ -13,7 +13,7 @@ export const games: Game[] = [
   {
     key: "bf5",
     name: "Battlefield 5",
-    available: false,
+    available: true,
   },
   // Bf2042Search
   {

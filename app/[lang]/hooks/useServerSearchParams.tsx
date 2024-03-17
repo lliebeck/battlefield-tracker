@@ -1,7 +1,7 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useMemo } from "react";
-import { bf1MapOptionKeys } from "../types/bf1.types";
 import { Dictionary, identity, pickBy } from "lodash";
+import { MapOptionKeys } from "../types/maps.types";
 
 type FilterOptions = {
   search?: string | undefined | null;
@@ -9,7 +9,9 @@ type FilterOptions = {
   isEmptyServer?: boolean | undefined | null;
 };
 
-export const useServerSearchParams = () => {
+export const useServerSearchParams = (
+  mapOptionKeys: readonly MapOptionKeys[]
+) => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -29,10 +31,7 @@ export const useServerSearchParams = () => {
       options.search = currentSearch;
     }
 
-    if (
-      currentMap &&
-      Object.keys(bf1MapOptionKeys).some((x) => x === currentMap)
-    ) {
+    if (currentMap && mapOptionKeys.some((x) => x === currentMap)) {
       options.map = currentMap;
     }
 
@@ -41,7 +40,7 @@ export const useServerSearchParams = () => {
     }
 
     return options;
-  }, [currentIsEmptyServer, currentMap, currentSearch]);
+  }, [currentIsEmptyServer, currentMap, currentSearch, mapOptionKeys]);
 
   const setFilterOptions = useCallback(
     (key: keyof FilterOptions, value: string | null | undefined) => {

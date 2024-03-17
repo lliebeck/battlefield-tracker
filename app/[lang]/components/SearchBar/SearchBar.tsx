@@ -7,18 +7,26 @@ import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import debounce from "@mui/material/utils/debounce";
-import { useServerSearchParams } from "../hooks/useServerSearchParams";
-import { Ibf1MapOptionsKeys, bf1MapOptionKeys } from "../types/bf1.types";
+import { useServerSearchParams } from "../../hooks/useServerSearchParams";
+import { MapOptionKeys } from "../../types/maps.types";
+import { useMemo } from "react";
 
 type Props = {
   dictionary: {
     server: Awaited<ReturnType<typeof getDictionary>>["server"];
     maps: Awaited<ReturnType<typeof getDictionary>>["maps"];
   };
+  mapOptionKeys: readonly MapOptionKeys[];
 };
 
-export const SearchBar = ({ dictionary }: Props) => {
-  const { filterOptions, setFilterOptions } = useServerSearchParams();
+export const SearchBar = ({ dictionary, mapOptionKeys }: Props) => {
+  const { filterOptions, setFilterOptions } =
+    useServerSearchParams(mapOptionKeys);
+
+  const combinedKeys = useMemo(
+    () => Object.assign({}, dictionary.maps.bf1Maps, dictionary.maps.bf5Maps),
+    [dictionary.maps]
+  );
 
   return (
     <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -34,15 +42,12 @@ export const SearchBar = ({ dictionary }: Props) => {
         )}
       />
       <Autocomplete
-        // multiple
         value={filterOptions?.map}
         onChange={(_, value) => setFilterOptions("map", value)}
         fullWidth
         id="tags-outlined"
-        options={Object.keys(bf1MapOptionKeys)}
-        getOptionLabel={(option) =>
-          dictionary.maps[option as Ibf1MapOptionsKeys]
-        }
+        options={mapOptionKeys}
+        getOptionLabel={(option) => combinedKeys[option as MapOptionKeys]}
         filterSelectedOptions
         renderInput={(params) => (
           <TextField
