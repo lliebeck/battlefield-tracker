@@ -11,11 +11,13 @@ import { useServerSearchParams } from "../hooks/useServerSearchParams";
 import { Ibf1MapOptionsKeys, bf1MapOptionKeys } from "../types/bf1.types";
 
 type Props = {
-  dictionaryMap: Awaited<ReturnType<typeof getDictionary>>["maps"];
-  dictionaryServer: Awaited<ReturnType<typeof getDictionary>>["server"];
+  dictionary: {
+    server: Awaited<ReturnType<typeof getDictionary>>["server"];
+    maps: Awaited<ReturnType<typeof getDictionary>>["maps"];
+  };
 };
 
-export const SearchBar = ({ dictionaryMap, dictionaryServer }: Props) => {
+export const SearchBar = ({ dictionary }: Props) => {
   const { filterOptions, setFilterOptions } = useServerSearchParams();
 
   return (
@@ -38,7 +40,9 @@ export const SearchBar = ({ dictionaryMap, dictionaryServer }: Props) => {
         fullWidth
         id="tags-outlined"
         options={Object.keys(bf1MapOptionKeys)}
-        getOptionLabel={(option) => dictionaryMap[option as Ibf1MapOptionsKeys]}
+        getOptionLabel={(option) =>
+          dictionary.maps[option as Ibf1MapOptionsKeys]
+        }
         filterSelectedOptions
         renderInput={(params) => (
           <TextField
@@ -53,7 +57,7 @@ export const SearchBar = ({ dictionaryMap, dictionaryServer }: Props) => {
       <Paper sx={{ padding: "0.5em" }}>
         <Box sx={{ display: "flex" }}>
           <Typography variant="body2" sx={{ alignSelf: "center" }}>
-            {dictionaryServer.showEmptyServer}
+            {dictionary.server.showEmptyServer}
           </Typography>
           <Switch
             value={filterOptions?.isEmptyServer}

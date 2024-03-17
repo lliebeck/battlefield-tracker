@@ -11,15 +11,13 @@ import { useServerSearchParams } from "./hooks/useServerSearchParams";
 
 type Props = {
   servers?: FrostbiteSearch;
-  dictionaryServer: Awaited<ReturnType<typeof getDictionary>>["server"];
-  dictionaryMaps: Awaited<ReturnType<typeof getDictionary>>["maps"];
+  dictionary: {
+    server: Awaited<ReturnType<typeof getDictionary>>["server"];
+    maps: Awaited<ReturnType<typeof getDictionary>>["maps"];
+  };
 };
 
-export const Client = ({
-  servers: initialServers,
-  dictionaryServer,
-  dictionaryMaps,
-}: Props) => {
+export const Client = ({ servers: initialServers, dictionary }: Props) => {
   const { lang } = useParams();
 
   const { filterOptions } = useServerSearchParams();
@@ -44,13 +42,10 @@ export const Client = ({
   return (
     //Substract custom app bar height (64px)
     <Box height={`calc(100% - 64px)`}>
-      <SearchBar
-        dictionaryMap={dictionaryMaps}
-        dictionaryServer={dictionaryServer}
-      />
+      <SearchBar dictionary={dictionary} />
       <ServerList
         servers={servers?.data?.servers}
-        dictionary={dictionaryServer}
+        dictionary={dictionary.server}
         isLoading={isLoading}
         hasError={error !== null}
       />

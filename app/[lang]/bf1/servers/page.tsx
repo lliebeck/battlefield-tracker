@@ -22,10 +22,7 @@ export default async function Page({
 
   return (
     <>
-      <Client
-        dictionaryServer={dictionary.server}
-        dictionaryMaps={dictionary.maps}
-      />
+      <Client dictionary={dictionary} />
     </>
   );
 }
