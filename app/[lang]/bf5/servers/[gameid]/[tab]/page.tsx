@@ -1,4 +1,4 @@
-import { Bf1DetailedServerInfo } from "@/api/model/bf1DetailedServerInfo";
+import { Bf5DetailedServerInfo } from "@/api/model/bf5DetailedServerInfo";
 import { Locale } from "@/config/i18n-config";
 import { getDictionary } from "@/get-dictionary";
 import axios, { AxiosResponse } from "axios";
@@ -9,11 +9,11 @@ export default async function Page({
 }: {
   params: { lang: Locale; gameid: string };
 }) {
-  let servers: AxiosResponse<Bf1DetailedServerInfo, any> | undefined =
+  let servers: AxiosResponse<Bf5DetailedServerInfo, any> | undefined =
     undefined;
 
   try {
-    servers = await axios.get<Bf1DetailedServerInfo>(
+    servers = await axios.get<Bf5DetailedServerInfo>(
       "https://api.gametools.network/bf1/detailedserver",
       {
         params: {
@@ -24,6 +24,7 @@ export default async function Page({
   } catch (ex) {
     //
   }
+
   const dictionary = await getDictionary(lang);
 
   return <Client servers={servers?.data} dictionary={dictionary} />;

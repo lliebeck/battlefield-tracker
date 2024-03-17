@@ -16,13 +16,13 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import { visuallyHidden } from "@mui/utils";
 import { useCallback, useMemo, useState } from "react";
-import { AdvancedPlayer } from "../client";
 import { PlayerRow } from "./PlayerRow";
+import { DashboardPlayerResponse } from "./dashboard.types";
 
 type Order = "asc" | "desc";
 
 type Props = {
-  players: AdvancedPlayer[] | undefined;
+  players: DashboardPlayerResponse[] | undefined;
   dictionary: Awaited<ReturnType<typeof getDictionary>>["player"];
 };
 
@@ -85,33 +85,27 @@ export const PlayerList = ({ players, dictionary }: Props) => {
     switch (orderBy) {
       case SortableHeaders.USERNAME: {
         return players?.sort((a, b) => {
-          return sortStrings(
-            a.advancedData?.userName,
-            b.advancedData?.userName
-          );
+          return sortStrings(a.name, b.name);
         });
       }
       case SortableHeaders.KILLDEATH: {
         return players?.sort((a, b) => {
-          return sortNumbers(
-            a.advancedData?.killDeath,
-            b.advancedData?.killDeath
-          );
+          return sortNumbers(a.data?.killDeath, b.data?.killDeath);
         });
       }
       case SortableHeaders.HEADSHOTS: {
         return players?.sort((a, b) => {
           return sortPercentage(
-            a.advancedData?.headshots?.toString(),
-            b.advancedData?.headshots?.toString()
+            a.data?.headshots?.toString(),
+            b.data?.headshots?.toString()
           );
         });
       }
       case SortableHeaders.ACCURACY: {
         return players?.sort((a, b) => {
           return sortPercentage(
-            a.advancedData?.accuracy?.toString(),
-            b.advancedData?.accuracy?.toString()
+            a.data?.accuracy?.toString(),
+            b.data?.accuracy?.toString()
           );
         });
       }
@@ -218,7 +212,7 @@ export const PlayerList = ({ players, dictionary }: Props) => {
         </TableHead>
         <TableBody>
           {sortedPlayers?.map((player) => (
-            <PlayerRow key={player.basicData.player_id} player={player} />
+            <PlayerRow key={player?.data?.id} player={player} />
           ))}
         </TableBody>
       </Table>

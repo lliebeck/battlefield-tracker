@@ -7,13 +7,13 @@ import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { useCallback, useMemo, useState } from "react";
-import { AdvancedPlayer } from "../client";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { DisplayUserName } from "./DisplayUserName";
 import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
+import { DashboardPlayerResponse } from "./dashboard.types";
 
 type Props = {
-  player: AdvancedPlayer;
+  player: DashboardPlayerResponse;
 };
 
 export const PlayerRow = ({ player }: Props) => {
@@ -33,22 +33,20 @@ export const PlayerRow = ({ player }: Props) => {
 
   const suspiciousStats: string[] = useMemo(() => {
     const arr: string[] = [];
-    const acc = getNumberOfPercentage(
-      player?.advancedData?.accuracy.toString()
-    );
+    const acc = getNumberOfPercentage(player.data?.accuracy.toString());
     const headshotPercentage = getNumberOfPercentage(
-      player?.advancedData?.headshots.toString()
+      player.data?.headshots.toString()
     );
 
     if (acc && acc > 50) arr.push("accuracy");
     if (headshotPercentage && headshotPercentage > 50) arr.push("headshots");
 
     return arr;
-  }, [
-    getNumberOfPercentage,
-    player?.advancedData?.accuracy,
-    player?.advancedData?.headshots,
-  ]);
+  }, [getNumberOfPercentage, player.data?.accuracy, player.data?.headshots]);
+
+  useEffect(() => {
+    console.log(player);
+  }, [player]);
 
   if (player.status === "loading") {
     return (
@@ -79,7 +77,7 @@ export const PlayerRow = ({ player }: Props) => {
   return (
     <>
       <TableRow
-        key={player.advancedData?.id}
+        key={player.data?.id}
         hover
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
@@ -95,16 +93,11 @@ export const PlayerRow = ({ player }: Props) => {
           )}
         </TableCell>
         <TableCell component="th" scope="row">
-          <DisplayUserName
-            avatar={player.advancedData?.avatar}
-            userName={player.advancedData?.userName}
-            rank={player.advancedData?.rank}
-            rankImg={player.advancedData?.rankImg}
-          />
+          <DisplayUserName player={player} />
         </TableCell>
-        <TableCell align="left">{player.advancedData?.killDeath}</TableCell>
-        <TableCell align="left">{player.advancedData?.accuracy}</TableCell>
-        <TableCell align="left">{player.advancedData?.headshots}</TableCell>
+        <TableCell align="left">{player.data?.killDeath}</TableCell>
+        <TableCell align="left">{player.data?.accuracy}</TableCell>
+        <TableCell align="left">{player.data?.headshots}</TableCell>
         <TableCell align="left">
           {!error && (
             <CircleIcon
@@ -115,7 +108,7 @@ export const PlayerRow = ({ player }: Props) => {
         <TableCell align="left">
           {!error && (
             <IconButton
-              href={`https://battlefieldtracker.com/bf1/profile/origin/${player.advancedData?.userName}/overview`}
+              href={`https://battlefieldtracker.com/bf1/profile/origin/${player.data?.userName}/overview`}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -124,7 +117,7 @@ export const PlayerRow = ({ player }: Props) => {
           )}
         </TableCell>
       </TableRow>
-      {!error && <PlayerAdvancedRow show={open} player={player.advancedData} />}
+      {!error && <PlayerAdvancedRow show={open} player={player.data} />}
     </>
   );
 };

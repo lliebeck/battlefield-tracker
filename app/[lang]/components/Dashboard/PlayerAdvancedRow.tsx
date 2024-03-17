@@ -1,4 +1,3 @@
-import { FrostbiteMainStats } from "@/api/model/frostbiteMainStats";
 import Box from "@mui/material/Box";
 import Collapse from "@mui/material/Collapse";
 import Divider from "@mui/material/Divider";
@@ -7,10 +6,11 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Typography from "@mui/material/Typography";
 import { PlayerAdvancedRowItem } from "./PlayerAdvancedRowItem";
+import { DashboardPlayer } from "./dashboard.types";
 
 type Props = {
   show: boolean;
-  player: FrostbiteMainStats | undefined;
+  player: DashboardPlayer | undefined;
 };
 
 export const PlayerAdvancedRow = ({ show, player }: Props) => {

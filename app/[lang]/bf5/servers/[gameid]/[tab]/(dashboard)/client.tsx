@@ -1,15 +1,18 @@
 "use client";
 
-import { useBf1playersBf1PlayersGet } from "@/api/battlefield-1/battlefield-1";
+import { useBfvplayersBfvPlayersGet } from "@/api/battlefield-5/battlefield-5";
 import {
-  Bf1Combined,
+  BfvMainStats,
   FrostbiteMainStats,
   FrostbiteServerPlayer,
 } from "@/api/model";
-import { getDictionary } from "@/get-dictionary";
+import { Dashboard } from "@/app/[lang]/components/Dashboard/Dashboard";
+import {
+  DashboardPlayer,
+  DashboardPlayerResponse,
+  DashboardTeam,
+} from "@/app/[lang]/components/Dashboard/dashboard.types";
 import { useMediaQuery, useTheme } from "@mui/material";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
 import axios, { AxiosResponse } from "axios";
@@ -22,26 +25,19 @@ import {
   useMemo,
   useState,
 } from "react";
-import { PlayerList } from "./components/PlayerList";
 import { ICombinedDictionaries } from "../tabs.types";
 
 type Props = {
   dictionary: ICombinedDictionaries;
 };
 
-export type AdvancedPlayer = {
-  status: "ok" | "loading" | "error";
-  basicData: FrostbiteServerPlayer;
-  advancedData: FrostbiteMainStats | undefined;
-};
-
 export const ServerDashboard = ({ dictionary }: Props) => {
   const { gameid } = useParams();
   const {
-    data: bf1ServerPlayers,
+    data: bf5ServerPlayers,
     isLoading,
     error,
-  } = useBf1playersBf1PlayersGet(
+  } = useBfvplayersBfvPlayersGet(
     {
       gameid: gameid as string,
     },
@@ -56,115 +52,193 @@ export const ServerDashboard = ({ dictionary }: Props) => {
   const theme = useTheme();
   const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
 
-  const teamOne = useMemo(
-    () => bf1ServerPlayers?.data.teams[0],
-    [bf1ServerPlayers?.data.teams]
+  // const teamOne = useMemo(
+  //   () => bf5ServerPlayers?.data.teams[0],
+  //   [bf5ServerPlayers?.data.teams]
+  // );
+
+  // const teamTwo = useMemo(
+  //   () => bf5ServerPlayers?.data.teams[1],
+  //   [bf5ServerPlayers?.data.teams]
+  // );
+
+  const mapBf1Player = useCallback(
+    (playerStats: BfvMainStats): DashboardPlayer => {
+      const AdvancedPlayer: DashboardPlayer = {
+        accuracy: playerStats.accuracy,
+        avengerKills: playerStats.avengerKills,
+        deaths: playerStats.deaths,
+        dogtagsTaken: playerStats.dogtagsTaken,
+        headshots: playerStats.headshots,
+        headShots: playerStats.headShots,
+        heals: playerStats.heals,
+        id: playerStats.id,
+        infantryKillDeath: playerStats.infantryKillDeath,
+        infantryKillsPerMinute: playerStats.infantryKillsPerMinute,
+        killAssists: playerStats.killAssists,
+        killDeath: playerStats.killDeath,
+        kills: playerStats.kills,
+        killsPerMinute: playerStats.killsPerMinute,
+        longestHeadShot: playerStats.longestHeadShot,
+        loses: playerStats.loses,
+        rank: playerStats.rank,
+        rankImg: playerStats.rankImg,
+        revives: playerStats.revives,
+        roundsPlayed: playerStats.roundsPlayed,
+        saviorKills: playerStats.saviorKills,
+        scorePerMinute: playerStats.scorePerMinute,
+        secondsPlayed: playerStats.secondsPlayed,
+        skill: playerStats.skill,
+        squadScore: playerStats.squadScore,
+        timePlayed: playerStats.timePlayed,
+        totalRankProgress: playerStats.totalRankProgress,
+        winPercent: playerStats.winPercent,
+        wins: playerStats.wins,
+        rankName: "",
+      };
+      return AdvancedPlayer;
+    },
+    []
   );
 
-  const teamTwo = useMemo(
-    () => bf1ServerPlayers?.data.teams[1],
-    [bf1ServerPlayers?.data.teams]
+  const getUpdateTeamData = useCallback(
+    (
+      currentTeamData: DashboardTeam | undefined,
+      newPlayerData: BfvMainStats,
+      hasError: boolean
+    ): DashboardTeam | undefined => {
+      if (!currentTeamData) return;
+      const newTeam: DashboardTeam = {
+        image: currentTeamData.image,
+        name: currentTeamData.name,
+        teamid: currentTeamData.teamid,
+        players: currentTeamData?.players?.map((p) => {
+          return p.id === newPlayerData?.userId
+            ? {
+                status: "ok",
+                id: p.id,
+                name: p.name,
+                avatar: newPlayerData?.avatar?.toString(),
+                rank: newPlayerData?.rank,
+                rankImg: newPlayerData?.rankImg,
+                data: mapBf1Player(newPlayerData),
+              }
+            : p;
+        }),
+      };
+      return newTeam;
+    },
+    [mapBf1Player]
   );
 
-  const inititalAdvancedTeamOnePlayers: AdvancedPlayer[] | undefined = useMemo(
-    () =>
-      teamOne?.players.map((player) => {
-        const AdvancedPlayer: AdvancedPlayer = {
+  const inititalTeamOnePlayers: DashboardTeam | undefined = useMemo(() => {
+    if (isLoading) return;
+    const teamOnePlayers = bf5ServerPlayers?.data.teams[0]?.players.map(
+      (player) => {
+        const dashboardPlayerResponse: DashboardPlayerResponse = {
+          id: player.user_id,
+          name: player.name,
+          avatar: "",
+          rank: player.rank,
+          rankImg: "",
           status: "loading",
-          basicData: player,
-          advancedData: undefined,
+          data: undefined,
         };
-        return AdvancedPlayer;
-      }),
-    [teamOne?.players]
-  );
+        return dashboardPlayerResponse;
+      }
+    );
+    const DashboardTeam: DashboardTeam = {
+      teamid: bf5ServerPlayers?.data.teams[0]?.teamid,
+      image: bf5ServerPlayers?.data.teams[0]?.image,
+      name: bf5ServerPlayers?.data.teams[0]?.name,
+      players: teamOnePlayers,
+    };
+    return DashboardTeam;
+  }, [bf5ServerPlayers?.data.teams, isLoading]);
 
-  const inititalAdvancedTeamTwoPlayers: AdvancedPlayer[] | undefined = useMemo(
-    () =>
-      teamTwo?.players.map((player) => {
-        const AdvancedPlayer: AdvancedPlayer = {
-          status: "loading",
-          basicData: player,
-          advancedData: undefined,
-        };
-        return AdvancedPlayer;
-      }),
-    [teamTwo?.players]
-  );
+  const inititalTeamTwoPlayers: DashboardTeam | undefined = useMemo(() => {
+    if (isLoading) return;
+    const players = bf5ServerPlayers?.data.teams[1].players.map((player) => {
+      const dashboardPlayerResponse: DashboardPlayerResponse = {
+        id: player.user_id,
+        name: player.name,
+        avatar: "",
+        rank: player.rank,
+        rankImg: "",
+        status: "loading",
+        data: undefined,
+      };
+      return dashboardPlayerResponse;
+    });
+    const DashboardTeam: DashboardTeam = {
+      teamid: bf5ServerPlayers?.data.teams[1].teamid,
+      image: bf5ServerPlayers?.data.teams[1].image,
+      name: bf5ServerPlayers?.data.teams[1].name,
+      players: players,
+    };
+    return DashboardTeam;
+  }, [bf5ServerPlayers?.data.teams, isLoading]);
 
   const [teamOnePlayers, setTeamOnePlayers] = useState<
-    AdvancedPlayer[] | undefined
-  >(inititalAdvancedTeamOnePlayers);
+    DashboardTeam | undefined
+  >(inititalTeamOnePlayers);
 
   const [teamTwoPlayers, setTeamTwoPlayers] = useState<
-    AdvancedPlayer[] | undefined
-  >(inititalAdvancedTeamTwoPlayers);
+    DashboardTeam | undefined
+  >(inititalTeamTwoPlayers);
 
-  const fetchAdvancedPlayerStats = useCallback(
+  const fetchPlayerStats = useCallback(
     async (
       players: FrostbiteServerPlayer[] | undefined,
-      inititalAdvancedPlayers: AdvancedPlayer[] | undefined,
-      setNewPlayers: Dispatch<SetStateAction<AdvancedPlayer[] | undefined>>
+      inititalAdvancedPlayers: DashboardTeam | undefined,
+      setNewPlayers: Dispatch<SetStateAction<DashboardTeam | undefined>>
     ) => {
       if (!players) return;
       for (const player of players) {
-        let res: AxiosResponse<Bf1Combined, any>;
+        let res: AxiosResponse<BfvMainStats, any>;
         try {
-          res = await axios.get<Bf1Combined>(
-            `https://api.gametools.network/bf1/stats/?playerid=${player.player_id}`
+          res = await axios.get<BfvMainStats>(
+            `https://api.gametools.network/bfv/stats/?oid=${player.user_id}`
           );
         } catch (ex) {
         } finally {
           setNewPlayers((prev) =>
             prev
-              ? prev?.map((p) =>
-                  p.basicData.player_id === player.player_id
-                    ? {
-                        status: res ? "ok" : "error",
-                        basicData: p.basicData,
-                        advancedData: res?.data,
-                      }
-                    : p
-                )
-              : inititalAdvancedPlayers?.map((p) =>
-                  p.basicData.player_id === player.player_id
-                    ? {
-                        status: res ? "ok" : "error",
-                        basicData: p.basicData,
-                        advancedData: res?.data,
-                      }
-                    : p
-                )
+              ? getUpdateTeamData(prev, res?.data, false)
+              : getUpdateTeamData(inititalAdvancedPlayers, res?.data, false)
           );
         }
       }
     },
-    []
+    [getUpdateTeamData]
   );
 
   useEffect(() => {
-    fetchAdvancedPlayerStats(
-      teamOne?.players,
-      inititalAdvancedTeamOnePlayers,
+    if (isLoading) return;
+    fetchPlayerStats(
+      bf5ServerPlayers?.data.teams[0]?.players,
+      inititalTeamOnePlayers,
       setTeamOnePlayers
     );
   }, [
-    fetchAdvancedPlayerStats,
-    inititalAdvancedTeamOnePlayers,
-    teamOne,
-    teamOne?.players,
+    bf5ServerPlayers?.data.teams,
+    fetchPlayerStats,
+    inititalTeamOnePlayers,
+    isLoading,
   ]);
 
   useEffect(() => {
-    fetchAdvancedPlayerStats(
-      teamTwo?.players,
-      inititalAdvancedTeamTwoPlayers,
+    if (isLoading) return;
+    fetchPlayerStats(
+      bf5ServerPlayers?.data.teams[1].players,
+      inititalTeamTwoPlayers,
       setTeamTwoPlayers
     );
   }, [
-    fetchAdvancedPlayerStats,
-    inititalAdvancedTeamTwoPlayers,
-    teamTwo?.players,
+    bf5ServerPlayers?.data.teams,
+    fetchPlayerStats,
+    inititalTeamTwoPlayers,
+    isLoading,
   ]);
 
   if (isLoading) {
@@ -180,65 +254,12 @@ export const ServerDashboard = ({ dictionary }: Props) => {
   }
 
   return (
-    <Grid container spacing={0.5} height={"100%"}>
-      <Grid
-        item
-        sm={12}
-        lg={6}
-        height={`calc(${isLgUp ? "100%" : "50%"} - ${
-          isLgUp ? "60px" : "45px"
-        })`}
-      >
-        <Grid item marginY={1}>
-          <Box display={"flex"}>
-            <Box
-              component="img"
-              height={isLgUp ? 50 : 30}
-              alt="Image of the Team"
-              src={teamOne?.image}
-            />
-            <Typography
-              variant={`${isLgUp ? "h4" : "h6"}`}
-              alignSelf={"center"}
-              marginLeft={1}
-            >
-              {teamOne?.name}
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item height={"100%"}>
-          <PlayerList players={teamOnePlayers} dictionary={dictionary.player} />
-        </Grid>
-      </Grid>
-      <Grid
-        item
-        sm={12}
-        lg={6}
-        height={`calc(${isLgUp ? "100%" : "50%"} - ${
-          isLgUp ? "60px" : "45px"
-        })`}
-      >
-        <Grid item marginY={1}>
-          <Box display={"flex"}>
-            <Box
-              component="img"
-              height={isLgUp ? 50 : 30}
-              alt="Image of the Team"
-              src={teamTwo?.image}
-            />
-            <Typography
-              variant={`${isLgUp ? "h4" : "h6"}`}
-              alignSelf={"center"}
-              marginLeft={1}
-            >
-              {teamTwo?.name}
-            </Typography>
-          </Box>
-        </Grid>
-        <Grid item height={"100%"}>
-          <PlayerList players={teamTwoPlayers} dictionary={dictionary.player} />
-        </Grid>
-      </Grid>
-    </Grid>
+    <Dashboard
+      dictionary={dictionary}
+      error={error}
+      isLoading={isLoading}
+      teamOne={teamOnePlayers}
+      teamTwo={teamTwoPlayers}
+    />
   );
 };
