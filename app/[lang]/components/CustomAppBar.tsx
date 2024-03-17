@@ -5,7 +5,8 @@ import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { useParams } from "next/navigation";
+import { usePathname } from "next/navigation";
+import { useMemo } from "react";
 import { games } from "../types/games.types";
 import DarkModeSwitcher from "./DarkModSwitcher";
 import LocaleSwitcher from "./LocaleSwitcher";
@@ -15,7 +16,16 @@ type Props = {
 };
 
 export const CustomAppBar = ({ setOpen }: Props) => {
-  const { game } = useParams();
+  const path = usePathname();
+  const game = useMemo(() => {
+    for (const game of games) {
+      if (path.includes(game.key)) {
+        return game.name;
+      }
+    }
+    return "Battlefield";
+  }, [path]);
+
   return (
     <AppBar
       position="fixed"
@@ -33,7 +43,7 @@ export const CustomAppBar = ({ setOpen }: Props) => {
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          {games.find((x) => x.key === game)?.name ?? "Battlefield"}
+          {game}
         </Typography>
         <LocaleSwitcher />
         <DarkModeSwitcher />

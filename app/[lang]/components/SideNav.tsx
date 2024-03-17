@@ -31,6 +31,7 @@ export const SideNav = ({ dictionary, open = true, setOpen }: Props) => {
           selected={game.key === selectedGame}
           disabled={!game.available}
           onClick={() => {
+            setOpen(false);
             router.push(`/${lang ?? "en"}/${game.key}/servers`);
           }}
         >
@@ -41,7 +42,7 @@ export const SideNav = ({ dictionary, open = true, setOpen }: Props) => {
         </ListItemButton>
       );
     });
-  }, [lang, router, selectedGame]);
+  }, [lang, router, selectedGame, setOpen]);
 
   return (
     <>
