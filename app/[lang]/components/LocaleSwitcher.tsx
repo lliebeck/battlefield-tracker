@@ -6,7 +6,7 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
-import { i18n, type Locale } from "../../../../config/i18n-config";
+import { i18n, type Locale } from "../../../config/i18n-config";
 
 export default function LocaleSwitcher() {
   const pathName = usePathname();

@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Toolbar from "@mui/material/Toolbar";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
-import { games } from "../../types/games.types";
+import { games } from "../types/games.types";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 
 type Props = {

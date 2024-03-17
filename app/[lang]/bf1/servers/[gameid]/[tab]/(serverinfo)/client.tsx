@@ -4,7 +4,6 @@ import { useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useParams } from "next/navigation";
 import { GeneralServerInfo } from "./components/GeneralServerInfol";
 import { ServerInfoSettings } from "./components/ServerInfoSettings";
@@ -19,7 +18,7 @@ export const ServerInfo = ({ dictionary }: Props) => {
     useBf1detailedserversBf1DetailedserverGet(
       {
         gameid: gameid as string,
-        lang: lang === "de" ? "de-de" : "en-us",
+        lang: lang.toString() ?? "en-us",
       },
       { query: { select: (x) => x.data } }
       // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
@@ -27,7 +26,6 @@ export const ServerInfo = ({ dictionary }: Props) => {
   const minWidth = "500px";
 
   const theme = useTheme();
-  const isDownMd = useMediaQuery(theme.breakpoints.down("md"));
 
   if (isLoading) {
     return <LinearProgress />;

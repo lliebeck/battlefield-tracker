@@ -6,7 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useParams } from "next/navigation";
-import { games } from "../../types/games.types";
+import { games } from "../types/games.types";
 import DarkModeSwitcher from "./DarkModSwitcher";
 import LocaleSwitcher from "./LocaleSwitcher";
 
