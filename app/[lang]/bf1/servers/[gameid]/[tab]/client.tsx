@@ -5,20 +5,19 @@ import { getDictionary } from "@/get-dictionary";
 import { useParams } from "next/navigation";
 import { ServerDashboard } from "./(dashboard)/client";
 import { ServerInfo } from "./(serverinfo)/client";
-import { ServerRoutes } from "./tabs.types";
+import { ICombinedDictionaries, ServerRoutes } from "./tabs.types";
 
 type Props = {
   servers?: Bf1DetailedServerInfo;
-  dictionaryPlayer: Awaited<ReturnType<typeof getDictionary>>["player"];
-  dictionaryServer: Awaited<ReturnType<typeof getDictionary>>["server"];
+  dictionary: ICombinedDictionaries;
 };
 
-export const Client = ({ dictionaryPlayer, dictionaryServer }: Props) => {
+export const Client = ({ dictionary }: Props) => {
   const { tab } = useParams();
 
   if (tab === ServerRoutes.PLAYERS)
-    return <ServerDashboard dictionary={dictionaryPlayer} />;
+    return <ServerDashboard dictionary={dictionary.player} />;
 
   if (tab === ServerRoutes.INFO)
-    return <ServerInfo dictionary={dictionaryServer} />;
+    return <ServerInfo dictionary={dictionary.server} />;
 };
