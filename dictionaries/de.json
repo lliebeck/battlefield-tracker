@@ -1,10 +1,7 @@
 {
-  "server-component": {
-    "welcome": "Willkommen"
-  },
-  "counter": {
-    "increment": "Zuwachs",
-    "decrement": "Dekrementieren"
+  "general": {
+    "player": "Spieler",
+    "serverInfo": "Server Info"
   },
   "server": {
     "name": "Name",
