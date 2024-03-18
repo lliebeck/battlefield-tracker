@@ -49,19 +49,6 @@ export const ServerDashboard = ({ dictionary }: Props) => {
     // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
   );
 
-  const theme = useTheme();
-  const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
-
-  // const teamOne = useMemo(
-  //   () => bf5ServerPlayers?.data.teams[0],
-  //   [bf5ServerPlayers?.data.teams]
-  // );
-
-  // const teamTwo = useMemo(
-  //   () => bf5ServerPlayers?.data.teams[1],
-  //   [bf5ServerPlayers?.data.teams]
-  // );
-
   const mapBf1Player = useCallback(
     (playerStats: BfvMainStats): DashboardPlayer => {
       const AdvancedPlayer: DashboardPlayer = {

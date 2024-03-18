@@ -40,7 +40,7 @@ enum SortableHeaders {
   HEADSHOTS = "headshots",
 }
 
-export const PlayerList = ({ players, dictionary }: Props) => {
+export const PlayerTable = ({ players, dictionary }: Props) => {
   const theme = useTheme();
   const isUpLg = useMediaQuery(theme.breakpoints.up("xl"));
   const [order, setOrder] = useState<Order>("asc");

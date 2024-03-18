@@ -1,13 +1,13 @@
 "use client";
 
-import { useMediaQuery, useTheme } from "@mui/material";
+import { Skeleton, useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
-import { useEffect } from "react";
-import { PlayerList } from "./PlayerList";
-import { DashboardProps } from "./dashboard.types";
+import { PlayerTable } from "./PlayerTable";
+import { DashboardProps, DashboardTeam } from "./dashboard.types";
+import { useCallback, useMemo } from "react";
 
 export const Dashboard = ({
   dictionary,
@@ -18,6 +18,37 @@ export const Dashboard = ({
 }: DashboardProps) => {
   const theme = useTheme();
   const isLgUp = useMediaQuery(theme.breakpoints.up("lg"));
+
+  const renderListTitle = useCallback(
+    (team: DashboardTeam | undefined) => {
+      return (
+        <Box display={"flex"}>
+          {team?.image ? (
+            <Box
+              component="img"
+              height={isLgUp ? 50 : 30}
+              alt="Image of the Team"
+              src={team?.image}
+            />
+          ) : (
+            <Skeleton variant="rectangular" width={40} height={40} />
+          )}
+          {team?.name ? (
+            <Typography
+              variant={`${isLgUp ? "h4" : "h6"}`}
+              alignSelf={"center"}
+              marginLeft={1}
+            >
+              {team?.name}
+            </Typography>
+          ) : (
+            <Skeleton variant="rectangular" width="50%" height={40} />
+          )}
+        </Box>
+      );
+    },
+    [isLgUp]
+  );
 
   if (isLoading) {
     return <LinearProgress />;
@@ -42,24 +73,10 @@ export const Dashboard = ({
         })`}
       >
         <Grid item marginY={1}>
-          <Box display={"flex"}>
-            <Box
-              component="img"
-              height={isLgUp ? 50 : 30}
-              alt="Image of the Team"
-              src={teamOne?.image}
-            />
-            <Typography
-              variant={`${isLgUp ? "h4" : "h6"}`}
-              alignSelf={"center"}
-              marginLeft={1}
-            >
-              {teamOne?.name}
-            </Typography>
-          </Box>
+          {renderListTitle(teamOne)}
         </Grid>
         <Grid item height={"100%"}>
-          <PlayerList
+          <PlayerTable
             players={teamOne?.players}
             dictionary={dictionary.player}
           />
@@ -74,24 +91,10 @@ export const Dashboard = ({
         })`}
       >
         <Grid item marginY={1}>
-          <Box display={"flex"}>
-            <Box
-              component="img"
-              height={isLgUp ? 50 : 30}
-              alt="Image of the Team"
-              src={teamTwo?.image}
-            />
-            <Typography
-              variant={`${isLgUp ? "h4" : "h6"}`}
-              alignSelf={"center"}
-              marginLeft={1}
-            >
-              {teamTwo?.name}
-            </Typography>
-          </Box>
+          {renderListTitle(teamTwo)}
         </Grid>
         <Grid item height={"100%"}>
-          <PlayerList
+          <PlayerTable
             players={teamTwo?.players}
             dictionary={dictionary.player}
           />

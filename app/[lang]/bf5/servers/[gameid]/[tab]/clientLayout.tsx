@@ -6,6 +6,7 @@ import { Box, IconButton, Tab, Tabs, Toolbar, Typography } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { ServerRoutes } from "./tabs.types";
+import { useBfvDetailedServersBfvDetailedserverGet } from "@/api/battlefield-5/battlefield-5";
 
 type LinkTabProps = {
   label?: string;
@@ -45,10 +46,12 @@ export default function ClientLayout({
     }
   }, [tab]);
 
-  const { data: server, isLoading } = useBf1detailedserversBf1DetailedserverGet(
+  const { data: serverInfo } = useBfvDetailedServersBfvDetailedserverGet(
     {
       gameid: gameid as string,
-    }
+      lang: lang.toString() ?? "en-us",
+    },
+    { query: { select: (x) => x.data } }
     // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
   );
 
@@ -60,7 +63,7 @@ export default function ClientLayout({
           <ArrowBackIcon />
         </IconButton>
         <Typography marginLeft={1} variant={"h5"} noWrap>
-          {server?.data?.prefix}
+          {serverInfo?.prefix}
         </Typography>
       </Toolbar>
       <Box marginX={3} height={"100%"}>
