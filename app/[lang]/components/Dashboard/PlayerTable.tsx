@@ -212,7 +212,10 @@ export const PlayerTable = ({ players, dictionary }: Props) => {
         </TableHead>
         <TableBody>
           {sortedPlayers?.map((player) => (
-            <PlayerRow key={player?.data?.id} player={player} />
+            <PlayerRow
+              key={player?.data?.id ?? crypto.randomUUID()}
+              player={player}
+            />
           ))}
         </TableBody>
       </Table>

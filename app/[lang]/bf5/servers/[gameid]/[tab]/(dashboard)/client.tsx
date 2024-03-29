@@ -1,9 +1,8 @@
 "use client";
 
-import { useBfvplayersBfvPlayersGet } from "@/api/battlefield-5/battlefield-5";
 import {
   BfvMainStats,
-  FrostbiteMainStats,
+  BfvServerPlayers,
   FrostbiteServerPlayer,
 } from "@/api/model";
 import { Dashboard } from "@/app/[lang]/components/Dashboard/Dashboard";
@@ -12,11 +11,7 @@ import {
   DashboardPlayerResponse,
   DashboardTeam,
 } from "@/app/[lang]/components/Dashboard/dashboard.types";
-import { useMediaQuery, useTheme } from "@mui/material";
-import LinearProgress from "@mui/material/LinearProgress";
-import Typography from "@mui/material/Typography";
 import axios, { AxiosResponse } from "axios";
-import { useParams } from "next/navigation";
 import {
   Dispatch,
   SetStateAction,
@@ -29,26 +24,10 @@ import { ICombinedDictionaries } from "../tabs.types";
 
 type Props = {
   dictionary: ICombinedDictionaries;
+  bf5ServerPlayers?: BfvServerPlayers;
 };
 
-export const ServerDashboard = ({ dictionary }: Props) => {
-  const { gameid } = useParams();
-  const {
-    data: bf5ServerPlayers,
-    isLoading,
-    error,
-  } = useBfvplayersBfvPlayersGet(
-    {
-      gameid: gameid as string,
-    },
-    {
-      query: {
-        retry: 2,
-      },
-    }
-    // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
-  );
-
+export const ServerDashboard = ({ dictionary, bf5ServerPlayers }: Props) => {
   const mapBf1Player = useCallback(
     (playerStats: BfvMainStats): DashboardPlayer => {
       const AdvancedPlayer: DashboardPlayer = {
@@ -88,29 +67,31 @@ export const ServerDashboard = ({ dictionary }: Props) => {
     []
   );
 
-  const getUpdateTeamData = useCallback(
+  const getUpdateTeamDataParallel = useCallback(
     (
       currentTeamData: DashboardTeam | undefined,
-      newPlayerData: BfvMainStats,
-      hasError: boolean
+      newPlayerData: PromiseSettledResult<AxiosResponse<BfvMainStats, any>>[]
     ): DashboardTeam | undefined => {
-      if (!currentTeamData) return;
       const newTeam: DashboardTeam = {
-        image: currentTeamData.image,
-        name: currentTeamData.name,
-        teamid: currentTeamData.teamid,
-        players: currentTeamData?.players?.map((p) => {
-          return p.id === newPlayerData?.userId
-            ? {
-                status: "ok",
-                id: p.id,
-                name: p.name,
-                avatar: newPlayerData?.avatar?.toString(),
-                rank: newPlayerData?.rank,
-                rankImg: newPlayerData?.rankImg,
-                data: mapBf1Player(newPlayerData),
-              }
-            : p;
+        ...currentTeamData,
+        players: currentTeamData?.players?.map((player) => {
+          const newPlayer = newPlayerData.find((x) => {
+            if (x.status === "rejected") return;
+            return x.value.data.userId === player.id;
+          });
+
+          if (newPlayer?.status === "rejected" || !newPlayer) return player;
+
+          const updtedDashboardPlayer: DashboardPlayerResponse = {
+            avatar: newPlayer.value.data.avatar ?? player.avatar,
+            id: player.id,
+            name: newPlayer.value.data.userName ?? player.name,
+            rank: newPlayer.value.data.rank ?? player.rank,
+            rankImg: newPlayer.value.data.rankImg ?? player.rankImg,
+            status: newPlayer.value.data ? "ok" : "error",
+            data: mapBf1Player(newPlayer?.value.data),
+          };
+          return updtedDashboardPlayer;
         }),
       };
       return newTeam;
@@ -119,33 +100,30 @@ export const ServerDashboard = ({ dictionary }: Props) => {
   );
 
   const inititalTeamOnePlayers: DashboardTeam | undefined = useMemo(() => {
-    if (isLoading) return;
-    const teamOnePlayers = bf5ServerPlayers?.data.teams[0]?.players.map(
-      (player) => {
-        const dashboardPlayerResponse: DashboardPlayerResponse = {
-          id: player.user_id,
-          name: player.name,
-          avatar: "",
-          rank: player.rank,
-          rankImg: "",
-          status: "loading",
-          data: undefined,
-        };
-        return dashboardPlayerResponse;
-      }
-    );
+    const teamOnePlayers = bf5ServerPlayers?.teams[0]?.players.map((player) => {
+      const dashboardPlayerResponse: DashboardPlayerResponse = {
+        id: player.user_id,
+        name: player.name,
+        avatar: "",
+        rank: player.rank,
+        rankImg: "",
+        status: "loading",
+        data: undefined,
+      };
+      return dashboardPlayerResponse;
+    });
+
     const DashboardTeam: DashboardTeam = {
-      teamid: bf5ServerPlayers?.data.teams[0]?.teamid,
-      image: bf5ServerPlayers?.data.teams[0]?.image,
-      name: bf5ServerPlayers?.data.teams[0]?.name,
+      teamid: bf5ServerPlayers?.teams[0]?.teamid,
+      image: bf5ServerPlayers?.teams[0]?.image,
+      name: bf5ServerPlayers?.teams[0]?.name,
       players: teamOnePlayers,
     };
     return DashboardTeam;
-  }, [bf5ServerPlayers?.data.teams, isLoading]);
+  }, [bf5ServerPlayers?.teams]);
 
   const inititalTeamTwoPlayers: DashboardTeam | undefined = useMemo(() => {
-    if (isLoading) return;
-    const players = bf5ServerPlayers?.data.teams[1].players.map((player) => {
+    const players = bf5ServerPlayers?.teams[1].players.map((player) => {
       const dashboardPlayerResponse: DashboardPlayerResponse = {
         id: player.user_id,
         name: player.name,
@@ -158,13 +136,13 @@ export const ServerDashboard = ({ dictionary }: Props) => {
       return dashboardPlayerResponse;
     });
     const DashboardTeam: DashboardTeam = {
-      teamid: bf5ServerPlayers?.data.teams[1].teamid,
-      image: bf5ServerPlayers?.data.teams[1].image,
-      name: bf5ServerPlayers?.data.teams[1].name,
+      teamid: bf5ServerPlayers?.teams[1].teamid,
+      image: bf5ServerPlayers?.teams[1].image,
+      name: bf5ServerPlayers?.teams[1].name,
       players: players,
     };
     return DashboardTeam;
-  }, [bf5ServerPlayers?.data.teams, isLoading]);
+  }, [bf5ServerPlayers?.teams]);
 
   const [teamOnePlayers, setTeamOnePlayers] = useState<
     DashboardTeam | undefined
@@ -181,70 +159,48 @@ export const ServerDashboard = ({ dictionary }: Props) => {
       setNewPlayers: Dispatch<SetStateAction<DashboardTeam | undefined>>
     ) => {
       if (!players) return;
-      for (const player of players) {
-        let res: AxiosResponse<BfvMainStats, any>;
-        try {
-          res = await axios.get<BfvMainStats>(
-            `https://api.gametools.network/bfv/stats/?oid=${player.user_id}`
-          );
-        } catch (ex) {
-        } finally {
-          setNewPlayers((prev) =>
-            prev
-              ? getUpdateTeamData(prev, res?.data, false)
-              : getUpdateTeamData(inititalAdvancedPlayers, res?.data, false)
+      try {
+        const res: Promise<AxiosResponse<BfvMainStats, any>>[] = [];
+        for (const player of players) {
+          res.push(
+            axios.get<BfvMainStats>(
+              `https://api.gametools.network/bfv/stats/?oid=${player.user_id}`
+            )
           );
         }
-      }
+        const responses = await Promise.allSettled(res);
+
+        setNewPlayers((prev) =>
+          prev
+            ? getUpdateTeamDataParallel(prev, responses)
+            : getUpdateTeamDataParallel(inititalAdvancedPlayers, responses)
+        );
+      } catch (ex) {}
     },
-    [getUpdateTeamData]
+    [getUpdateTeamDataParallel]
   );
 
+  useEffect(() => console.log(bf5ServerPlayers), [bf5ServerPlayers]);
+
   useEffect(() => {
-    if (isLoading) return;
     fetchPlayerStats(
-      bf5ServerPlayers?.data.teams[0]?.players,
+      bf5ServerPlayers?.teams[0]?.players,
       inititalTeamOnePlayers,
       setTeamOnePlayers
     );
-  }, [
-    bf5ServerPlayers?.data.teams,
-    fetchPlayerStats,
-    inititalTeamOnePlayers,
-    isLoading,
-  ]);
+  }, [bf5ServerPlayers?.teams, fetchPlayerStats, inititalTeamOnePlayers]);
 
   useEffect(() => {
-    if (isLoading) return;
     fetchPlayerStats(
-      bf5ServerPlayers?.data.teams[1].players,
+      bf5ServerPlayers?.teams[1].players,
       inititalTeamTwoPlayers,
       setTeamTwoPlayers
     );
-  }, [
-    bf5ServerPlayers?.data.teams,
-    fetchPlayerStats,
-    inititalTeamTwoPlayers,
-    isLoading,
-  ]);
-
-  if (isLoading) {
-    return <LinearProgress />;
-  }
-
-  if (error?.status && error?.status >= 500 && error?.status < 600) {
-    return <Typography variant="h6">Services not available!</Typography>;
-  }
-
-  if (error) {
-    return <Typography variant="h6">Something went wrong!</Typography>;
-  }
+  }, [bf5ServerPlayers?.teams, fetchPlayerStats, inititalTeamTwoPlayers]);
 
   return (
     <Dashboard
       dictionary={dictionary}
-      error={error}
-      isLoading={isLoading}
       teamOne={teamOnePlayers}
       teamTwo={teamTwoPlayers}
     />

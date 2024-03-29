@@ -1,5 +1,5 @@
 import { Locale } from "@/config/i18n-config";
-import { redirect } from "next/navigation";
+import { permanentRedirect, redirect } from "next/navigation";
 
 export default async function Page({
   params: { lang, gameid },

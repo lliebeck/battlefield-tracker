@@ -3,32 +3,13 @@ import { ServerInfo } from "@/app/[lang]/components/ServerInfo/ServerInfo";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useParams } from "next/navigation";
 import { ICombinedDictionaries } from "../tabs.types";
+import { Bf5DetailedServerInfo } from "@/api/model/bf5DetailedServerInfo";
 
 type Props = {
   dictionary: ICombinedDictionaries;
+  serverInfo: Bf5DetailedServerInfo | undefined;
 };
 
-export const ServerInfoClient = ({ dictionary }: Props) => {
-  const { gameid, lang } = useParams();
-  const { data: serverInfo, isLoading } =
-    useBfvDetailedServersBfvDetailedserverGet(
-      {
-        gameid: gameid as string,
-        lang: lang.toString() ?? "en-us",
-      },
-      { query: { select: (x) => x.data } }
-      // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
-    );
-
-  if (isLoading) {
-    return <LinearProgress />;
-  }
-
-  return (
-    <ServerInfo
-      serverInfo={serverInfo}
-      isLoading={isLoading}
-      dictionary={dictionary}
-    />
-  );
+export const ServerInfoClient = ({ dictionary, serverInfo }: Props) => {
+  return <ServerInfo serverInfo={serverInfo} dictionary={dictionary} />;
 };

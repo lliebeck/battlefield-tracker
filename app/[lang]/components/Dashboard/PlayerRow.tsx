@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import Skeleton from "@mui/material/Skeleton";
 import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { DisplayUserName } from "./DisplayUserName";
 import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
 import { DashboardPlayerResponse } from "./dashboard.types";
@@ -44,10 +44,6 @@ export const PlayerRow = ({ player }: Props) => {
     return arr;
   }, [getNumberOfPercentage, player.data?.accuracy, player.data?.headshots]);
 
-  useEffect(() => {
-    console.log(player);
-  }, [player]);
-
   if (player.status === "loading") {
     return (
       <TableRow>
@@ -77,11 +73,11 @@ export const PlayerRow = ({ player }: Props) => {
   return (
     <>
       <TableRow
-        key={player.data?.id}
+        key={player.data?.id ?? crypto.randomUUID()}
         hover
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
-        <TableCell>
+        <TableCell key={player.data?.id ?? crypto.randomUUID()}>
           {!error && (
             <IconButton
               aria-label="expand row"

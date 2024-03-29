@@ -1,7 +1,7 @@
 import { Locale } from "@/config/i18n-config";
 import { getDictionary } from "@/get-dictionary";
-import ClientLayout from "./clientLayout";
 import { PropsWithChildren } from "react";
+import ClientLayout from "./clientLayout";
 
 export default async function ServerLayout({
   params: { lang },

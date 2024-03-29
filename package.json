@@ -22,6 +22,7 @@
     "@mui/material-nextjs": "^5.15.11",
     "@tanstack/react-query": "^5.25.0",
     "axios": "^1.6.7",
+    "axios-retry": "^4.1.0",
     "lodash": "^4.17.21",
     "msw": "^2.2.3",
     "negotiator": "0.6.3",

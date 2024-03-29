@@ -1,12 +1,11 @@
 "use client";
-import { useBf1detailedserversBf1DetailedserverGet } from "@/api/battlefield-1/battlefield-1";
+import { useBfvDetailedServersBfvDetailedserverGet } from "@/api/battlefield-5/battlefield-5";
 import { getDictionary } from "@/get-dictionary";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, IconButton, Tab, Tabs, Toolbar, Typography } from "@mui/material";
 import { useParams, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { ServerRoutes } from "./tabs.types";
-import { useBfvDetailedServersBfvDetailedserverGet } from "@/api/battlefield-5/battlefield-5";
 
 type LinkTabProps = {
   label?: string;

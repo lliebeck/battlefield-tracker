@@ -14,8 +14,8 @@ export type AdvancedPlayer = {
 };
 
 export type DashboardProps = {
-  isLoading: boolean;
-  error: AxiosError<HTTPValidationError, any> | null;
+  isLoading?: boolean;
+  error?: AxiosError<HTTPValidationError, any> | null;
   teamOne: DashboardTeam | undefined;
   teamTwo: DashboardTeam | undefined;
   dictionary: ICombinedDictionaries;

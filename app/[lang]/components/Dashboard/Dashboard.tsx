@@ -5,9 +5,9 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
+import { useCallback } from "react";
 import { PlayerTable } from "./PlayerTable";
 import { DashboardProps, DashboardTeam } from "./dashboard.types";
-import { useCallback, useMemo } from "react";
 
 export const Dashboard = ({
   dictionary,

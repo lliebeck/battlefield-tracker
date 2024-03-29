@@ -12,18 +12,13 @@ import { IServerInfo } from "./serverInfo.types";
 
 type Props = {
   serverInfo: IServerInfo | undefined;
-  isLoading: boolean;
   dictionary: ICombinedDictionaries;
 };
 
-export const ServerInfo = ({ serverInfo, isLoading, dictionary }: Props) => {
+export const ServerInfo = ({ serverInfo, dictionary }: Props) => {
   const minWidth = "500px";
 
   const theme = useTheme();
-
-  if (isLoading) {
-    return <LinearProgress />;
-  }
 
   return (
     <Box marginTop={1}>
