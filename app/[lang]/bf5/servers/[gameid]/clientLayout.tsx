@@ -1,12 +1,11 @@
 "use client";
-import { useBfvDetailedServersBfvDetailedserverGet } from "@/api/battlefield-5/battlefield-5";
+import { Bf5DetailedServerInfo } from "@/api/model/bf5DetailedServerInfo";
 import { getDictionary } from "@/get-dictionary";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, IconButton, Tab, Tabs, Toolbar, Typography } from "@mui/material";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { ServerRoutes } from "./tabs.types";
-
 type LinkTabProps = {
   label?: string;
   href?: string;
@@ -26,33 +25,33 @@ const LinkTab = (props: LinkTabProps) => {
 
 type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>["general"];
+  serverInfo: Bf5DetailedServerInfo | undefined;
 };
 
 export default function ClientLayout({
   children,
   dictionary,
+  serverInfo,
 }: Props & React.PropsWithChildren) {
   const router = useRouter();
-  const { gameid, lang, tab } = useParams();
+  const { lang } = useParams();
+  const path = usePathname();
+  const tab = useMemo(
+    () =>
+      path.endsWith(ServerRoutes.PLAYERS)
+        ? ServerRoutes.PLAYERS
+        : ServerRoutes.INFO,
+    [path]
+  );
 
   const value = useMemo(() => {
-    const currentTab = tab as ServerRoutes;
-    switch (currentTab) {
+    switch (tab) {
       case ServerRoutes.PLAYERS:
         return 0;
       case ServerRoutes.INFO:
         return 1;
     }
   }, [tab]);
-
-  const { data: serverInfo } = useBfvDetailedServersBfvDetailedserverGet(
-    {
-      gameid: gameid as string,
-      lang: lang.toString() ?? "en-us",
-    },
-    { query: { select: (x) => x.data } }
-    // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
-  );
 
   return (
     // Subtract height from CustomAppBar, header and tabs plus some margin
@@ -66,7 +65,7 @@ export default function ClientLayout({
         </Typography>
       </Toolbar>
       <Box marginX={3} height={"100%"}>
-        <Tabs value={value} role="navigation">
+        <Tabs value={value} role="navigation" defaultValue={0}>
           <LinkTab label={dictionary.player} href={ServerRoutes.PLAYERS} />
           <LinkTab label={dictionary.serverInfo} href={ServerRoutes.INFO} />
         </Tabs>

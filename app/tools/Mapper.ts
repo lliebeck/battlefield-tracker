@@ -4,12 +4,20 @@ import { ApiErrorMessageObject } from "../lib/exceptions";
 export const AxiosErrorToApiError = (
   axiosError: AxiosError
 ): ApiErrorMessageObject => {
+  const config = axiosError.config;
+
+  const path = `
+      ${config?.baseURL}
+      ${config?.url?.substring(1, config?.url?.length - 1)}?
+      ${new URLSearchParams(config?.params)}
+    `;
+
   let message: ApiErrorMessageObject = {
     name: axiosError.name,
     status: axiosError.response?.status,
-    path: axiosError.response?.config?.url,
+    path: path,
     statusText: axiosError.response?.statusText,
-    method: axiosError.config?.method,
+    method: config?.method,
   };
   return message;
 };

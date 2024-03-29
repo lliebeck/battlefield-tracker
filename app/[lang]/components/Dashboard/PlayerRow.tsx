@@ -10,15 +10,16 @@ import TableRow from "@mui/material/TableRow";
 import { useCallback, useMemo, useState } from "react";
 import { DisplayUserName } from "./DisplayUserName";
 import { PlayerAdvancedRow } from "./PlayerAdvancedRow";
-import { DashboardPlayerResponse } from "./dashboard.types";
+import { DashboardPlayer } from "./dashboard.types";
 
 type Props = {
-  player: DashboardPlayerResponse;
+  isLoading: boolean;
+  player: DashboardPlayer | undefined;
 };
 
-export const PlayerRow = ({ player }: Props) => {
+export const PlayerRow = ({ player, isLoading }: Props) => {
   const [open, setOpen] = useState(false);
-  const error = useMemo(() => player.status === "error", [player.status]);
+  const error = useMemo(() => player === undefined, [player]);
 
   const getNumberOfPercentage = useCallback((value: string | undefined) => {
     if (!value) return;
@@ -33,18 +34,18 @@ export const PlayerRow = ({ player }: Props) => {
 
   const suspiciousStats: string[] = useMemo(() => {
     const arr: string[] = [];
-    const acc = getNumberOfPercentage(player.data?.accuracy.toString());
+    const acc = getNumberOfPercentage(player?.accuracy?.toString());
     const headshotPercentage = getNumberOfPercentage(
-      player.data?.headshots.toString()
+      player?.headshots?.toString()
     );
 
     if (acc && acc > 50) arr.push("accuracy");
     if (headshotPercentage && headshotPercentage > 50) arr.push("headshots");
 
     return arr;
-  }, [getNumberOfPercentage, player.data?.accuracy, player.data?.headshots]);
+  }, [getNumberOfPercentage, player?.accuracy, player?.headshots]);
 
-  if (player.status === "loading") {
+  if (isLoading) {
     return (
       <TableRow>
         <TableCell component="th" scope="row"></TableCell>
@@ -73,11 +74,11 @@ export const PlayerRow = ({ player }: Props) => {
   return (
     <>
       <TableRow
-        key={player.data?.id ?? crypto.randomUUID()}
+        key={player?.id ?? crypto.randomUUID()}
         hover
         sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
       >
-        <TableCell key={player.data?.id ?? crypto.randomUUID()}>
+        <TableCell key={player?.id ?? crypto.randomUUID()}>
           {!error && (
             <IconButton
               aria-label="expand row"
@@ -91,9 +92,9 @@ export const PlayerRow = ({ player }: Props) => {
         <TableCell component="th" scope="row">
           <DisplayUserName player={player} />
         </TableCell>
-        <TableCell align="left">{player.data?.killDeath}</TableCell>
-        <TableCell align="left">{player.data?.accuracy}</TableCell>
-        <TableCell align="left">{player.data?.headshots}</TableCell>
+        <TableCell align="left">{player?.killDeath}</TableCell>
+        <TableCell align="left">{player?.accuracy}</TableCell>
+        <TableCell align="left">{player?.headshots}</TableCell>
         <TableCell align="left">
           {!error && (
             <CircleIcon
@@ -104,7 +105,7 @@ export const PlayerRow = ({ player }: Props) => {
         <TableCell align="left">
           {!error && (
             <IconButton
-              href={`https://battlefieldtracker.com/bf1/profile/origin/${player.data?.userName}/overview`}
+              href={`https://battlefieldtracker.com/bf1/profile/origin/${player?.userName}/overview`}
               rel="noopener noreferrer"
               target="_blank"
             >
@@ -113,7 +114,7 @@ export const PlayerRow = ({ player }: Props) => {
           )}
         </TableCell>
       </TableRow>
-      {!error && <PlayerAdvancedRow show={open} player={player.data} />}
+      {!error && <PlayerAdvancedRow show={open} player={player} />}
     </>
   );
 };

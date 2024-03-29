@@ -1,5 +1,6 @@
 "use client";
 
+import { getDictionary } from "@/get-dictionary";
 import {
   Box,
   Button,
@@ -10,7 +11,6 @@ import {
   Container,
   Typography,
 } from "@mui/material";
-import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 
 export type ApiErrorViewData = {
@@ -25,16 +25,18 @@ export default function GlobalError({
   error,
   reset,
 }: {
-  error: (Error & { digest?: string }) | AxiosError;
+  error: Error & { digest?: string };
   reset: () => void;
+  dictionary: Awaited<ReturnType<typeof getDictionary>>["general"];
 }) {
   const router = useRouter();
+  let res: ApiErrorViewData | undefined;
 
-  console.log(error.name);
+  try {
+    res = JSON.parse(error.message) as ApiErrorViewData;
+  } catch (e) {}
 
-  if (!(error instanceof AxiosError)) {
-    let res = JSON.parse(error.message) as ApiErrorViewData;
-
+  if (res) {
     return (
       <Container
         sx={{
@@ -51,8 +53,8 @@ export default function GlobalError({
           <Typography variant="h4" mb={2}>
             {res.statusText}
           </Typography>
-          <Card>
-            <CardHeader title="Failed to load data"></CardHeader>
+          <Card elevation={6}>
+            <CardHeader title="Failed to fetch data"></CardHeader>
             <CardContent>
               <Box sx={{ display: "flex" }}>
                 <Box mr={5}>
@@ -78,24 +80,28 @@ export default function GlobalError({
   }
 
   return (
-    <html>
-      <body>
-        <h2>Something went wrong!</h2>
-        <p>{JSON.stringify(error.name)}</p>
-        <button onClick={() => reset()}>Try again</button>
-      </body>
-    </html>
+    <Container
+      sx={{
+        alignItems: "center",
+        justifyContent: "center",
+        display: "flex",
+        height: "100%",
+      }}
+    >
+      <Card elevation={6}>
+        <CardHeader title="There was a Problem"></CardHeader>
+        <CardContent>
+          <Typography>{error.message}.</Typography>
+          <Typography>
+            Please try again later or contact the support if the problem
+            persists.
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Button onClick={reset}>Try again</Button>
+          <Button onClick={() => router.push("/")}>Go back home</Button>
+        </CardActions>
+      </Card>
+    </Container>
   );
-}
-
-class ApiCallException extends Error {
-  code: number;
-  path: string;
-
-  constructor(message: string, code: number, path: string) {
-    super(message);
-    this.name = this.constructor.name;
-    this.code = code;
-    this.path = path;
-  }
 }
