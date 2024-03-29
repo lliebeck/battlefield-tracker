@@ -1,4 +1,3 @@
-import { Bf1DetailedServerInfo } from "@/api/model";
 import { getDictionary } from "@/get-dictionary";
 import { Card, CardContent, CardMedia } from "@mui/material";
 import Grid from "@mui/material/Grid";

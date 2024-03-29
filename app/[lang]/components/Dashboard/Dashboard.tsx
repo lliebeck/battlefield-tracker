@@ -3,16 +3,15 @@
 import { Skeleton, useMediaQuery, useTheme } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LinearProgress from "@mui/material/LinearProgress";
 import Typography from "@mui/material/Typography";
+import { useCallback } from "react";
 import { PlayerTable } from "./PlayerTable";
 import { DashboardProps, DashboardTeam } from "./dashboard.types";
-import { useCallback, useMemo } from "react";
 
 export const Dashboard = ({
   dictionary,
   error,
-  isLoading,
+  isPlayersLoading,
   teamOne,
   teamTwo,
 }: DashboardProps) => {
@@ -50,18 +49,6 @@ export const Dashboard = ({
     [isLgUp]
   );
 
-  if (isLoading) {
-    return <LinearProgress />;
-  }
-
-  if (error?.status && error?.status >= 500 && error?.status < 600) {
-    return <Typography variant="h6">Services not available!</Typography>;
-  }
-
-  if (error) {
-    return <Typography variant="h6">Something went wrong!</Typography>;
-  }
-
   return (
     <Grid container spacing={0.5} height={"100%"}>
       <Grid
@@ -77,6 +64,7 @@ export const Dashboard = ({
         </Grid>
         <Grid item height={"100%"}>
           <PlayerTable
+            isPlayersLoading={isPlayersLoading}
             players={teamOne?.players}
             dictionary={dictionary.player}
           />
@@ -95,6 +83,7 @@ export const Dashboard = ({
         </Grid>
         <Grid item height={"100%"}>
           <PlayerTable
+            isPlayersLoading={isPlayersLoading}
             players={teamTwo?.players}
             dictionary={dictionary.player}
           />

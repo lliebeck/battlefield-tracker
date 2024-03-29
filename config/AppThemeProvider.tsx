@@ -22,6 +22,14 @@ export const AppThemeProvider = ({
     let createdTheme = createTheme({
       palette: {
         mode: mode,
+        // background: { default: "#ccd5ae", paper: "#e9edc9" },
+        // primary: {
+        //   light: "#757ce8",
+        //   main: "#d4a373",
+        //   dark: "#002884",
+        //   contrastText: "#fff",
+        // },
+        // secondary: { main: "#fb8500" },
       },
       typography: {
         fontFamily: roboto.style.fontFamily,

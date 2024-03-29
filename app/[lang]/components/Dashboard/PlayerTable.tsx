@@ -17,12 +17,13 @@ import TableHead from "@mui/material/TableHead";
 import { visuallyHidden } from "@mui/utils";
 import { useCallback, useMemo, useState } from "react";
 import { PlayerRow } from "./PlayerRow";
-import { DashboardPlayerResponse } from "./dashboard.types";
+import { DashboardPlayer } from "./dashboard.types";
 
 type Order = "asc" | "desc";
 
 type Props = {
-  players: DashboardPlayerResponse[] | undefined;
+  isPlayersLoading: boolean;
+  players: (DashboardPlayer | undefined)[] | undefined;
   dictionary: Awaited<ReturnType<typeof getDictionary>>["player"];
 };
 
@@ -40,7 +41,11 @@ enum SortableHeaders {
   HEADSHOTS = "headshots",
 }
 
-export const PlayerTable = ({ players, dictionary }: Props) => {
+export const PlayerTable = ({
+  players,
+  dictionary,
+  isPlayersLoading,
+}: Props) => {
   const theme = useTheme();
   const isUpLg = useMediaQuery(theme.breakpoints.up("xl"));
   const [order, setOrder] = useState<Order>("asc");
@@ -85,27 +90,27 @@ export const PlayerTable = ({ players, dictionary }: Props) => {
     switch (orderBy) {
       case SortableHeaders.USERNAME: {
         return players?.sort((a, b) => {
-          return sortStrings(a.name, b.name);
+          return sortStrings(a?.userName, b?.userName);
         });
       }
       case SortableHeaders.KILLDEATH: {
         return players?.sort((a, b) => {
-          return sortNumbers(a.data?.killDeath, b.data?.killDeath);
+          return sortNumbers(a?.killDeath, b?.killDeath);
         });
       }
       case SortableHeaders.HEADSHOTS: {
         return players?.sort((a, b) => {
           return sortPercentage(
-            a.data?.headshots?.toString(),
-            b.data?.headshots?.toString()
+            a?.headshots?.toString(),
+            b?.headshots?.toString()
           );
         });
       }
       case SortableHeaders.ACCURACY: {
         return players?.sort((a, b) => {
           return sortPercentage(
-            a.data?.accuracy?.toString(),
-            b.data?.accuracy?.toString()
+            a?.accuracy?.toString(),
+            b?.accuracy?.toString()
           );
         });
       }
@@ -212,7 +217,11 @@ export const PlayerTable = ({ players, dictionary }: Props) => {
         </TableHead>
         <TableBody>
           {sortedPlayers?.map((player) => (
-            <PlayerRow key={player?.data?.id} player={player} />
+            <PlayerRow
+              isLoading={isPlayersLoading}
+              key={player?.id ?? crypto.randomUUID()}
+              player={player}
+            />
           ))}
         </TableBody>
       </Table>
