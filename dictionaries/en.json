@@ -13,13 +13,31 @@
     "region": {
       "title": "Region",
       "options": {
-        "all": "All",
-        "eu": "EU",
-        "asia": "Asia",
-        "nam": "North America",
-        "sam": "South America",
-        "au": "Australia",
-        "oc": "Oceana"
+        "all": {
+          "default": "All",
+          "short": "All"
+        },
+        "eu": {
+          "default": "Europe",
+          "short": "EU"
+        },
+        "asia": {
+          "default": "Asia",
+          "short": "Asia"
+        },
+        "nam": {
+          "default": "North America",
+          "short": "NAM"
+        },
+        "sam": {
+          "default": "South America",
+          "short": "SAM"
+        },
+        "au": {
+          "default": "Australia",
+          "short": "AU"
+        },
+        "oc": { "default": "Oceana", "short": "OC" }
       }
     },
     "owner": "Owner",
