@@ -24,8 +24,15 @@ export const ServerInfoSettingsCard = ({ value, label }: Props) => {
       <Typography variant="h6">{label}</Typography>
       {Object.entries(value).map(([key, value]) => (
         <Box key={key} display={"flex"}>
-          <Typography variant="subtitle2">{key}:</Typography>
-          <Typography marginLeft={1} variant="subtitle2">
+          <Typography variant="subtitle2" lineHeight={1.5} fontSize={12}>
+            {key}:
+          </Typography>
+          <Typography
+            marginLeft={1}
+            variant="subtitle2"
+            lineHeight={1.5}
+            fontSize={13}
+          >
             {value}
           </Typography>
         </Box>

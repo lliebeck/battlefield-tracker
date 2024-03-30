@@ -24,6 +24,7 @@ export default async function Page({
       {
         params: {
           gameid: gameid,
+          lang: lang ?? "en-us",
         },
       }
     );

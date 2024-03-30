@@ -10,6 +10,7 @@
     "player": "Player",
     "inQue": "Queue",
     "showEmptyServer": "Empty server",
+    "mapRotation": "Map rotation",
     "region": {
       "title": "Region",
       "options": {
