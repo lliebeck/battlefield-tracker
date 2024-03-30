@@ -1,5 +1,11 @@
 import { getDictionary } from "@/get-dictionary";
-import { Card, CardContent, CardMedia } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardMedia,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import { IServerInfo } from "./serverInfo.types";
@@ -13,8 +19,11 @@ export const GeneralServerInfo = ({
   serverInfo,
   dictionary,
 }: GeneralServerInfoProps) => {
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.up("sm"));
+
   return (
-    <Card sx={{ maxWidth: "500px" }}>
+    <Card sx={{ maxWidth: "500px", height: "100%" }}>
       <CardMedia
         sx={{ height: "300px" }}
         image={serverInfo?.currentMapImage}
