@@ -15,6 +15,7 @@ import { useMemo } from "react";
 import { useServerSearchParams } from "../../hooks/useServerSearchParams";
 import { MapOptionKeys } from "../../types/maps.types";
 import { regionKeys } from "../../types/region.types";
+import { useMediaQuery, useTheme } from "@mui/material";
 
 type Props = {
   dictionary: {
@@ -25,6 +26,9 @@ type Props = {
 };
 
 export const SearchBar = ({ dictionary, mapOptionKeys }: Props) => {
+  const theme = useTheme();
+  const isSm = useMediaQuery(theme.breakpoints.down("sm"));
+
   const { filterOptions, setFilterOptions } =
     useServerSearchParams(mapOptionKeys);
 
@@ -40,6 +44,7 @@ export const SearchBar = ({ dictionary, mapOptionKeys }: Props) => {
         label="Search name"
         type="search"
         variant="filled"
+        size={isSm ? "small" : "medium"}
         defaultValue={filterOptions?.search}
         onChange={debounce(
           (e) => setFilterOptions("search", e.target.value),
@@ -51,6 +56,7 @@ export const SearchBar = ({ dictionary, mapOptionKeys }: Props) => {
         onChange={(_, value) => setFilterOptions("map", value)}
         fullWidth
         options={mapOptionKeys}
+        size={isSm ? "small" : "medium"}
         getOptionLabel={(option) => combinedKeys[option as MapOptionKeys]}
         filterSelectedOptions
         renderInput={(params) => (
@@ -63,11 +69,15 @@ export const SearchBar = ({ dictionary, mapOptionKeys }: Props) => {
         )}
         sx={{ margin: "0.5em" }}
       />
-      <FormControl variant="filled" sx={{ minWidth: 120, marginRight: 1 }}>
+      <FormControl
+        variant="filled"
+        sx={{ minWidth: isSm ? 80 : 140, marginRight: 1 }}
+      >
         <InputLabel id="label-region-label">
           {dictionary.server.region.title}
         </InputLabel>
         <Select
+          size={isSm ? "small" : "medium"}
           labelId="label-region-label"
           id="label-region"
           value={filterOptions?.region ?? "eu"}
@@ -77,14 +87,18 @@ export const SearchBar = ({ dictionary, mapOptionKeys }: Props) => {
         >
           {regionKeys.map((region) => (
             <MenuItem key={region} value={region}>
-              <Typography>
-                {dictionary.server.region.options[region]}
+              <Typography overflow={"hidden"}>
+                {
+                  dictionary.server.region.options[region][
+                    isSm ? "short" : "default"
+                  ]
+                }
               </Typography>
             </MenuItem>
           ))}
         </Select>
       </FormControl>
-      <Paper sx={{ padding: "0.5em" }}>
+      <Paper sx={{ padding: isSm ? 0.5 : 1 }}>
         <Box sx={{ display: "flex" }}>
           <Typography variant="body2" sx={{ alignSelf: "center" }}>
             {dictionary.server.showEmptyServer}

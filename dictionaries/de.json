@@ -13,13 +13,31 @@
     "region": {
       "title": "Region",
       "options": {
-        "all": "Alle",
-        "eu": "EU",
-        "asia": "Asien",
-        "nam": "Nordamerika",
-        "sam": "Südamerika",
-        "au": "Australien",
-        "oc": "Ozeanien"
+        "all": {
+          "default": "Alle",
+          "short": "All"
+        },
+        "eu": {
+          "default": "Europa",
+          "short": "EU"
+        },
+        "asia": {
+          "default": "Asia",
+          "short": "Asia"
+        },
+        "nam": {
+          "default": "Nordamerika",
+          "short": "NAM"
+        },
+        "sam": {
+          "default": "Südamerika",
+          "short": "SAM"
+        },
+        "au": {
+          "default": "Australien",
+          "short": "AU"
+        },
+        "oc": { "default": "Ozeanien", "short": "OC" }
       }
     },
     "owner": "Besitzer",
