@@ -10,7 +10,18 @@
     "player": "Player",
     "inQue": "Queue",
     "showEmptyServer": "Empty server",
-    "region": "Region",
+    "region": {
+      "title": "Region",
+      "options": {
+        "all": "All",
+        "eu": "EU",
+        "asia": "Asia",
+        "nam": "North America",
+        "sam": "South America",
+        "au": "Australia",
+        "oc": "Oceana"
+      }
+    },
     "owner": "Owner",
     "settings": {
       "title": "Settings",

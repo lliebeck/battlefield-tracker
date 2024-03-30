@@ -44,7 +44,7 @@ export const GeneralServerInfo = ({
             <Typography variant={"body1"}>{serverInfo?.inQueue}</Typography>
           </Grid>
           <Grid item>
-            <Typography variant={"body2"}>{dictionary.region}</Typography>
+            <Typography variant={"body2"}>{dictionary.region.title}</Typography>
             <Typography variant={"body1"}>{serverInfo?.region}</Typography>
           </Grid>
           <Grid item>
