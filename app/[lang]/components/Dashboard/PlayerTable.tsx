@@ -61,7 +61,8 @@ export const PlayerTable = ({
 
   const sortStrings = useCallback(
     (a: string | null | undefined, b: string | null | undefined) => {
-      if (!a || !b) return 0;
+      if (!a) return -1;
+      if (!b) return 1;
       return order === "asc" ? a.localeCompare(b) : b.localeCompare(a);
     },
     [order]
@@ -69,7 +70,8 @@ export const PlayerTable = ({
 
   const sortNumbers = useCallback(
     (a: number | undefined, b: number | undefined) => {
-      if (!a || !b) return 0;
+      if (!a) return -1;
+      if (!b) return 1;
       return order === "asc" ? a - b : b - a;
     },
     [order]
@@ -77,7 +79,8 @@ export const PlayerTable = ({
 
   const sortPercentage = useCallback(
     (a: string | undefined, b: string | undefined) => {
-      if (!a || !b) return 0;
+      if (!a) return -1;
+      if (!b) return 1;
       const castedA = parseFloat(a.replace("%", ""));
       const castedB = parseFloat(b.replace("%", ""));
       if (isNaN(castedA) || isNaN(castedB)) return 0;
