@@ -1,11 +1,13 @@
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo } from "react";
 import { Dictionary, identity, pickBy } from "lodash";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo } from "react";
 import { MapOptionKeys } from "../types/maps.types";
+import { regionKeys } from "../types/region.types";
 
 type FilterOptions = {
   search?: string | undefined | null;
   map?: string | undefined | null;
+  region?: string | undefined | null;
   isEmptyServer?: boolean | undefined | null;
 };
 
@@ -17,6 +19,7 @@ export const useServerSearchParams = (
 
   let currentSearch = useMemo(() => searchParams.get("search"), [searchParams]);
   let currentMap = useMemo(() => searchParams.get("map"), [searchParams]);
+  let region = useMemo(() => searchParams.get("region"), [searchParams]);
   let currentIsEmptyServer = useMemo(
     () => searchParams.get("isEmptyServer"),
     [searchParams]
@@ -25,7 +28,8 @@ export const useServerSearchParams = (
   const filterOptions: FilterOptions = useMemo(() => {
     let options: FilterOptions = {};
 
-    if (!currentSearch && !currentMap && !currentIsEmptyServer) return {};
+    if (!currentSearch && !currentMap && !currentIsEmptyServer && !region)
+      return {};
 
     if (currentSearch) {
       options.search = currentSearch;
@@ -39,8 +43,12 @@ export const useServerSearchParams = (
       options.isEmptyServer = currentIsEmptyServer === "true" ? true : false;
     }
 
+    if (region) {
+      options.region = region;
+    }
+
     return options;
-  }, [currentIsEmptyServer, currentMap, currentSearch, mapOptionKeys]);
+  }, [currentIsEmptyServer, currentMap, currentSearch, mapOptionKeys, region]);
 
   const setFilterOptions = useCallback(
     (key: keyof FilterOptions, value: string | null | undefined) => {
@@ -53,6 +61,10 @@ export const useServerSearchParams = (
         }
         case "search": {
           newFilterOptions.search = value;
+          break;
+        }
+        case "region": {
+          newFilterOptions.region = value;
           break;
         }
         case "isEmptyServer": {

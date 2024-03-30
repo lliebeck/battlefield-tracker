@@ -10,7 +10,18 @@
     "player": "Spieler",
     "inQue": "Warteschlange",
     "showEmptyServer": "Leere Server",
-    "region": "Region",
+    "region": {
+      "title": "Region",
+      "options": {
+        "all": "Alle",
+        "eu": "EU",
+        "asia": "Asien",
+        "nam": "Nordamerika",
+        "sam": "Südamerika",
+        "au": "Australien",
+        "oc": "Ozeanien"
+      }
+    },
     "owner": "Besitzer",
     "settings": {
       "title": "Einstellungen",

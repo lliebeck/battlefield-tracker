@@ -35,6 +35,7 @@ export const Client = ({ servers: initialServers, dictionary }: Props) => {
         ? ""
         : "oneToFive,sixToTen,tenPlus,none",
       map_filters: filterOptions?.map ?? undefined,
+      region: filterOptions?.region ?? "eu",
       lang: lang.toString() ?? "en-us",
     }
     // { query: { initialData: createEmptyAxiosResponse(initialServers) } }

@@ -9,6 +9,7 @@ import { ServerList } from "../../components/ServerList";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
 import { bf1MapOptionKeys } from "./types/bf1.types";
 import { useServerSearchParams } from "../../hooks/useServerSearchParams";
+import { useEffect } from "react";
 
 type Props = {
   servers?: FrostbiteSearch;
@@ -35,6 +36,7 @@ export const Client = ({ servers: initialServers, dictionary }: Props) => {
         ? ""
         : "oneToFive,sixToTen,tenPlus,none",
       map_filters: filterOptions?.map ?? undefined,
+      region: filterOptions?.region ?? "eu",
       lang: lang.toString() ?? "en-us",
     }
     // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
