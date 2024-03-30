@@ -10,7 +10,6 @@ import { DashboardProps, DashboardTeam } from "./dashboard.types";
 
 export const Dashboard = ({
   dictionary,
-  error,
   isPlayersLoading,
   teamOne,
   teamTwo,

@@ -6,6 +6,7 @@ import { ICombinedDictionaries } from "../../types/dictionary.types";
 import { GeneralServerInfo } from "./GeneralServerInfol";
 import { ServerInfoSettings } from "./ServerInfoSettings";
 import { IServerInfo } from "./serverInfo.types";
+import { useMemo } from "react";
 
 type Props = {
   serverInfo: IServerInfo | undefined;
@@ -16,6 +17,11 @@ export const ServerInfo = ({ serverInfo, dictionary }: Props) => {
   const minWidth = "500px";
 
   const theme = useTheme();
+  const hasSettings = useMemo(
+    () =>
+      serverInfo?.settings && Object.entries(serverInfo?.settings).length > 1,
+    [serverInfo?.settings]
+  );
 
   return (
     <Box marginTop={1}>
@@ -27,10 +33,12 @@ export const ServerInfo = ({ serverInfo, dictionary }: Props) => {
           />
         </Grid>
         <Grid item>
-          <ServerInfoSettings
-            serverInfo={serverInfo}
-            dictionary={dictionary.server}
-          />
+          {hasSettings && (
+            <ServerInfoSettings
+              serverInfo={serverInfo}
+              dictionary={dictionary.server}
+            />
+          )}
         </Grid>
       </Grid>
     </Box>

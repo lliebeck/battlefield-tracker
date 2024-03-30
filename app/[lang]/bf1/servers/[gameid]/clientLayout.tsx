@@ -1,12 +1,11 @@
 "use client";
-import { useBf1detailedserversBf1DetailedserverGet } from "@/api/battlefield-1/battlefield-1";
+import { Bf1DetailedServerInfo } from "@/api/model/bf1DetailedServerInfo";
 import { getDictionary } from "@/get-dictionary";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Box, IconButton, Tab, Tabs, Toolbar, Typography } from "@mui/material";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { ServerRoutes } from "./tabs.types";
-
 type LinkTabProps = {
   label?: string;
   href?: string;
@@ -26,18 +25,27 @@ const LinkTab = (props: LinkTabProps) => {
 
 type Props = {
   dictionary: Awaited<ReturnType<typeof getDictionary>>["general"];
+  serverInfo: Bf1DetailedServerInfo | undefined;
 };
 
 export default function ClientLayout({
   children,
   dictionary,
+  serverInfo,
 }: Props & React.PropsWithChildren) {
   const router = useRouter();
-  const { gameid, lang, tab } = useParams();
+  const { lang } = useParams();
+  const path = usePathname();
+  const tab = useMemo(
+    () =>
+      path.endsWith(ServerRoutes.PLAYERS)
+        ? ServerRoutes.PLAYERS
+        : ServerRoutes.INFO,
+    [path]
+  );
 
   const value = useMemo(() => {
-    const currentTab = tab as ServerRoutes;
-    switch (currentTab) {
+    switch (tab) {
       case ServerRoutes.PLAYERS:
         return 0;
       case ServerRoutes.INFO:
@@ -45,26 +53,19 @@ export default function ClientLayout({
     }
   }, [tab]);
 
-  const { data: server, isLoading } = useBf1detailedserversBf1DetailedserverGet(
-    {
-      gameid: gameid as string,
-    }
-    // { query: { initialData: createEmptyAxiosResponse(initialServers) } }
-  );
-
   return (
     // Subtract height from CustomAppBar, header and tabs plus some margin
     <Box height={`calc(100% - 176px - 4px)`}>
       <Toolbar>
-        <IconButton onClick={() => router.push(`/${lang}/bf1/servers`)}>
+        <IconButton onClick={() => router.push(`/${lang}/bf5/servers`)}>
           <ArrowBackIcon />
         </IconButton>
         <Typography marginLeft={1} variant={"h5"} noWrap>
-          {server?.data?.prefix}
+          {serverInfo?.prefix}
         </Typography>
       </Toolbar>
       <Box marginX={3} height={"100%"}>
-        <Tabs value={value} role="navigation">
+        <Tabs value={value} role="navigation" defaultValue={0}>
           <LinkTab label={dictionary.player} href={ServerRoutes.PLAYERS} />
           <LinkTab label={dictionary.serverInfo} href={ServerRoutes.INFO} />
         </Tabs>
