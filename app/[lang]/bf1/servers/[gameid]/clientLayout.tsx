@@ -57,7 +57,7 @@ export default function ClientLayout({
     // Subtract height from CustomAppBar, header and tabs plus some margin
     <Box height={`calc(100% - 176px - 4px)`}>
       <Toolbar>
-        <IconButton onClick={() => router.push(`/${lang}/bf5/servers`)}>
+        <IconButton onClick={() => router.push(`/${lang}/bf1/servers`)}>
           <ArrowBackIcon />
         </IconButton>
         <Typography marginLeft={1} variant={"h5"} noWrap>
