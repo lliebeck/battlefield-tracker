@@ -10,7 +10,37 @@
     "player": "Spieler",
     "inQue": "Warteschlange",
     "showEmptyServer": "Leere Server",
-    "region": "Region",
+    "mapRotation": "Kartenrotation",
+    "region": {
+      "title": "Region",
+      "options": {
+        "all": {
+          "default": "Alle",
+          "short": "All"
+        },
+        "eu": {
+          "default": "Europa",
+          "short": "EU"
+        },
+        "asia": {
+          "default": "Asia",
+          "short": "Asia"
+        },
+        "nam": {
+          "default": "Nordamerika",
+          "short": "NAM"
+        },
+        "sam": {
+          "default": "Südamerika",
+          "short": "SAM"
+        },
+        "au": {
+          "default": "Australien",
+          "short": "AU"
+        },
+        "oc": { "default": "Ozeanien", "short": "OC" }
+      }
+    },
     "owner": "Besitzer",
     "settings": {
       "title": "Einstellungen",

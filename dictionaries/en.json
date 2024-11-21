@@ -10,7 +10,37 @@
     "player": "Player",
     "inQue": "Queue",
     "showEmptyServer": "Empty server",
-    "region": "Region",
+    "mapRotation": "Map rotation",
+    "region": {
+      "title": "Region",
+      "options": {
+        "all": {
+          "default": "All",
+          "short": "All"
+        },
+        "eu": {
+          "default": "Europe",
+          "short": "EU"
+        },
+        "asia": {
+          "default": "Asia",
+          "short": "Asia"
+        },
+        "nam": {
+          "default": "North America",
+          "short": "NAM"
+        },
+        "sam": {
+          "default": "South America",
+          "short": "SAM"
+        },
+        "au": {
+          "default": "Australia",
+          "short": "AU"
+        },
+        "oc": { "default": "Oceana", "short": "OC" }
+      }
+    },
     "owner": "Owner",
     "settings": {
       "title": "Settings",

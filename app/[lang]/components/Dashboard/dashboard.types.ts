@@ -24,6 +24,7 @@ export type DashboardTeam = {
 };
 
 export type DashboardPlayer = {
+  playerid?: number;
   accuracy?: number;
   avatar?: FrostbiteMainStatsAvatar;
   avengerKills?: number;
