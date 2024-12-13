@@ -3,17 +3,14 @@ import { Locale } from "@/config/i18n-config";
 import { getDictionary } from "@/get-dictionary";
 import axios, { AxiosResponse } from "axios";
 import { Client } from "./client";
+import { Suspense } from "react";
 
-export default async function Page(
-  props: {
-    params: Promise<{ lang: Locale }>;
-  }
-) {
+export default async function Page(props: {
+  params: Promise<{ lang: Locale }>;
+}) {
   const params = await props.params;
 
-  const {
-    lang
-  } = params;
+  const { lang } = params;
 
   let servers: AxiosResponse<FrostbiteSearch, any> | undefined = undefined;
 
@@ -28,7 +25,9 @@ export default async function Page(
 
   return (
     <>
-      <Client dictionary={dictionary} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Client dictionary={dictionary} />
+      </Suspense>
     </>
   );
 }

@@ -5,11 +5,10 @@ import { FrostbiteSearch } from "@/api/model/frostbiteSearch";
 import { getDictionary } from "@/get-dictionary";
 import Box from "@mui/material/Box";
 import { useParams } from "next/navigation";
-import { ServerList } from "../../components/ServerList";
 import { SearchBar } from "../../components/SearchBar/SearchBar";
-import { bf1MapOptionKeys } from "./types/bf1.types";
+import { ServerList } from "../../components/ServerList";
 import { useServerSearchParams } from "../../hooks/useServerSearchParams";
-import { useEffect } from "react";
+import { bf1MapOptionKeys } from "./types/bf1.types";
 
 type Props = {
   servers?: FrostbiteSearch;

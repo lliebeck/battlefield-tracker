@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 export default async function RootLayout(
   props: Readonly<{
     children: React.ReactNode;
-    params: { lang: Locale };
+    params: Promise<{ lang: Locale }>;
   }>
 ) {
   const { lang } = await props.params;

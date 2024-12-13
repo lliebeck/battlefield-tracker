@@ -6,18 +6,15 @@ import axiosRetry from "axios-retry";
 import { PropsWithChildren } from "react";
 import ClientLayout from "./clientLayout";
 
-export default async function ServerLayout(
-  props: {
-    params: { lang: Locale; gameid: string };
-  } & PropsWithChildren
-) {
-  const params = await props.params;
+export default async function ServerLayout({
+  children,
+  params,
+}: {
+  params: Promise<{ lang: Locale; gameid: string }>;
+} & React.PropsWithChildren) {
+  const { lang, gameid } = await params;
 
-  const {
-    children
-  } = props;
-
-  const dictionary = await getDictionary(params.lang);
+  const dictionary = await getDictionary(lang);
 
   let serverInfo: AxiosResponse<Bf5DetailedServerInfo, any> | undefined =
     undefined;
@@ -30,7 +27,7 @@ export default async function ServerLayout(
       "/bfv/detailedserver/",
       {
         params: {
-          gameid: params.gameid,
+          gameid: gameid,
         },
       }
     );
