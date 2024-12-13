@@ -1,7 +1,6 @@
 import { FrostbiteServerList } from "@/api/model/frostbiteServerList";
-import { HTTPValidationError } from "@/api/model/hTTPValidationError";
 import { getDictionary } from "@/get-dictionary";
-import { Container, LinearProgress, Typography } from "@mui/material";
+import { LinearProgress, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -65,12 +64,8 @@ export const ServerList = ({
             </TableHead>
             <TableBody>
               {servers && servers?.length < 1 ? (
-                // <Typography m={1} variant="body1">
-                //   {dictionary.noServersFound}
-                // </Typography>
                 <TableRow>
                   <TableCell align="left">
-                    {" "}
                     {dictionary.noServersFound}
                   </TableCell>
                   <TableCell align="left"></TableCell>
