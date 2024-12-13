@@ -33,7 +33,8 @@ export const SearchBar = ({ dictionary, mapOptionKeys }: Props) => {
     useServerSearchParams(mapOptionKeys);
 
   const combinedKeys = useMemo(
-    () => Object.assign({}, dictionary.maps.bf1Maps, dictionary.maps.bf5Maps),
+    () =>
+      Object.assign({}, dictionary.maps.bf1Maps, dictionary.maps.bf5Maps, null),
     [dictionary.maps]
   );
 
@@ -52,7 +53,7 @@ export const SearchBar = ({ dictionary, mapOptionKeys }: Props) => {
         )}
       />
       <Autocomplete
-        value={filterOptions?.map}
+        value={filterOptions?.map || null}
         onChange={(_, value) => setFilterOptions("map", value)}
         fullWidth
         options={mapOptionKeys}

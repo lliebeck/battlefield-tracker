@@ -31,11 +31,18 @@ const getDashboardTeam = async (team: BfvServerTeam) => {
   return dashboardTeam;
 };
 
-export default async function Page({
-  params: { lang, gameid },
-}: {
-  params: { lang: Locale; gameid: string };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ lang: Locale; gameid: string }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    lang,
+    gameid
+  } = params;
+
   let bf5ServerPlayers: AxiosResponse<BfvServerPlayers, any> | undefined =
     undefined;
 

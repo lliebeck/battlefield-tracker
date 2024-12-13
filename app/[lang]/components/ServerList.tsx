@@ -65,9 +65,19 @@ export const ServerList = ({
             </TableHead>
             <TableBody>
               {servers && servers?.length < 1 ? (
-                <Typography m={1} variant="body1">
-                  {dictionary.noServersFound}
-                </Typography>
+                // <Typography m={1} variant="body1">
+                //   {dictionary.noServersFound}
+                // </Typography>
+                <TableRow>
+                  <TableCell align="left">
+                    {" "}
+                    {dictionary.noServersFound}
+                  </TableCell>
+                  <TableCell align="left"></TableCell>
+                  <TableCell align="left"></TableCell>
+                  <TableCell align="left"></TableCell>
+                  <TableCell align="left"></TableCell>
+                </TableRow>
               ) : (
                 servers?.map((server) => {
                   return (

@@ -4,11 +4,17 @@ import { getDictionary } from "@/get-dictionary";
 import axios, { AxiosResponse } from "axios";
 import { Client } from "./client";
 
-export default async function Page({
-  params: { lang },
-}: {
-  params: { lang: Locale };
-}) {
+export default async function Page(
+  props: {
+    params: Promise<{ lang: Locale }>;
+  }
+) {
+  const params = await props.params;
+
+  const {
+    lang
+  } = params;
+
   let servers: AxiosResponse<FrostbiteSearch, any> | undefined = undefined;
 
   try {
