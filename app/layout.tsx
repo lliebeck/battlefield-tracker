@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { i18n, type Locale } from "../config/i18n-config";
 import ClientLayout from "./[lang]/components/ClientLayout";
 import ReactQueryProviders from "./[lang]//components/ReactQueryProviders";
+import { getDictionary } from "@/get-dictionary";
 
 export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
@@ -20,19 +21,18 @@ export default async function RootLayout(
     params: { lang: Locale };
   }>
 ) {
-  const params = await props.params;
-
-  const {
-    children
-  } = props;
+  const { lang } = await props.params;
+  const dictionary = await getDictionary(lang);
 
   return (
-    <html lang={params.lang}>
+    <html lang={lang}>
       <body>
         <AppRouterCacheProvider options={{ key: "css" }}>
           <ReactQueryProviders>
             <AppThemeProvider>
-              <ClientLayout>{children}</ClientLayout>
+              <ClientLayout dictionary={dictionary.footer}>
+                {props.children}
+              </ClientLayout>
             </AppThemeProvider>
           </ReactQueryProviders>
         </AppRouterCacheProvider>

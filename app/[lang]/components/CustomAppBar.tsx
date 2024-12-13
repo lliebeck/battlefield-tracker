@@ -38,7 +38,7 @@ export const CustomAppBar = ({ setOpen }: Props) => {
           color="inherit"
           aria-label="menu"
           sx={{ mr: 2 }}
-          onClick={() => setOpen(() => true)}
+          onClick={() => setOpen((prev: boolean) => !prev)}
         >
           <MenuIcon />
         </IconButton>

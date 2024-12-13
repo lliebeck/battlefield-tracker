@@ -2,17 +2,20 @@ export type Game = {
   key: string;
   name: string;
   available: boolean;
+  img?: string;
 };
 
 export const games: Game[] = [
   {
     key: "bf1",
     name: "Battlefield 1",
+    img: "/images/bf1-wallpaper-800x600.jpg",
     available: true,
   },
   {
     key: "bf5",
     name: "Battlefield 5",
+    img: "/images/bf5-wallpaper-800x600.jpg",
     available: true,
   },
   // Bf2042Search

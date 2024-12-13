@@ -118,5 +118,124 @@
       "al marj encampment": "Lager el Merdj",
       "al sudan": "Al Sundan"
     }
+  },
+  "home": {
+    "welcome": "Willkommen bei MyGameLobby.de!",
+    "introduction": "Du willst deine aktuelle Battlefield-Lobby finden und herausfinden, mit wem du gerade spielst? Dann bist du bei uns genau richtig! Unsere Plattform nutzt eine offene API, um detaillierte Informationen über die Spieler in deiner Lobby zu liefern. Suche einfach nach deinem Server, um auf umfassende Statistiken deiner Teamkameraden und Gegner zuzugreifen. Viel Spaß!",
+    "imageListHeader": "Derzeit unterstützte Spiele",
+    "generalInformation": {
+      "header": "Generelle Informationen",
+      "content": "Ich habe erst vor kurzem meinen Bachelor abgeschlossen und arbeite derzeit als Solo-Entwickler an diesem Projekt. Seid also nachsichtig mit eurem Feedback. Das Projekt ist Open Source, ihr findet den Quellcode auf Github. Wenn du Vorschläge oder Feedback hast, kannst du mich gerne kontaktieren:"
+    }
+  },
+  "footer": {
+    "legalNotice": "Impressum",
+    "privacyPolicy": "Datenschutz"
+  },
+  "legalNotice": {
+    "title": "Impressum",
+    "supplier": {
+      "title": "Anbieter",
+      "name": "Lukas Liebeck",
+      "street": "Waldstraße 3",
+      "city": "52372 Kreuzau"
+    },
+    "contact": {
+      "title": "Kontakt",
+      "phone": "Telefon: +491771643865",
+      "email": "E-Mail: contact@lliebeck.de"
+    },
+    "disclaimer": {
+      "title": "Haftungsausschluss",
+      "content": {
+        "title": "1. Haftungsbeschränkung für Inhalte der Website",
+        "paragraph1": "Der Verantwortliche der vorbezeichneten Website übernimmt keine Haftung auf Aktualität, Richtigkeit und Vollständigkeit der auf dieser Website zur Verfügung gestellten Inhalte. Dies gilt nicht, wenn dem Verantwortlichen vorsätzliches oder grob fahrlässiges Verhalten vorzuwerfen ist. Die Inhalte wurden mit der größtmöglichen Sorgfalt und nach bestem Gewissen erstellt. Dennoch kann die inhaltliche Richtigkeit, insbesondere bei komplexen Themen nicht gewährleistet werden, so dass der Verantwortliche den Nutzern empfiehlt, bei wichtigen Informationen bei den zuständigen Stellen anzufragen oder rechtliche Beratung in Anspruch zu nehmen.",
+        "paragraph2": "Namentlich gekennzeichnete Beiträge, die auf der Website öffentlich zugänglich gemacht werden, geben die Meinung des jeweiligen Autors und nicht immer die Meinung des Website-Betreibers wieder.",
+        "paragraph3": "Sofern kostenpflichtige oder kostenlose und frei zugängliche Inhalte oder Dienste auf der Website zur Verfügung gestellt werden, handelt es sich dabei um unverbindliche Invitatio ad offerendum, welche lediglich zur Abgabe eines Angebots durch den Nutzer aufrufen und selbst kein verbindliches Angebot darstellen.",
+        "paragraph4": "Gemäß §§ 7 ff. DDG ist der Website-Betreiber für fremde Inhalte, die er für einen Nutzer veröffentlicht, außer in den gesetzlich genannten Ausnahmefällen nicht verantwortlich, sofern",
+        "paragraph5": "1. er keine Kenntnis von der rechtswidrigen Handlung oder der Information hat und ihm im Falle von Schadensersatzansprüchen auch keine Tatsachen oder Umstände bekannt sind, aus denen die rechtswidrige Handlung oder die Information offensichtlich wird, oder",
+        "paragraph6": "2. er unverzüglich tätig geworden ist, um die Information zu entfernen oder den Zugang zu ihr zu sperren, sobald er diese Kenntnis erlangt hat.",
+        "paragraph7": "Eine diesbezügliche Haftung ist somit erst ab dem Zeitpunkt der Kenntniserlangung einer konkreten Rechtsverletzung möglich.",
+        "paragraph8": "Erlangt der Website-Betreiber Kenntnis von solchen rechtswidrigen Inhalten, werden diese unverzüglich entfernt."
+      },
+      "links": {
+        "title": "2. Haftung für ausgehende Links",
+        "paragraph1": "Der Website-Betreiber verlinkt von seiner Website auf fremde Websites. Durch diese sog. „Hyperlinks“ wird der Nutzer direkt auf die fremde Website geleitet. Das Setzen von sog. „Hyperlinks“ bedeutet nicht, dass sich der Website-Betreiber die hinter dem Link liegenden Inhalte zu Eigen macht. Der Website-Betreiber hat dabei keinerlei Einfluss auf die Informationen der fremden Website. Daher kann keine Haftung für die Aktualität, Richtigkeit und Vollständigkeit der Inhalte der fremden Website übernommen werden.",
+        "paragraph2": "Für die Inhalte ist ausschließlich der jeweilige Anbieter oder Betreiber der verlinkten Website verantwortlich.",
+        "paragraph3": "Der Website-Betreiber versichert jedoch, dass ihm zum Zeitpunkt des Setzens der Verlinkung keinerlei rechtliche Verstöße bekannt waren und er die fremde Website im Rahmen des Zumutbaren geprüft hat.",
+        "paragraph4": "Solange keine konkreten Anhaltspunkte einer Rechtsverletzung vorliegen, ist eine permanente inhaltliche Kontrolle der verlinkten Website für den Website-Betreiber nicht zumutbar.",
+        "paragraph5": "Erhält der Website-Betreiber Kenntnis von der Rechtswidrigkeit der verlinkten Inhalte, wird der entsprechende Link unverzüglich entfernt."
+      },
+      "copyright": {
+        "title": "3. Urheberrechte",
+        "paragraph1": "Die auf dieser Webseite veröffentlichten Inhalte unterliegen dem deutschen Urheberrecht und Leistungsschutzrecht.",
+        "paragraph2": "Als Urheber i. S. v. § 7 UrhG stehen dem Website-Betreiber die alleinigen und ausschließlichen Verwertungsrechte gemäß §§ 15 ff. UrhG zu. Eine Vervielfältigung oder Verwendung sämtlicher Inhalte der Website in fremden elektronischen oder gedruckten Medien ist ohne vorherige Zustimmung des Website-Betreibers untersagt und wird ggf. verfolgt.",
+        "paragraph3": "Inhalte, die nicht vom Website-Betreiber erstellt wurden, sind als solche gekennzeichnet. Die Urheberrechte Dritter werden beachtet.",
+        "paragraph4": "Sollten Sie dennoch auf eine Urheberrechtsverletzung aufmerksam werden, wird um einen entsprechenden Hinweis an den Website-Betreiber gebeten. Der Website-Betreiber wird derartige Inhalte dann umgehend entfernen."
+      },
+      "privacyPolicy": {
+        "title": "4. Datenschutz",
+        "paragraph1": "Die Website kann grundsätzlich ohne Eingabe von personenbezogenen Daten wie z. B. Name oder E-Mail-Adresse genutzt werden. Es werden keine personenbezogenen Daten gespeichert.",
+        "paragraph2": "Sollte die Möglichkeit der Eingabe solcher Daten bestehen, so erfolgt die Mitteilung dieser Daten auf freiwilliger Basis durch den Nutzer. Eine Weitergabe dieser Daten an Dritte ist ohne die ausdrückliche Zustimmung durch den Nutzer ausgeschlossen.",
+        "paragraph3": "Ein lückenloser Schutz der übermittelten Daten vor dem Zugriff durch unbefugte Dritte ist jedoch nicht möglich, da es im Bereich der Datenübermittlung im Internet zu Sicherheitslücken kommen kann. Der Website-Betreiber versucht jedoch, die Gefahr des unbefugten Zugriffs durch geeignete Maßnahmen zu unterbinden und im Falle der Kenntnis von einer Sicherheitslücke diese durch geeignete Maßnahmen zu schließen.",
+        "paragraph4": "Der Website-Betreiber übernimmt keine Haftung für Schäden, die durch solche Sicherheitsverletzungen entstehen.",
+        "paragraph5": "Wenn Sie die Website besuchen, erhebt der Website-Betreiber die Daten, die technisch erforderlich sind, um Ihnen die Website anzuzeigen und die Stabilität und Sicherheit zu gewährleisten (IP-Adresse, Datum und Uhrzeit der Anfrage, Browser etc.). Diese Erhebung personenbezogenen Daten stellt keine Auswertung personenbezogener Daten dar.",
+        "paragraph6": "Der Nutzung der im Impressum veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich gewünschter Werbung, insbesondere Spam-Mails, wird widersprochen und im Falle der Nichtbeachtung ggf. mit rechtlichen Schritten verfolgt."
+      }
+    }
+  },
+  "privacyPolicy": {
+    "title": "Datenschutzerklärung",
+    "subtitle": "Allgemeiner Hinweis und Pflichtinformationen",
+    "responsibleAuthority": {
+      "title": "Benennung der verantwortlichen Stelle",
+      "paragraph1": "Die verantwortliche Stelle für die Datenverarbeitung auf dieser Website ist:",
+      "author": "Lukas Liebeck",
+      "street": "Waldstraße 3",
+      "city": "52372 Kreuzau",
+      "email": "contact@lliebeck.de",
+      "paragraph2": "Die verantwortliche Stelle entscheidet allein oder gemeinsam mit anderen über die Zwecke und Mittel der Verarbeitung von personenbezogenen Daten (z.B. Namen, Kontaktdaten o. Ä.)."
+    },
+    "revocation": {
+      "title": "Widerruf Ihrer Einwilligung zur Datenverarbeitung",
+      "paragraph1": "Nur mit Ihrer ausdrücklichen Einwilligung sind einige Vorgänge der Datenverarbeitung möglich. Ein Widerruf Ihrer bereits erteilten Einwilligung ist jederzeit möglich. Für den Widerruf genügt eine formlose Mitteilung per E-Mail. Die Rechtmäßigkeit der bis zum Widerruf erfolgten Datenverarbeitung bleibt vom Widerruf unberührt."
+    },
+    "complaint": {
+      "title": "Recht auf Beschwerde bei der zuständigen Aufsichtsbehörde",
+      "paragraph1": "Als Betroffener steht Ihnen im Falle eines datenschutzrechtlichen Verstoßes ein Beschwerderecht bei der zuständigen Aufsichtsbehörde zu. Zuständige Aufsichtsbehörde bezüglich datenschutzrechtlicher Fragen ist der Landesdatenschutzbeauftragte des Bundeslandes, in dem sich der Sitz unseres Unternehmens befindet. Der folgende Link stellt eine Liste der Datenschutzbeauftragten sowie deren Kontaktdaten bereit:"
+    },
+    "dataPortability": {
+      "title": "Recht auf Datenübertragbarkeit",
+      "paragraph1": "Ihnen steht das Recht zu, Daten, die wir auf Grundlage Ihrer Einwilligung oder in Erfüllung eines Vertrags automatisiert verarbeiten, an sich oder an Dritte aushändigen zu lassen. Die Bereitstellung erfolgt in einem maschinenlesbaren Format. Sofern Sie die direkte Übertragung der Daten an einen anderen Verantwortlichen verlangen, erfolgt dies nur, soweit es technisch machbar ist."
+    },
+    "information": {
+      "title": "Recht auf Auskunft, Berichtigung, Sperrung, Löschung",
+      "paragraph1": "Sie haben jederzeit im Rahmen der geltenden gesetzlichen Bestimmungen das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, Herkunft der Daten, deren Empfänger und den Zweck der Datenverarbeitung und ggf. ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten. Diesbezüglich und auch zu weiteren Fragen zum Thema personenbezogene Daten können Sie sich jederzeit über die im Impressum aufgeführten Kontaktmöglichkeiten an uns wenden."
+    },
+    "encryption": {
+      "title": "SSL- bzw. TLS-Verschlüsselung",
+      "paragraph1": "Aus Sicherheitsgründen und zum Schutz der Übertragung vertraulicher Inhalte, die Sie an uns als Seitenbetreiber senden, nutzt unsere Website eine SSL-bzw. TLS-Verschlüsselung. Damit sind Daten, die Sie über diese Website übermitteln, für Dritte nicht mitlesbar. Sie erkennen eine verschlüsselte Verbindung an der „https://“ Adresszeile Ihres Browsers und am Schloss-Symbol in der Browserzeile."
+    },
+    "logs": {
+      "title": "Server-Log-Dateien",
+      "paragraph1": "In Server-Log-Dateien erhebt und speichert der Provider der Website automatisch Informationen, die Ihr Browser automatisch an uns übermittelt. Dies sind:",
+      "data": {
+        "domain": "Besuchte Seite auf unserer Domain",
+        "date": "Datum und Uhrzeit der Serveranfrage",
+        "browser": "Browsertyp und Browserversion",
+        "os": "Verwendetes Betriebssystem",
+        "referrer": "Referrer URL",
+        "hostname": "Hostname des zugreifenden Rechners",
+        "ip": "IP-Adresse"
+      },
+      "paragraph2": "Diese Daten sind für uns technisch erforderlich, um Ihnen unsere Website anzuzeigen und die Stabilität und Sicherheit zu gewährleisten. (Rechtsgrundlage der Datenverarbeitung bildet Art. 6 Abs. 1 lit. f DSGVO) Es findet keine Zusammenführung dieser Daten mit anderen Datenquellen statt."
+    },
+    "contactForm": {
+      "title": "Kontakformular",
+      "paragraph1": "Per Kontaktformular übermittelte Daten werden einschließlich Ihrer Kontaktdaten gespeichert, um Ihre Anfrage bearbeiten zu können oder um für Anschlussfragen bereitzustehen. Eine Weitergabe dieser Daten findet ohne Ihre Einwilligung nicht statt.",
+      "paragraph2": "Je nach Art der Anfrage ist die Rechtsgrundlage für diese Verarbeitung Art. 6 Abs. 1 lit. b DSGVO für Anfragen, die Sie selbst im Rahmen einer vorvertraglichen Maßnahme stellen oder Art. 6 Abs. 1 S. 1 lit. f DSGVO, wenn Ihre Anfrage sonstiger Art ist. Sollten personenbezogene Daten abgefragt werden, die wir nicht für die Erfüllung eines Vertrages oder zur Wahrung berechtigter Interessen benötigen, erfolgt die Übermittlung an uns auf Basis einer von Ihnen abgegebenen Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO.t vom Widerruf unberührt.",
+      "paragraph3": "Über das Kontaktformular übermittelte Daten verbleiben bei uns, bis Sie uns zur Löschung auffordern, Ihre Einwilligung zur Speicherung widerrufen oder keine Notwendigkeit der Datenspeicherung mehr besteht. Zwingende gesetzliche Bestimmungen - insbesondere Aufbewahrungsfristen - bleiben unberührt."
+    },
+    "source": "Quelle: Datenschutz-Konfigurator von "
   }
 }

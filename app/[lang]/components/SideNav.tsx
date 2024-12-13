@@ -33,7 +33,7 @@ export const SideNav = ({ open = true, setOpen }: Props) => {
           disabled={!game.available}
           onClick={() => {
             setOpen(false);
-            router.push(`/${lang ?? "en"}/${game.key}/servers`);
+            router.push(`/${lang ?? "en-us"}/${game.key}/servers`);
           }}
         >
           <ListItemText
@@ -47,31 +47,36 @@ export const SideNav = ({ open = true, setOpen }: Props) => {
 
   return (
     <>
-      <ClickAwayListener
-        mouseEvent="onMouseDown"
-        touchEvent="onTouchStart"
-        onClickAway={() => open && setOpen(false)}
-      >
-        <Drawer
-          variant="temporary"
-          open={open}
-          onClose={(_, reason) => reason === "backdropClick" && setOpen(false)}
-          sx={{
+      <Drawer
+        variant="temporary"
+        open={open}
+        onClose={() => setOpen(false)}
+        sx={{
+          width: drawerWidth,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
             width: drawerWidth,
-            flexShrink: 0,
-            "& .MuiDrawer-paper": {
-              width: drawerWidth,
-              boxSizing: "border-box",
-              px: 2,
-              py: 1,
-            },
-          }}
-        >
-          <Toolbar />
-          <Divider />
-          <List component="nav">{mainListItems}</List>
-        </Drawer>
-      </ClickAwayListener>
+            boxSizing: "border-box",
+            px: 2,
+            py: 1,
+          },
+        }}
+      >
+        <Toolbar />
+        <List component="nav">
+          <ListItemButton
+            selected={path.includes("home")}
+            onClick={() => {
+              setOpen(false);
+              router.push(`/${lang ?? "en-us"}/`);
+            }}
+          >
+            <ListItemText primary="Home" />
+          </ListItemButton>
+        </List>
+        <Divider />
+        <List component="nav">{mainListItems}</List>
+      </Drawer>
     </>
   );
 };

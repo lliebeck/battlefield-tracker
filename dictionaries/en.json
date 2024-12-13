@@ -118,5 +118,124 @@
       "al marj encampment": "Al Marj Encampment",
       "al sudan": "Al Sundan"
     }
+  },
+  "home": {
+    "welcome": "Welcome to MyGameLobby.de!",
+    "introduction": "Looking to find your current Battlefield lobby and discover who you’re playing with? You’ve come to the perfect place! Our platform uses an open API to provide detailed insights about the players in your lobby. Simply search for your server to access comprehensive stats about your teammates and opponents. Enjoy!",
+    "imageListHeader": "Currently supported games",
+    "generalInformation": {
+      "header": "General Information",
+      "content": "I recently completed my bachelor's degree and am currently working on this project as a solo developer. So, please be kind with your feedback. This project is open source, and you can find the code on GitHub. If you have any feature requests, suggestions, or just want to share your thoughts, feel free to reach out to me:"
+    }
+  },
+  "footer": {
+    "legalNotice": "Legal Notice",
+    "privacyPolicy": "Privacy Policy"
+  },
+  "legalNotice": {
+    "title": "Legal Notice",
+    "supplier": {
+      "title": "Supplier:",
+      "name": "Lukas Liebeck",
+      "street": "Waldstraße 3",
+      "city": "52372 Kreuzau"
+    },
+    "contact": {
+      "title": "Contact",
+      "phone": "Telefon: +491771643865",
+      "email": "E-Mail: contact@lliebeck.de"
+    },
+    "disclaimer": {
+      "title": "Disclaimer ",
+      "content": {
+        "title": "1. limitation of liability for website content",
+        "paragraph1": "The person responsible for the aforementioned website accepts no liability for the topicality, correctness and completeness of the content provided on this website. This does not apply if the person responsible can be accused of intentional or grossly negligent behavior. The contents were created with the greatest possible care and to the best of our knowledge. Nevertheless, the accuracy of the content cannot be guaranteed, especially in the case of complex topics, so that the person responsible recommends that users contact the relevant authorities for important information or seek legal advice.",
+        "paragraph2": "Contributions identified by name that are made publicly available on the website reflect the opinion of the respective author and not always the opinion of the website operator.",
+        "paragraph3": "Insofar as paid or free and freely accessible content or services are made available on the website, these are non-binding invitatio ad offerendum, which merely call for the submission of an offer by the user and do not themselves constitute a binding offer.",
+        "paragraph4": "According to §§ 7 ff. DDG, the website operator is outside of the exceptions namend by law not responsible for third-party content that he publishes for a user, provided that",
+        "paragraph5": "1. he has no knowledge of the illegal act or the information and, in the case of claims for damages, no facts or circumstances are known to him from which the illegal act or the information becomes apparent, or",
+        "paragraph6": "2. he has taken immediate action to remove the information or to block access to it as soon as he became aware of it.",
+        "paragraph7": "Liability in this regard is thus only possible from the time of gaining knowledge of a concrete infringement.",
+        "paragraph8": "If the website operator becomes aware of such illegal content, it will be removed immediately."
+      },
+      "links": {
+        "title": "2. liability for outgoing links ",
+        "paragraph1": "The website operator links from his website to external websites. These so-called „hyperlinks“ lead the user directly to the external website. The setting of so-called „hyperlinks“ does not mean that the website operator adopts the content behind the link as its own. The website operator has no influence whatsoever on the information on the external website. Therefore, no liability can be assumed for the topicality, correctness and completeness of the contents of the external website.",
+        "paragraph2": "The respective provider or operator of the linked website is solely responsible for the content.",
+        "paragraph3": "However, the website operator assures that he was not aware of any legal violations at the time of setting the link and that he has checked the external website within the scope of what is reasonable.",
+        "paragraph4": "As long as there are no concrete indications of a violation of the law, a permanent control of the linked website is not reasonable for the website operator.",
+        "paragraph5": "If the website operator becomes aware of the illegality of the linked content, the corresponding link will be removed immediately. "
+      },
+      "copyright": {
+        "title": "3. copyrights",
+        "paragraph1": "The content published on this website is subject to German copyright and ancillary copyright law.",
+        "paragraph2": "As the author within the meaning of Section 7 of the German Copyright Act (UrhG), the website operator is entitled to the sole and exclusive exploitation rights pursuant to Sections 15 et seq. UrhG. Any duplication or use of objects such as images, diagrams, sounds or texts in other electronic or printed publications is not permitted without the author’s agreement and will be prosecuted.",
+        "paragraph3": "Contents that were not created by the website operator are marked as such. The copyrights of third parties are respected.",
+        "paragraph4": "Should you nevertheless become aware of a copyright infringement, you are requested to notify the website operator accordingly. The website operator will then remove such content immediately."
+      },
+      "privacyPolicy": {
+        "title": "4. data protection",
+        "paragraph1": "The website can generally be used without entering personal data such as name or e-mail address. No personal data will be stored.",
+        "paragraph2": "Should the possibility of entering such data exist, the communication of this data is on a voluntary basis by the user. A transfer of this data to third parties without the express consent of the user is excluded.",
+        "paragraph3": "However, complete protection of the transmitted data against access by unauthorized third parties is not possible, as there may be security gaps in the area of data transmission on the Internet. However, the website operator attempts to prevent the risk of unauthorized access by taking appropriate measures and, if it becomes aware of a security breach, to close it by taking appropriate measures.",
+        "paragraph4": "The website operator does not assume any liability for damages caused by such security breaches.",
+        "paragraph5": "When you visit the website, the website operator collects the data that is technically necessary to display the website to you and to ensure stability and security (IP address, date and time of request, browser, etc.). This collection of personal data does not constitute an evaluation of personal data. ",
+        "paragraph6": "The use of contact data published in the imprint by third parties for sending unsolicited advertisements, in particular spam e-mails, is prohibited and in case of non-compliance may be pursued with legal action."
+      }
+    }
+  },
+  "privacyPolicy": {
+    "title": "Privacy Policy",
+    "subtitle": "General Notice and Mandatory Information",
+    "responsibleAuthority": {
+      "title": "Designation of the Responsible Authority",
+      "paragraph1": "The responsible authority for data processing on this website is:",
+      "author": "Lukas Liebeck",
+      "street": "Waldstraße 3",
+      "city": "52372 Kreuzau",
+      "email": "contact@lliebeck.de",
+      "paragraph2": "The responsible authority, either alone or jointly with others, decides on the purposes and means of processing personal data (e.g., names, contact details, etc.)."
+    },
+    "revocation": {
+      "title": "Revocation of Your Consent to Data Processing",
+      "paragraph1": "Some data processing operations are only possible with your express consent. You can revoke your consent at any time. An informal notification via email is sufficient for revocation. The legality of the data processing carried out until the revocation remains unaffected by the revocation."
+    },
+    "complaint": {
+      "title": "Right to Lodge a Complaint with the Competent Supervisory Authority",
+      "paragraph1": "If there has been a breach of data protection law, you have the right to lodge a complaint with the competent supervisory authority. The competent supervisory authority for data protection issues is the data protection officer of the federal state in which our company is headquartered. The following link provides a list of data protection officers and their contact details:"
+    },
+    "dataPortability": {
+      "title": "Right to Data Portability",
+      "paragraph1": "You have the right to have data that we process based on your consent or in fulfillment of a contract automatically handed over to yourself or to a third party. The data will be provided in a machine-readable format. If you request the direct transfer of the data to another responsible party, this will only be done to the extent that it is technically feasible."
+    },
+    "information": {
+      "title": "Right of Information, Correction, Blocking, Deletion",
+      "paragraph1": "Within the scope of the applicable legal provisions, you have the right at any time to obtain information free of charge about your stored personal data, its origin, its recipients, and the purpose of the data processing and, if applicable, a right to have this data corrected, blocked, or deleted. For this purpose, and for further questions on the subject of personal data, you can contact us at any time via the contact details provided in the legal notice."
+    },
+    "encryption": {
+      "title": "SSL or TLS Encryption",
+      "paragraph1": "For security reasons and to protect the transmission of confidential content that you send to us as the site operator, our website uses SSL or TLS encryption. This means that data you transmit via this website cannot be read by third parties. You can recognize an encrypted connection by the 'https://' address line of your browser and the lock icon in the browser line."
+    },
+    "logs": {
+      "title": "Server Log Files",
+      "paragraph1": "The provider of the website automatically collects and stores information in server log files that your browser automatically transmits to us. These are:",
+      "data": {
+        "domain": "Visited page on our domain",
+        "date": "Date and time of the server request",
+        "browser": "Browser type and version",
+        "os": "Operating system used",
+        "referrer": "Referrer URL",
+        "hostname": "Host name of the accessing computer",
+        "ip": "IP address"
+      },
+      "paragraph2": "This data is technically necessary for us to display our website to you and to ensure stability and security. (The legal basis for data processing is Art. 6 para. 1 lit. f GDPR). This data is not merged with other data sources."
+    },
+    "contactForm": {
+      "title": "Contact Form",
+      "paragraph1": "Data transmitted via the contact form, including your contact details, will be stored in order to process your request or to be available for follow-up questions. This data will not be passed on without your consent.",
+      "paragraph2": "Depending on the type of request, the legal basis for this processing is Art. 6 para. 1 lit. b DSGVO for requests that you make yourself as part of a pre-contractual measure or Art. 6 para. 1 sentence 1 lit. f DSGVO if your request is of a different nature. If personal data is requested that we do not need for the fulfilment of a contract or to protect legitimate interests, it will be transmitted to us on the basis of your consent in accordance with Art. 6 para. 1 lit. a DSGVO .t unaffected by the revocation.",
+      "paragraph3": "Data transmitted via the contact form will remain with us until you ask us to delete it, revoke your consent to storage or there is no longer any need to store the data. Mandatory statutory provisions - in particular retention periods - remain unaffected."
+    },
+    "source": "Source: Data Protection Configurator from "
   }
 }

@@ -4,10 +4,15 @@ import Toolbar from "@mui/material/Toolbar";
 import { useState } from "react";
 import { CustomAppBar } from "./CustomAppBar";
 import { SideNav } from "./SideNav";
+import Footer from "./Footer";
+import { getDictionary } from "@/get-dictionary";
 
 export default function ClientLayout({
   children,
-}: {} & React.PropsWithChildren) {
+  dictionary,
+}: {
+  dictionary: Awaited<ReturnType<typeof getDictionary>>["footer"];
+} & React.PropsWithChildren) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -28,6 +33,7 @@ export default function ClientLayout({
           <Toolbar />
           {children}
         </Box>
+        <Footer dictionary={dictionary} />
       </Box>
     </>
   );

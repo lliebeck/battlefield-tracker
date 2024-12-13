@@ -20,16 +20,25 @@ export const AppThemeProvider = ({
 
   const theme = useMemo(() => {
     let createdTheme = createTheme({
+      // palette: {
+      //   mode: mode,
+      //   // background: { default: "#ccd5ae", paper: "#e9edc9" },
+      //   // primary: {
+      //   //   light: "#757ce8",
+      //   //   main: "#d4a373",
+      //   //   dark: "#002884",
+      //   //   contrastText: "#fff",
+      //   // },
+      //   // secondary: { main: "#fb8500" },
+      // },
       palette: {
         mode: mode,
-        // background: { default: "#ccd5ae", paper: "#e9edc9" },
-        // primary: {
-        //   light: "#757ce8",
-        //   main: "#d4a373",
-        //   dark: "#002884",
-        //   contrastText: "#fff",
-        // },
-        // secondary: { main: "#fb8500" },
+        primary: {
+          main: "#164863",
+        },
+        secondary: {
+          main: "#427D9D",
+        },
       },
       typography: {
         fontFamily: roboto.style.fontFamily,
