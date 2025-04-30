@@ -35,6 +35,8 @@ export function middleware(request: NextRequest) {
       "/favicon.ico",
       "/images/bf1-wallpaper-800x600.jpg",
       "/images/bf5-wallpaper-800x600.jpg",
+      "/logos/bf1-logo.png",
+      "/logos/bf5-logo.png",
       // Your other files in `public`
     ].includes(pathname)
   )

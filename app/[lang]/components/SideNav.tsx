@@ -9,7 +9,8 @@ import Toolbar from "@mui/material/Toolbar";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { games } from "../types/games.types";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
+import { Avatar, ListItemAvatar, ListItemIcon } from "@mui/material";
+import HomeIcon from "@mui/icons-material/Home";
 
 type Props = {
   dictionary?: Awaited<ReturnType<typeof getDictionary>>["server"];
@@ -36,6 +37,16 @@ export const SideNav = ({ open = true, setOpen }: Props) => {
             router.push(`/${lang ?? "en-us"}/${game.key}/servers`);
           }}
         >
+          {game.logo && (
+            <ListItemAvatar>
+              <Avatar
+                sizes="25%"
+                variant="rounded"
+                alt={`${game.name}-logo`}
+                src={game.logo}
+              />
+            </ListItemAvatar>
+          )}
           <ListItemText
             primary={game.name}
             secondary={!game.available ? "(coming soon)" : null}
@@ -71,6 +82,9 @@ export const SideNav = ({ open = true, setOpen }: Props) => {
               router.push(`/${lang ?? "en-us"}/`);
             }}
           >
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
             <ListItemText primary="Home" />
           </ListItemButton>
         </List>
