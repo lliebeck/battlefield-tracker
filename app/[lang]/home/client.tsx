@@ -24,7 +24,6 @@ export const Client = ({ dictionary }: Props) => {
   const isSm = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
-    // <ImageList cols={isSm ? 2 : 1} gap={12}>
     <ImageList cols={2} gap={12}>
       {games.map((game) =>
         game.available ? (

@@ -32,17 +32,12 @@ const getDashboardTeam = async (team: FrostbiteServerTeam) => {
   return dashboardTeam;
 };
 
-export default async function Page(
-  props: {
-    params: Promise<{ lang: Locale; gameid: string }>;
-  }
-) {
+export default async function Page(props: {
+  params: Promise<{ lang: Locale; gameid: string }>;
+}) {
   const params = await props.params;
 
-  const {
-    lang,
-    gameid
-  } = params;
+  const { lang, gameid } = params;
 
   let bf1ServerPlayers: AxiosResponse<Bf1ServerPlayers, any> | undefined =
     undefined;
