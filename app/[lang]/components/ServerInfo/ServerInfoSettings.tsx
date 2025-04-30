@@ -17,8 +17,8 @@ export const ServerInfoSettings = ({ serverInfo, dictionary }: Props) => {
         <Typography gutterBottom variant="h5" component="div">
           {dictionary.settings.title}
         </Typography>
-        <Grid container item flexDirection={"row"} spacing={2}>
-          <Grid item>
+        <Grid container flexDirection={"row"} spacing={2}>
+          <Grid>
             {serverInfo?.settings.Misc && (
               <ServerInfoSettingsCard
                 value={serverInfo?.settings.Misc}
@@ -26,8 +26,8 @@ export const ServerInfoSettings = ({ serverInfo, dictionary }: Props) => {
               />
             )}
           </Grid>
-          <Grid container item flexDirection={"column"} spacing={2} xs>
-            <Grid item>
+          <Grid container flexDirection={"column"} spacing={2} size="grow">
+            <Grid>
               {serverInfo?.settings.Vehicles && (
                 <ServerInfoSettingsCard
                   value={serverInfo?.settings.Vehicles}
@@ -35,7 +35,7 @@ export const ServerInfoSettings = ({ serverInfo, dictionary }: Props) => {
                 />
               )}
             </Grid>
-            <Grid item>
+            <Grid>
               {serverInfo?.settings.Scales && (
                 <ServerInfoSettingsCard
                   value={serverInfo?.settings.Scales}
@@ -43,7 +43,7 @@ export const ServerInfoSettings = ({ serverInfo, dictionary }: Props) => {
                 />
               )}
             </Grid>
-            <Grid item>
+            <Grid>
               {serverInfo?.settings.Kits && (
                 <ServerInfoSettingsCard
                   value={serverInfo?.settings.Kits}
@@ -52,7 +52,7 @@ export const ServerInfoSettings = ({ serverInfo, dictionary }: Props) => {
               )}
             </Grid>
           </Grid>
-          <Grid item>
+          <Grid>
             {serverInfo?.settings.Weapons && (
               <ServerInfoSettingsCard
                 value={serverInfo?.settings.Weapons}

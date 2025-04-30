@@ -10,12 +10,11 @@ import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import debounce from "@mui/material/utils/debounce";
 import { useMemo } from "react";
 import { useServerSearchParams } from "../../hooks/useServerSearchParams";
 import { MapOptionKeys } from "../../types/maps.types";
 import { regionKeys } from "../../types/region.types";
-import { useMediaQuery, useTheme } from "@mui/material";
+import { debounce, useMediaQuery, useTheme } from "@mui/material";
 
 type Props = {
   dictionary: {

@@ -38,13 +38,20 @@ export const ServerInfo = ({ serverInfo, dictionary }: Props) => {
   return (
     <Box marginTop={1}>
       <Grid container spacing={2} flexDirection={"row"}>
-        <Grid item minWidth={minWidth} xs={12} md={6} lg={4} xl={2}>
+        <Grid
+          minWidth={minWidth}
+          size={{
+            xs: 12,
+            md: 6,
+            lg: 4,
+            xl: 2
+          }}>
           <GeneralServerInfo
             serverInfo={serverInfo}
             dictionary={dictionary.server}
           />
         </Grid>
-        <Grid item minWidth={minWidth}>
+        <Grid minWidth={minWidth}>
           {hasSettings && (
             <ServerInfoSettings
               serverInfo={serverInfo}
@@ -52,7 +59,7 @@ export const ServerInfo = ({ serverInfo, dictionary }: Props) => {
             />
           )}
         </Grid>
-        <Grid item xs={12} minWidth={minWidth}>
+        <Grid minWidth={minWidth} size={12}>
           {serverInfo && (
             <MapRotation
               dictionary={dictionary.server}
