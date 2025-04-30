@@ -34,29 +34,29 @@ export const GeneralServerInfo = ({
           {serverInfo?.prefix}
         </Typography>
         <Grid container flexDirection={"row"} spacing={2}>
-          <Grid item>
+          <Grid>
             <Typography variant={"body2"}>{dictionary.map}</Typography>
             <Typography variant={"body1"}>{serverInfo?.currentMap}</Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography variant={"body2"}>{dictionary.mode}</Typography>
             <Typography variant={"body1"}>{serverInfo?.mode}</Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography variant={"body2"}>{dictionary.player}</Typography>
             <Typography
               variant={"body1"}
             >{`${serverInfo?.playerAmount}/${serverInfo?.maxPlayerAmount}`}</Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography variant={"body2"}>{dictionary.inQue}</Typography>
             <Typography variant={"body1"}>{serverInfo?.inQueue}</Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography variant={"body2"}>{dictionary.region.title}</Typography>
             <Typography variant={"body1"}>{serverInfo?.region}</Typography>
           </Grid>
-          <Grid item>
+          <Grid>
             <Typography variant={"body2"}>{dictionary.owner}</Typography>
             <Typography variant={"body1"}>{serverInfo?.owner?.name}</Typography>
           </Grid>

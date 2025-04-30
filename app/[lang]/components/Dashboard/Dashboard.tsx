@@ -51,17 +51,17 @@ export const Dashboard = ({
   return (
     <Grid container spacing={0.5} height={"100%"}>
       <Grid
-        item
-        sm={12}
-        lg={6}
         height={`calc(${isLgUp ? "100%" : "50%"} - ${
           isLgUp ? "60px" : "45px"
         })`}
-      >
-        <Grid item marginY={1}>
+        size={{
+          sm: 12,
+          lg: 6
+        }}>
+        <Grid marginY={1}>
           {renderListTitle(teamOne)}
         </Grid>
-        <Grid item height={"100%"}>
+        <Grid height={"100%"}>
           <PlayerTable
             isPlayersLoading={isPlayersLoading}
             players={teamOne?.players}
@@ -70,17 +70,17 @@ export const Dashboard = ({
         </Grid>
       </Grid>
       <Grid
-        item
-        sm={12}
-        lg={6}
         height={`calc(${isLgUp ? "100%" : "50%"} - ${
           isLgUp ? "60px" : "45px"
         })`}
-      >
-        <Grid item marginY={1}>
+        size={{
+          sm: 12,
+          lg: 6
+        }}>
+        <Grid marginY={1}>
           {renderListTitle(teamTwo)}
         </Grid>
-        <Grid item height={"100%"}>
+        <Grid height={"100%"}>
           <PlayerTable
             isPlayersLoading={isPlayersLoading}
             players={teamTwo?.players}
