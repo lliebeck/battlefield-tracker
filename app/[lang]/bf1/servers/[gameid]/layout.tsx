@@ -3,18 +3,17 @@ import { Locale } from "@/config/i18n-config";
 import { getDictionary } from "@/get-dictionary";
 import axios, { AxiosResponse } from "axios";
 import axiosRetry from "axios-retry";
-import { PropsWithChildren } from "react";
 import ClientLayout from "./clientLayout";
 
 export default async function ServerLayout({
   children,
   params,
 }: {
-  params: Promise<{ lang: Locale; gameid: string }>;
+  params: Promise<{ lang: string; gameid: string }>;
 } & React.PropsWithChildren) {
   const { lang, gameid } = await params;
 
-  const dictionary = await getDictionary(lang);
+  const dictionary = await getDictionary(lang as Locale);
 
   let serverInfo: AxiosResponse<Bf1DetailedServerInfo, any> | undefined =
     undefined;
